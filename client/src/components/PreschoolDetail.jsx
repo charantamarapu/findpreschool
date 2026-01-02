@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Heart, Share2, MapPin, Phone, Mail, Globe, Star } from 'lucide-react';
 import { formatCurrency, calculateAnnualCost, formatDate } from '../utils/helpers';
 import { SchoolContactForm } from './SchoolContactForm';
+import { MapComponent } from './MapComponent';
 
 export const ImageCarousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
