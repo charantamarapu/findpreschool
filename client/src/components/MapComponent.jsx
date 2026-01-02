@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
+import 'leaflet.markercluster';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import { useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 
@@ -30,6 +33,54 @@ function SetViewOnClick({ center }) {
   return null;
 }
 
+export const MarkerClusterLayer = ({ preschools, createDivIcon, onSelect }) => {
+  const map = useMap();
+  const markersRef = useRef(null);
+
+  useEffect(() => {
+    if (!map) return;
+
+    // create a marker cluster group
+    const markerCluster = L.markerClusterGroup({ chunkedLoading: true });
+
+    // build markers and add to cluster
+    preschools.forEach((preschool) => {
+      if (!preschool.latitude || !preschool.longitude) return;
+      const marker = L.marker([preschool.latitude, preschool.longitude], {
+        icon: createDivIcon(preschool.verified_status ? '#10b981' : '#06b6d4', (preschool.name || '').split(' ').slice(0,2).map(w=>w[0]).join('')),
+      });
+
+      const popupHtml = `
+        <div class="font-semibold text-sm">
+          <div class="mb-1">${preschool.name}</div>
+          <div class="text-xs text-gray-600 mb-1">${preschool.address || ''}</div>
+          ${preschool.phone ? `<a href="tel:${preschool.phone}" class="text-xs text-blue-600 hover:underline">${preschool.phone}</a>` : ''}
+        </div>
+      `;
+
+      marker.bindPopup(popupHtml, { minWidth: 160 });
+
+      marker.on('click', () => onSelect(preschool));
+
+      markerCluster.addLayer(marker);
+    });
+
+    map.addLayer(markerCluster);
+
+    // store ref to cleanup later
+    markersRef.current = markerCluster;
+
+    return () => {
+      if (markersRef.current) {
+        map.removeLayer(markersRef.current);
+        markersRef.current = null;
+      }
+    };
+  }, [map, preschools]);
+
+  return null;
+};
+
 export const MapComponent = ({ preschools = [], center = [20.5937, 78.9629], zoom = 5, showOverlay = true }) => {
   const [selected, setSelected] = useState(null);
   const mapRef = useRef(null);
@@ -57,31 +108,12 @@ export const MapComponent = ({ preschools = [], center = [20.5937, 78.9629], zoo
           maxZoom={19}
         />
 
-        {preschools.map((preschool) => (
-          preschool.latitude && preschool.longitude && (
-            <Marker
-              key={preschool.id}
-              position={[preschool.latitude, preschool.longitude]}
-              icon={createDivIcon(preschool.verified_status ? '#10b981' : '#06b6d4', (preschool.name || '').split(' ').slice(0,2).map(w=>w[0]).join(''))}
-              eventHandlers={{ click: () => handleSelect(preschool) }}
-            >
-              <Popup className="preschool-popup">
-                <div className="font-semibold text-sm">
-                  <h4 className="mb-1">{preschool.name}</h4>
-                  <p className="text-xs text-gray-600 mb-1">{preschool.address}</p>
-                  {preschool.phone && (
-                    <a 
-                      href={`tel:${preschool.phone}`}
-                      className="text-xs text-blue-600 hover:underline"
-                    >
-                      {preschool.phone}
-                    </a>
-                  )}
-                </div>
-              </Popup>
-            </Marker>
-          )
-        ))}
+        {/* Marker clustering: use Leaflet.markercluster to handle many markers efficiently */}
+        <MarkerClusterLayer
+          preschools={preschools}
+          createDivIcon={createDivIcon}
+          onSelect={handleSelect}
+        />
 
         {selected && <SetViewOnClick center={[selected.latitude, selected.longitude]} />}
       </MapContainer>
