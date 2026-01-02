@@ -78,9 +78,6 @@ function AppContent() {
               <Link to="/preschools" className="text-gray-600 hover:text-primary-600 font-medium">
                 Browse
               </Link>
-              <Link to="/preschools?city=Delhi" className="text-gray-600 hover:text-primary-600 font-medium">
-                Top Cities
-              </Link>
               <a href="#contact" onClick={handleContactClick} className="text-gray-600 hover:text-primary-600 font-medium">Contact Us</a>
               <Link to="/admin/login" className="text-blue-600 hover:text-blue-800 font-medium">
                 Admin
@@ -104,9 +101,6 @@ function AppContent() {
               </Link>
               <Link to="/preschools" className="text-gray-600 hover:text-primary-600 font-medium">
                 Browse
-              </Link>
-              <Link to="/preschools?city=Delhi" className="text-gray-600 hover:text-primary-600 font-medium">
-                Top Cities
               </Link>
               <a href="#contact" onClick={handleContactClick} className="text-gray-600 hover:text-primary-600 font-medium">Contact Us</a>
               <Link to="/admin/login" className="text-blue-600 hover:text-blue-800 font-medium">

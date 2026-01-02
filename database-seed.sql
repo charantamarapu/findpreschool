@@ -73,3 +73,7 @@ INSERT INTO preschool_owners (preschool_id, owner_name, owner_email, owner_phone
 (2, 'Meera Kulkarni', 'owner@littlestars.com', '9999999998', TRUE, NOW(), NOW()),
 (3, 'Arun Pillai', 'owner@rainbowkids.com', '9999999997', FALSE, NOW(), NOW()),
 (5, 'Priya Singh', 'owner@goldenyears.com', '9999999996', TRUE, NOW(), NOW());
+
+-- Insert Default Admin User
+INSERT INTO admin_users (email, password_hash, name, role, active, created_at, updated_at) VALUES
+('admin@findpreschool.com', '$2b$10$tDFm9y5tTTbu58VxyF4oMuFB54TzQjEvsi101d2xAcIBo/4vvNoSu', 'System Admin', 'admin', TRUE, NOW(), NOW());

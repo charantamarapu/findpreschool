@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import AdminTable from '../../components/AdminTable';
 import { ArrowLeft, Shield } from 'lucide-react';
+import { formatCurrency } from '../../utils/helpers';
 
 const AdminPreschools = () => {
   const navigate = useNavigate();
@@ -39,9 +40,9 @@ const AdminPreschools = () => {
       render: (item) => {
         const min = item.admissionDetails?.[0]?.monthly_fee_min;
         const max = item.admissionDetails?.[0]?.monthly_fee_max;
-        if (min && max) return `₹${min} - ₹${max}`;
-        if (min) return `₹${min}`;
-        if (max) return `₹${max}`;
+        if (min && max) return `${formatCurrency(min)} - ${formatCurrency(max)}`;
+        if (min) return `${formatCurrency(min)}`;
+        if (max) return `${formatCurrency(max)}`;
         return 'N/A';
       }
     },

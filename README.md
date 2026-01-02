@@ -100,6 +100,8 @@ findpreschool/
 └── README.md
 ```
 
+**Note:** Several legacy documentation files have been moved to `archive_docs/` to reduce root clutter. Archived files: INDEX.md, DIRECTORY_TREE.md, FILE_MANIFEST.md, PROJECT_SUMMARY.md.
+
 ## 🗄️ Database Schema
 
 ### Tables

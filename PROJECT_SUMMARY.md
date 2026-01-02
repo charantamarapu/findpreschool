@@ -1,5 +1,8 @@
 # FindPreschool.org - Complete Project Summary
 
+> This file has been archived to `archive_docs/PROJECT_SUMMARY.md`.
+> See archive_docs/PROJECT_SUMMARY.md for the original full content.
+
 ## ✅ Project Completion Status
 
 Your complete full-stack preschool comparison website is ready! All components have been created and organized in the proper directory structure.

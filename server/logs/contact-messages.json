@@ -1,0 +1,11 @@
+[
+  {
+    "type": "contact_form",
+    "name": "MailTest",
+    "email": "tester@example.com",
+    "phone": "9999999999",
+    "message": "This is a test when SMTP is down.",
+    "error": "connect ECONNREFUSED 127.0.0.1:1025",
+    "timestamp": "2026-01-02T18:02:07.774Z"
+  }
+]

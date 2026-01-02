@@ -29,67 +29,9 @@ Complete full-stack preschool comparison website with React frontend, Node.js ba
 - **.env.example** - Environment variables template
 - **config/database.js** (30 lines) - Sequelize connection pool
 
-### Models (8 files)
-- **models/Preschool.js** (40 lines) - Main preschool model
-- **models/PreschoolImage.js** (30 lines) - Images relationship
-- **models/AdmissionDetail.js** (40 lines) - Fees and ratings
-- **models/FranchiseDetail.js** (35 lines) - Franchise opportunities
-- **models/ComparisonHistory.js** (30 lines) - Usage tracking
-- **models/Review.js** (35 lines) - Verified reviews
-- **models/AdminUser.js** (40 lines) - Staff with password hashing
-- **models/PreschoolOwner.js** (30 lines) - Ownership verification
-- **models/index.js** (40 lines) - Model associations
+This documentation file has been archived and moved to `archive_docs/FILE_MANIFEST.md`.
 
-### Controllers (5 files)
-- **controllers/preschoolController.js** (120 lines) - CRUD operations
-- **controllers/googleMapsController.js** (200 lines) - Google Places API
-- **controllers/comparisonController.js** (100 lines) - Side-by-side comparisons
-- **controllers/reviewController.js** (120 lines) - Review management
-- **controllers/detailController.js** (100 lines) - Admission & franchise
-
-### Routes (5 files)
-- **routes/preschools.js** (15 lines) - Preschool endpoints
-- **routes/comparison.js** (15 lines) - Comparison endpoints
-- **routes/googleMaps.js** (15 lines) - Google Maps endpoints
-- **routes/reviews.js** (20 lines) - Review endpoints
-- **routes/details.js** (20 lines) - Details endpoints
-
-### Middleware (3 files)
-- **middleware/auth.js** (40 lines) - JWT authentication
-- **middleware/validation.js** (90 lines) - Joi validation schemas
-- **middleware/errorHandler.js** (50 lines) - Global error handling
-
----
-
-## 🎨 Frontend (client/) - 25 Files
-
-### Configuration Files
-- **package.json** - Dependencies (react, vite, tailwind, axios)
-- **vite.config.js** - Vite configuration
-- **tailwind.config.js** - Tailwind theme customization
-- **postcss.config.js** - PostCSS plugins
-- **index.html** - HTML entry point with Google Maps script
-
-### Entry Point
-- **src/main.jsx** (15 lines) - React initialization
-- **src/App.jsx** (150 lines) - Main app with routing and layout
-
-### Pages (3 files)
-- **src/pages/HomePage.jsx** (250 lines) - Hero, featured, stats sections
-- **src/pages/PreschoolListPage.jsx** (100 lines) - List with filters
-- **src/pages/PreschoolDetailPageWrapper.jsx** (60 lines) - Detail page wrapper
-
-### Components (4 files)
-- **src/components/PreschoolCard.jsx** (120 lines) - Grid card component
-- **src/components/ComparisonPanel.jsx** (130 lines) - Sticky comparison table
-- **src/components/FilterSidebar.jsx** (120 lines) - Advanced filters
-- **src/components/PreschoolDetail.jsx** (300 lines) - Full detail view with tabs
-
-### Services (1 file)
-- **src/services/apiService.js** (70 lines) - API endpoints wrapper
-
-### Context (2 files)
-- **src/context/ComparisonContext.jsx** (50 lines) - Comparison state
+See [archive_docs/FILE_MANIFEST.md](archive_docs/FILE_MANIFEST.md) for the full original content.
 - **src/context/FilterContext.jsx** (50 lines) - Filter state
 
 ### Utilities (1 file)

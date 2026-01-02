@@ -13,10 +13,10 @@ export const ComparisonPanel = ({ comparisonData }) => {
     const csvData = comparisonData.map((p) => ({
       'Preschool Name': p.name,
       'Monthly Fee': p.admission?.monthly_fee_min && p.admission?.monthly_fee_max
-        ? `₹${p.admission.monthly_fee_min} - ₹${p.admission.monthly_fee_max}`
+        ? `${formatCurrency(p.admission.monthly_fee_min)} - ${formatCurrency(p.admission.monthly_fee_max)}`
         : p.admission?.monthly_fee_min || p.admission?.monthly_fee_max || 'N/A',
       'Annual Fee': p.admission?.annual_fee_min && p.admission?.annual_fee_max
-        ? `₹${p.admission.annual_fee_min} - ₹${p.admission.annual_fee_max}`
+        ? `${formatCurrency(p.admission.annual_fee_min)} - ${formatCurrency(p.admission.annual_fee_max)}`
         : p.admission?.annual_fee_min || p.admission?.annual_fee_max || 'N/A',
       'Registration Fee': p.admission?.registration_fee || 'N/A',
       'Rating': p.admission?.verified_rating || 'N/A',
@@ -94,9 +94,9 @@ export const ComparisonPanel = ({ comparisonData }) => {
                 {comparisonData.map((p) => (
                   <td key={p.id} className="p-2">
                     {p.admission?.monthly_fee_min && p.admission?.monthly_fee_max
-                      ? `₹${formatCurrency(p.admission.monthly_fee_min)} - ₹${formatCurrency(p.admission.monthly_fee_max)}`
+                      ? `${formatCurrency(p.admission.monthly_fee_min)} - ${formatCurrency(p.admission.monthly_fee_max)}`
                       : p.admission?.monthly_fee_min || p.admission?.monthly_fee_max
-                        ? `₹${formatCurrency(p.admission.monthly_fee_min || p.admission.monthly_fee_max)}`
+                        ? `${formatCurrency(p.admission.monthly_fee_min || p.admission.monthly_fee_max)}`
                         : 'N/A'}
                   </td>
                 ))}
@@ -108,9 +108,9 @@ export const ComparisonPanel = ({ comparisonData }) => {
                 {comparisonData.map((p) => (
                   <td key={p.id} className="p-2">
                     {p.admission?.annual_fee_min && p.admission?.annual_fee_max
-                      ? `₹${formatCurrency(p.admission.annual_fee_min)} - ₹${formatCurrency(p.admission.annual_fee_max)}`
+                      ? `${formatCurrency(p.admission.annual_fee_min)} - ${formatCurrency(p.admission.annual_fee_max)}`
                       : p.admission?.annual_fee_min || p.admission?.annual_fee_max
-                        ? `₹${formatCurrency(p.admission.annual_fee_min || p.admission.annual_fee_max)}`
+                        ? `${formatCurrency(p.admission.annual_fee_min || p.admission.annual_fee_max)}`
                         : 'N/A'}
                   </td>
                 ))}

@@ -252,10 +252,10 @@ export const PreschoolDetailPage = ({ preschool }) => {
                     <p className="text-sm text-gray-600 mb-1">Monthly Fee</p>
                     <p className="text-2xl font-bold text-primary-600">
                       {preschool.admission.monthly_fee_min && preschool.admission.monthly_fee_max
-                        ? `₹${formatCurrency(preschool.admission.monthly_fee_min)} - ₹${formatCurrency(preschool.admission.monthly_fee_max)}`
+                        ? `${formatCurrency(preschool.admission.monthly_fee_min)} - ${formatCurrency(preschool.admission.monthly_fee_max)}`
                         : preschool.admission.monthly_fee_min 
-                          ? `₹${formatCurrency(preschool.admission.monthly_fee_min)}`
-                          : `₹${formatCurrency(preschool.admission.monthly_fee_max)}`
+                          ? `${formatCurrency(preschool.admission.monthly_fee_min)}`
+                          : `${formatCurrency(preschool.admission.monthly_fee_max)}`
                       }
                     </p>
                   </div>
@@ -265,10 +265,10 @@ export const PreschoolDetailPage = ({ preschool }) => {
                     <p className="text-sm text-gray-600 mb-1">Annual Fee</p>
                     <p className="text-2xl font-bold text-green-600">
                       {preschool.admission.annual_fee_min && preschool.admission.annual_fee_max
-                        ? `₹${formatCurrency(preschool.admission.annual_fee_min)} - ₹${formatCurrency(preschool.admission.annual_fee_max)}`
+                        ? `${formatCurrency(preschool.admission.annual_fee_min)} - ${formatCurrency(preschool.admission.annual_fee_max)}`
                         : preschool.admission.annual_fee_min 
-                          ? `₹${formatCurrency(preschool.admission.annual_fee_min)}`
-                          : `₹${formatCurrency(preschool.admission.annual_fee_max)}`
+                          ? `${formatCurrency(preschool.admission.annual_fee_min)}`
+                          : `${formatCurrency(preschool.admission.annual_fee_max)}`
                       }
                     </p>
                   </div>

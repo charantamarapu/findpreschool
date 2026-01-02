@@ -120,10 +120,10 @@ export const PreschoolCard = ({ preschool, onViewDetails }) => {
             <p className="text-sm text-gray-600">Monthly Fee</p>
             <p className="text-lg font-bold text-primary-600">
               {monthlyFeeMin && monthlyFeeMax
-                ? `₹${formatCurrency(monthlyFeeMin)} - ₹${formatCurrency(monthlyFeeMax)}`
+                ? `${formatCurrency(monthlyFeeMin)} - ${formatCurrency(monthlyFeeMax)}`
                 : monthlyFeeMin 
-                  ? `₹${formatCurrency(monthlyFeeMin)}`
-                  : `₹${formatCurrency(monthlyFeeMax)}`
+                  ? `${formatCurrency(monthlyFeeMin)}`
+                  : `${formatCurrency(monthlyFeeMax)}`
               }
             </p>
           </div>
