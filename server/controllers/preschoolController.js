@@ -14,12 +14,14 @@ export const getAllPreschools = async (req, res) => {
       minFee,
       maxFee,
       minRating,
+      minEstablishedYear,
       limit = 20,
       offset = 0,
     } = req.query;
 
     const where = {};
     if (city) where.city = city;
+    if (minEstablishedYear) where.established_year = { [Op.gte]: parseInt(minEstablishedYear) };
 
     // Build include for admission with optional filtering so the database does the heavy lifting
     const admissionWhere = {};

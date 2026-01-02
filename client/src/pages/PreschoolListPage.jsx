@@ -35,6 +35,7 @@ export const PreschoolListPage = () => {
         if (filters.minFee) params.minFee = filters.minFee;
         if (filters.maxFee) params.maxFee = filters.maxFee;
         if (filters.minRating) params.minRating = filters.minRating;
+        if (filters.minEstablishedYear) params.minEstablishedYear = filters.minEstablishedYear;
 
         const response = await preschoolService.getAllPreschools(params);
 

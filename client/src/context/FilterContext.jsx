@@ -8,6 +8,7 @@ export const FilterProvider = ({ children }) => {
     minFee: null,
     maxFee: null,
     minRating: null,
+    minEstablishedYear: null,
     facilities: [],
     ageGroup: [],
   });
@@ -25,6 +26,7 @@ export const FilterProvider = ({ children }) => {
       minFee: null,
       maxFee: null,
       minRating: null,
+      minEstablishedYear: null,
       facilities: [],
       ageGroup: [],
     });

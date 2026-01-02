@@ -86,6 +86,24 @@ export const FilterSidebar = () => {
         </select>
       </div>
 
+      {/* Established Year Filter */}
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Established After
+        </label>
+        <input
+          type="number"
+          placeholder="e.g., 2010"
+          value={filters.minEstablishedYear || ''}
+          onChange={(e) =>
+            updateFilter('minEstablishedYear', e.target.value ? parseInt(e.target.value) : null)
+          }
+          min="1900"
+          max={new Date().getFullYear()}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-600"
+        />
+      </div>
+
       {/* Advanced Filters */}
       <div className="border-t pt-4 mt-4">
         <button

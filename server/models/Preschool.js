@@ -30,6 +30,10 @@ const Preschool = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    established_year: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     tableName: 'preschools',

@@ -40,18 +40,31 @@ export const PreschoolCard = ({ preschool, onViewDetails }) => {
       <div>
         <h3 className="font-bold text-lg mb-2 line-clamp-2">{preschool.name}</h3>
 
-        {/* Rating and Reviews */}
-        {rating > 0 && (
-          <div className="flex items-center gap-2 mb-3">
-            <div className="flex text-yellow-400">
-              {[...Array(Math.round(rating))].map((_, i) => (
-                <Star key={i} size={16} fill="currentColor" />
-              ))}
-            </div>
-            <span className="text-sm text-gray-600">
-              {rating.toFixed(1)} ({preschool.admission?.total_reviews || 0}{' '}
-              reviews)
+        {/* Established Year and Rating */}
+        <div className="flex items-center justify-between mb-3">
+          {preschool.established_year && (
+            <span className="text-xs text-gray-500 italic">
+              Since {preschool.established_year}
             </span>
+          )}
+          {rating > 0 && (
+            <div className="flex items-center gap-2">
+              <div className="flex text-yellow-400">
+                {[...Array(Math.round(rating))].map((_, i) => (
+                  <Star key={i} size={16} fill="currentColor" />
+                ))}
+              </div>
+              <span className="text-sm text-gray-600">
+                {rating.toFixed(1)}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Rating Details */}
+        {rating > 0 && (
+          <div className="text-xs text-gray-600 mb-3">
+            {preschool.admission?.total_reviews || 0} reviews
           </div>
         )}
 
