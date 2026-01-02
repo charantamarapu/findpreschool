@@ -49,6 +49,33 @@ body {
 /* Comparison badge (header) */
 .header-compare { @apply absolute right-4 mt-2 bg-secondary-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow; }
 
+/* Map markers & overlay */
+.custom-div-icon .marker-pin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  margin-left: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.custom-div-icon .marker-label {
+  margin-top: -6px;
+  font-weight: 700;
+  font-size: 11px;
+  color: white;
+  text-align: center;
+}
+
+.custom-marker { background: transparent; }
+
+/* Map overlay card */
+.card { @apply bg-white rounded-xl shadow-card transition-shadow border border-gray-100 overflow-hidden; }
+
+/* Small responsive tweak */
+@media (max-width: 640px) {
+  .absolute.bottom-4.right-4.w-80 { width: calc(100% - 2rem); left: 1rem; right: 1rem; }
+}
+
 .card img { @apply w-full h-full object-cover; }
 
 .rating-stars { @apply flex gap-1 items-center; }

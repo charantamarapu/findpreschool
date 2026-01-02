@@ -130,6 +130,15 @@ export const PreschoolDetailPage = ({ preschool }) => {
         <ImageCarousel images={preschool.images || []} />
       </div>
 
+      {/* Small Map */}
+      {preschool.latitude && preschool.longitude && (
+        <div className="mb-8">
+          <div className="h-64 rounded-lg overflow-hidden bg-white shadow-sm">
+            <MapComponent preschools={[preschool]} center={[preschool.latitude, preschool.longitude]} zoom={14} showOverlay={false} />
+          </div>
+        </div>
+      )}
+
       {/* Main Content */}
       <div className="grid grid-cols-3 gap-8">
         {/* Left Column - Contact Info */}
