@@ -21,42 +21,33 @@ export const getAllPreschools = async (req, res) => {
     const where = {};
     if (city) where.city = city;
 
-    let preschools = await Preschool.findAndCountAll({
+    // Build include for admission with optional filtering so the database does the heavy lifting
+    const admissionWhere = {};
+    if (minFee) admissionWhere.monthly_fee = { ...(admissionWhere.monthly_fee || {}), [Op.gte]: parseFloat(minFee) };
+    if (maxFee) admissionWhere.monthly_fee = { ...(admissionWhere.monthly_fee || {}), [Op.lte]: parseFloat(maxFee) };
+    if (minRating) admissionWhere.verified_rating = { [Op.gte]: parseFloat(minRating) };
+
+    const include = [
+      { association: 'images', attributes: ['image_url', 'is_primary'] },
+      {
+        association: 'admission',
+        attributes: [
+          'monthly_fee',
+          'annual_fee',
+          'verified_rating',
+          'total_reviews',
+        ],
+        ...(Object.keys(admissionWhere).length ? { where: admissionWhere, required: true } : {}),
+      },
+    ];
+
+    const preschools = await Preschool.findAndCountAll({
       where,
-      include: [
-        { association: 'images', attributes: ['image_url', 'is_primary'] },
-        {
-          association: 'admission',
-          attributes: [
-            'monthly_fee',
-            'annual_fee',
-            'verified_rating',
-            'total_reviews',
-          ],
-        },
-      ],
+      include,
       limit: parseInt(limit),
       offset: parseInt(offset),
       order: [['created_at', 'DESC']],
     });
-
-    // Filter by fee range
-    if (minFee || maxFee) {
-      preschools.rows = preschools.rows.filter((p) => {
-        const fee = p.admission?.monthly_fee || 0;
-        if (minFee && fee < minFee) return false;
-        if (maxFee && fee > maxFee) return false;
-        return true;
-      });
-    }
-
-    // Filter by rating
-    if (minRating) {
-      preschools.rows = preschools.rows.filter((p) => {
-        const rating = p.admission?.verified_rating || 0;
-        return rating >= parseFloat(minRating);
-      });
-    }
 
     return res.status(200).json({
       success: true,
