@@ -55,13 +55,23 @@ function AppContent() {
       <nav className="bg-white shadow-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <Link to="/" className="text-2xl font-bold text-primary-600">
-              FindPreschool.org
+            <Link to="/" className="flex items-center gap-3" onClick={handleHomeClick}>
+              <div className="site-logo bg-white p-1 rounded-md shadow-sm">
+                <svg viewBox="0 0 48 48" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <rect width="48" height="48" rx="10" fill="#06B6D4" />
+                  <path d="M15 30c3-6 9-9 16-9" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="19" cy="19" r="2" fill="#fff" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-xl font-bold text-primary-600">FindPreschool</div>
+                <div className="text-xs text-gray-500 -mt-0.5">discover. compare. decide.</div>
+              </div>
             </Link>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex gap-6 items-center">
-              <Link to="/" className="text-gray-600 hover:text-primary-600 font-medium" onClick={handleHomeClick}>
+            <div className="hidden md:flex gap-6 items-center nav-links">
+              <Link to="/" className="nav-link" onClick={handleHomeClick}>
                 Home
               </Link>
               <Link to="/preschools" className="text-gray-600 hover:text-primary-600 font-medium">
@@ -97,7 +107,7 @@ function AppContent() {
               <Link to="/preschools?city=Delhi" className="text-gray-600 hover:text-primary-600 font-medium">
                 Top Cities
               </Link>
-              <a href="#contact" className="text-gray-600 hover:text-primary-600 font-medium">Contact Us</a>
+              <a href="#contact" onClick={handleContactClick} className="text-gray-600 hover:text-primary-600 font-medium">Contact Us</a>
               <Link to="/admin/login" className="text-blue-600 hover:text-blue-800 font-medium">
                 Admin
               </Link>
