@@ -136,13 +136,14 @@ export const ComparisonPanel = ({ comparisonData }) => {
               {/* Rating */}
               <tr className="border-b">
                 <td className="p-2 font-semibold">Verified Rating</td>
-                {comparisonData.map((p) => (
-                  <td key={p.id} className="p-2">
-                    {p.admission?.verified_rating || 0 > 0
-                      ? `${p.admission.verified_rating.toFixed(1)} ⭐`
-                      : 'No rating'}
-                  </td>
-                ))}
+                {comparisonData.map((p) => {
+                  const rating = p.admission?.verified_rating ? parseFloat(p.admission.verified_rating) : 0;
+                  return (
+                    <td key={p.id} className="p-2">
+                      {rating > 0 ? `${rating.toFixed(1)} ⭐` : 'No rating'}
+                    </td>
+                  );
+                })}
               </tr>
 
               {/* Reviews */}

@@ -114,9 +114,10 @@ export const PreschoolDetailPage = ({ preschool }) => {
             <div className="flex items-center gap-2">
               <span className="text-yellow-400 text-2xl">★</span>
               <span className="font-bold">
-                {parseFloat(preschool.admission.verified_rating) || 0 > 0
-                  ? parseFloat(preschool.admission.verified_rating).toFixed(1)
-                  : 'No'}
+                {(() => {
+                  const rating = parseFloat(preschool.admission.verified_rating) || 0;
+                  return rating > 0 ? rating.toFixed(1) : 'No';
+                })()}
               </span>
               <span className="text-gray-600">
                 ({preschool.admission.total_reviews || 0} reviews)
@@ -349,9 +350,10 @@ export const PreschoolDetailPage = ({ preschool }) => {
                   <div className="border-t pt-3">
                     <p className="text-sm text-gray-600">Verified Rating</p>
                     <p className="text-2xl font-bold text-primary-600">
-                      {parseFloat(preschool.admission.verified_rating) || 0 > 0
-                        ? parseFloat(preschool.admission.verified_rating).toFixed(1)
-                        : 'No'}
+                      {(() => {
+                        const rating = parseFloat(preschool.admission.verified_rating) || 0;
+                        return rating > 0 ? rating.toFixed(1) : 'No';
+                      })()}
                     </p>
                   </div>
                   <div>
