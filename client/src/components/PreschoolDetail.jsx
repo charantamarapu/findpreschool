@@ -178,6 +178,22 @@ export const PreschoolDetailPage = ({ preschool }) => {
                       </div>
                     </div>
                   )}
+                  {preschool.latitude && preschool.longitude && (
+                    <div className="flex gap-3">
+                      <span className="text-primary-600 flex-shrink-0 font-bold">📍</span>
+                      <div>
+                        <p className="font-semibold">Coordinates</p>
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${preschool.latitude},${preschool.longitude}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary-600 hover:underline"
+                        >
+                          {preschool.latitude}, {preschool.longitude}
+                        </a>
+                      </div>
+                    </div>
+                  )}
                   {preschool.phone && (
                     <div className="flex gap-3">
                       <Phone className="text-primary-600 flex-shrink-0" />
@@ -231,19 +247,29 @@ export const PreschoolDetailPage = ({ preschool }) => {
             <div className="space-y-4">
               <h3 className="font-bold text-lg">Fee Structure</h3>
               <div className="grid grid-cols-2 gap-4">
-                {preschool.admission.monthly_fee && (
+                {(preschool.admission.monthly_fee_min || preschool.admission.monthly_fee_max) && (
                   <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                     <p className="text-sm text-gray-600 mb-1">Monthly Fee</p>
                     <p className="text-2xl font-bold text-primary-600">
-                      {formatCurrency(preschool.admission.monthly_fee)}
+                      {preschool.admission.monthly_fee_min && preschool.admission.monthly_fee_max
+                        ? `₹${formatCurrency(preschool.admission.monthly_fee_min)} - ₹${formatCurrency(preschool.admission.monthly_fee_max)}`
+                        : preschool.admission.monthly_fee_min 
+                          ? `₹${formatCurrency(preschool.admission.monthly_fee_min)}`
+                          : `₹${formatCurrency(preschool.admission.monthly_fee_max)}`
+                      }
                     </p>
                   </div>
                 )}
-                {preschool.admission.annual_fee && (
+                {(preschool.admission.annual_fee_min || preschool.admission.annual_fee_max) && (
                   <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                     <p className="text-sm text-gray-600 mb-1">Annual Fee</p>
                     <p className="text-2xl font-bold text-green-600">
-                      {formatCurrency(preschool.admission.annual_fee)}
+                      {preschool.admission.annual_fee_min && preschool.admission.annual_fee_max
+                        ? `₹${formatCurrency(preschool.admission.annual_fee_min)} - ₹${formatCurrency(preschool.admission.annual_fee_max)}`
+                        : preschool.admission.annual_fee_min 
+                          ? `₹${formatCurrency(preschool.admission.annual_fee_min)}`
+                          : `₹${formatCurrency(preschool.admission.annual_fee_max)}`
+                      }
                     </p>
                   </div>
                 )}
@@ -255,12 +281,6 @@ export const PreschoolDetailPage = ({ preschool }) => {
                     </p>
                   </div>
                 )}
-                <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-                  <p className="text-sm text-gray-600 mb-1">Total Annual Cost</p>
-                  <p className="text-2xl font-bold text-purple-600">
-                    {formatCurrency(calculateAnnualCost(preschool.admission))}
-                  </p>
-                </div>
               </div>
 
               {preschool.admission.age_criteria && (

@@ -11,7 +11,8 @@ export const PreschoolCard = ({ preschool, onViewDetails }) => {
   const primaryImage =
     preschool.images?.find((img) => img.is_primary)?.image_url ||
     preschool.images?.[0]?.image_url;
-  const monthlyFee = preschool.admission?.monthly_fee;
+  const monthlyFeeMin = preschool.admission?.monthly_fee_min;
+  const monthlyFeeMax = preschool.admission?.monthly_fee_max;
   const rating = parseFloat(preschool.admission?.verified_rating) || 0;
 
   return (
@@ -97,14 +98,33 @@ export const PreschoolCard = ({ preschool, onViewDetails }) => {
               </a>
             </div>
           )}
+
+          {/* Google Maps Link */}
+          {preschool.google_map_url ? (
+            <div className="flex items-center gap-2 text-gray-600">
+              <MapPin size={16} />
+              <a href={preschool.google_map_url} target="_blank" rel="noopener noreferrer" className="hover:text-primary-600 truncate">Open in Maps</a>
+            </div>
+          ) : (preschool.latitude && preschool.longitude) ? (
+            <div className="flex items-center gap-2 text-gray-600">
+              <MapPin size={16} />
+              <a href={`https://www.google.com/maps/search/?api=1&query=${preschool.latitude},${preschool.longitude}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary-600 truncate">Open Coordinates</a>
+            </div>
+          ) : null
+        }
         </div>
 
         {/* Fee */}
-        {monthlyFee && (
+        {(monthlyFeeMin || monthlyFeeMax) && (
           <div className="mb-4 p-2 bg-primary-50 rounded-lg">
             <p className="text-sm text-gray-600">Monthly Fee</p>
             <p className="text-lg font-bold text-primary-600">
-              {formatCurrency(monthlyFee)}
+              {monthlyFeeMin && monthlyFeeMax
+                ? `₹${formatCurrency(monthlyFeeMin)} - ₹${formatCurrency(monthlyFeeMax)}`
+                : monthlyFeeMin 
+                  ? `₹${formatCurrency(monthlyFeeMin)}`
+                  : `₹${formatCurrency(monthlyFeeMax)}`
+              }
             </p>
           </div>
         )}

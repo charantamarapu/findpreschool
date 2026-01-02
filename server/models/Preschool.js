@@ -26,6 +26,10 @@ const Preschool = sequelize.define(
       type: DataTypes.STRING(255),
       // Removed unique constraint to reduce key count
     },
+    google_map_url: {
+      type: DataTypes.STRING(500),
+      allowNull: true,
+    },
     verified_status: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

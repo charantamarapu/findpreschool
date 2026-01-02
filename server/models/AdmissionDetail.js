@@ -14,8 +14,10 @@ const AdmissionDetail = sequelize.define(
       allowNull: false,
       // Removed unique constraint to reduce key count
     },
-    monthly_fee: DataTypes.DECIMAL(10, 2),
-    annual_fee: DataTypes.DECIMAL(10, 2),
+    monthly_fee_min: DataTypes.DECIMAL(10, 2),
+    monthly_fee_max: DataTypes.DECIMAL(10, 2),
+    annual_fee_min: DataTypes.DECIMAL(10, 2),
+    annual_fee_max: DataTypes.DECIMAL(10, 2),
     registration_fee: DataTypes.DECIMAL(10, 2),
     hidden_charges_json: DataTypes.JSON,
     age_criteria: DataTypes.STRING(255),

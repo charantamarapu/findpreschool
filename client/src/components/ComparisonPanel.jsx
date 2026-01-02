@@ -12,10 +12,13 @@ export const ComparisonPanel = ({ comparisonData }) => {
   const handleExportCSV = () => {
     const csvData = comparisonData.map((p) => ({
       'Preschool Name': p.name,
-      'Monthly Fee': p.admission?.monthly_fee || 'N/A',
-      'Annual Fee': p.admission?.annual_fee || 'N/A',
+      'Monthly Fee': p.admission?.monthly_fee_min && p.admission?.monthly_fee_max
+        ? `₹${p.admission.monthly_fee_min} - ₹${p.admission.monthly_fee_max}`
+        : p.admission?.monthly_fee_min || p.admission?.monthly_fee_max || 'N/A',
+      'Annual Fee': p.admission?.annual_fee_min && p.admission?.annual_fee_max
+        ? `₹${p.admission.annual_fee_min} - ₹${p.admission.annual_fee_max}`
+        : p.admission?.annual_fee_min || p.admission?.annual_fee_max || 'N/A',
       'Registration Fee': p.admission?.registration_fee || 'N/A',
-      'Total Annual Cost': calculateAnnualCost(p.admission),
       'Rating': p.admission?.verified_rating || 'N/A',
       'Reviews': p.admission?.total_reviews || 0,
     }));
@@ -90,9 +93,11 @@ export const ComparisonPanel = ({ comparisonData }) => {
                 <td className="p-2 font-semibold">Monthly Fee</td>
                 {comparisonData.map((p) => (
                   <td key={p.id} className="p-2">
-                    {p.admission?.monthly_fee
-                      ? formatCurrency(p.admission.monthly_fee)
-                      : 'N/A'}
+                    {p.admission?.monthly_fee_min && p.admission?.monthly_fee_max
+                      ? `₹${formatCurrency(p.admission.monthly_fee_min)} - ₹${formatCurrency(p.admission.monthly_fee_max)}`
+                      : p.admission?.monthly_fee_min || p.admission?.monthly_fee_max
+                        ? `₹${formatCurrency(p.admission.monthly_fee_min || p.admission.monthly_fee_max)}`
+                        : 'N/A'}
                   </td>
                 ))}
               </tr>
@@ -102,9 +107,11 @@ export const ComparisonPanel = ({ comparisonData }) => {
                 <td className="p-2 font-semibold">Annual Fee</td>
                 {comparisonData.map((p) => (
                   <td key={p.id} className="p-2">
-                    {p.admission?.annual_fee
-                      ? formatCurrency(p.admission.annual_fee)
-                      : 'N/A'}
+                    {p.admission?.annual_fee_min && p.admission?.annual_fee_max
+                      ? `₹${formatCurrency(p.admission.annual_fee_min)} - ₹${formatCurrency(p.admission.annual_fee_max)}`
+                      : p.admission?.annual_fee_min || p.admission?.annual_fee_max
+                        ? `₹${formatCurrency(p.admission.annual_fee_min || p.admission.annual_fee_max)}`
+                        : 'N/A'}
                   </td>
                 ))}
               </tr>

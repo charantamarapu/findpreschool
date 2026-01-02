@@ -36,9 +36,14 @@ const AdminPreschools = () => {
     {
       key: 'monthly_fee',
       label: 'Monthly Fee',
-      render: (item) => item.admissionDetails?.[0]?.monthly_fee
-        ? `₹${item.admissionDetails[0].monthly_fee}`
-        : 'N/A'
+      render: (item) => {
+        const min = item.admissionDetails?.[0]?.monthly_fee_min;
+        const max = item.admissionDetails?.[0]?.monthly_fee_max;
+        if (min && max) return `₹${min} - ₹${max}`;
+        if (min) return `₹${min}`;
+        if (max) return `₹${max}`;
+        return 'N/A';
+      }
     },
     {
       key: 'created_at',

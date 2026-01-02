@@ -21,8 +21,10 @@ const AdminPreschoolEdit = () => {
     established_year: '',
   });
   const [admissionData, setAdmissionData] = useState({
-    monthly_fee: '',
-    annual_fee: '',
+    monthly_fee_min: '',
+    monthly_fee_max: '',
+    annual_fee_min: '',
+    annual_fee_max: '',
     verified_rating: '',
   });
   const [imageData, setImageData] = useState({
@@ -58,8 +60,10 @@ const AdminPreschoolEdit = () => {
           // Load admission data
           if (foundPreschool.admission) {
             setAdmissionData({
-              monthly_fee: foundPreschool.admission.monthly_fee || '',
-              annual_fee: foundPreschool.admission.annual_fee || '',
+              monthly_fee_min: foundPreschool.admission.monthly_fee_min || '',
+              monthly_fee_max: foundPreschool.admission.monthly_fee_max || '',
+              annual_fee_min: foundPreschool.admission.annual_fee_min || '',
+              annual_fee_max: foundPreschool.admission.annual_fee_max || '',
               verified_rating: foundPreschool.admission.verified_rating || '',
             });
           }
@@ -124,11 +128,13 @@ const AdminPreschoolEdit = () => {
       await adminService.updatePreschool(id, preschoolPayload);
 
       // Update admission details
-      if (admissionData.monthly_fee || admissionData.annual_fee || admissionData.verified_rating) {
+      if (admissionData.monthly_fee_min || admissionData.monthly_fee_max || admissionData.annual_fee_min || admissionData.annual_fee_max || admissionData.verified_rating) {
         const admissionPayload = {
           preschool_id: Number(id),
-          monthly_fee: admissionData.monthly_fee ? parseFloat(admissionData.monthly_fee) : null,
-          annual_fee: admissionData.annual_fee ? parseFloat(admissionData.annual_fee) : null,
+          monthly_fee_min: admissionData.monthly_fee_min ? parseFloat(admissionData.monthly_fee_min) : null,
+          monthly_fee_max: admissionData.monthly_fee_max ? parseFloat(admissionData.monthly_fee_max) : null,
+          annual_fee_min: admissionData.annual_fee_min ? parseFloat(admissionData.annual_fee_min) : null,
+          annual_fee_max: admissionData.annual_fee_max ? parseFloat(admissionData.annual_fee_max) : null,
           verified_rating: admissionData.verified_rating ? parseFloat(admissionData.verified_rating) : 0,
         };
         await adminService.createAdmissionDetail(admissionPayload);
@@ -235,22 +241,40 @@ const AdminPreschoolEdit = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">Established Year</label>
                 <input name="established_year" type="number" min="1900" max={new Date().getFullYear()} value={form.established_year} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 2010" />
               </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Google Maps URL</label>
+                <div className="flex gap-2">
+                  <input name="google_map_url" type="url" value={form.google_map_url || ''} onChange={handleChange} className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="https://www.google.com/maps/...?" />
+                  <button type="button" onClick={() => {
+                    if (form.latitude && form.longitude) {
+                      setForm(f => ({ ...f, google_map_url: `https://www.google.com/maps/search/?api=1&query=${f.latitude},${f.longitude}` }));
+                    }
+                  }} className="inline-flex items-center px-3 py-2 bg-gray-100 border border-gray-300 rounded-md text-sm">Generate</button>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Admission Details */}
           <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Admission Details</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Monthly Fee (₹)</label>
-                <input name="monthly_fee" type="number" step="0.01" value={admissionData.monthly_fee} onChange={handleAdmissionChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 15000" />
+                <label className="block text-sm font-medium text-gray-700 mb-2">Monthly Fee Range (₹)</label>
+                <div className="grid grid-cols-2 gap-3">
+                  <input name="monthly_fee_min" type="number" step="0.01" value={admissionData.monthly_fee_min} onChange={handleAdmissionChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Min e.g., 10000" />
+                  <input name="monthly_fee_max" type="number" step="0.01" value={admissionData.monthly_fee_max} onChange={handleAdmissionChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Max e.g., 20000" />
+                </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Annual Fee (₹)</label>
-                <input name="annual_fee" type="number" step="0.01" value={admissionData.annual_fee} onChange={handleAdmissionChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 180000" />
+                <label className="block text-sm font-medium text-gray-700 mb-2">Annual Fee Range (₹)</label>
+                <div className="grid grid-cols-2 gap-3">
+                  <input name="annual_fee_min" type="number" step="0.01" value={admissionData.annual_fee_min} onChange={handleAdmissionChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Min e.g., 120000" />
+                  <input name="annual_fee_max" type="number" step="0.01" value={admissionData.annual_fee_max} onChange={handleAdmissionChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Max e.g., 240000" />
+                </div>
               </div>
-              <div>
+              <div className="max-w-xs">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Rating (0-5)</label>
                 <input name="verified_rating" type="number" step="0.1" min="0" max="5" value={admissionData.verified_rating} onChange={handleAdmissionChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 4.5" />
               </div>
