@@ -6,6 +6,7 @@ import { ContactForm } from '../components/ContactForm';
 import { preschoolService } from '../services/apiService';
 
 export const HomePage = () => {
+
   const [searchCity, setSearchCity] = useState('');
   const [allPreschools, setAllPreschools] = useState([]);
 
@@ -21,6 +22,19 @@ export const HomePage = () => {
       }
     };
     fetchPreschools();
+  }, []);
+
+  // Scroll to contact section if #contact in URL, and on hash change
+  useEffect(() => {
+    const scrollToContact = () => {
+      if (window.location.hash === '#contact') {
+        const el = document.getElementById('contact');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+    scrollToContact();
+    window.addEventListener('hashchange', scrollToContact);
+    return () => window.removeEventListener('hashchange', scrollToContact);
   }, []);
 
   const featuredPreschools = [

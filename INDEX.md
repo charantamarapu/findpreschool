@@ -34,10 +34,10 @@ Start here and follow the guides in this order:
 - **When**: After backend is running
 - **Contains**: All 25+ API calls with request/response examples
 
-### 7️⃣ **[PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md)** - 10 Minutes
-- **What**: High-level project summary
-- **When**: Overview of what was built
-- **Contains**: Features, structure, statistics, next steps
+### 7️⃣ **[ADMIN_PANEL_README.md](./ADMIN_PANEL_README.md)** - 10 Minutes
+- **What**: Complete admin panel documentation
+- **When**: When you need to manage database operations
+- **Contains**: Admin login, dashboard features, CRUD operations, bulk actions
 
 ---
 
@@ -95,7 +95,7 @@ findpreschool/
 │   ├── config/
 │   │   └── database.js ................ Sequelize connection
 │   │
-│   ├── models/ (8 files)
+│   ├── models/ (9 files)
 │   │   ├── Preschool.js
 │   │   ├── PreschoolImage.js
 │   │   ├── AdmissionDetail.js
@@ -106,19 +106,21 @@ findpreschool/
 │   │   ├── PreschoolOwner.js
 │   │   └── index.js (associations)
 │   │
-│   ├── controllers/ (5 files)
+│   ├── controllers/ (6 files)
 │   │   ├── preschoolController.js
 │   │   ├── googleMapsController.js
 │   │   ├── comparisonController.js
 │   │   ├── reviewController.js
-│   │   └── detailController.js
+│   │   ├── detailController.js
+│   │   └── adminController.js ......... Admin operations
 │   │
-│   ├── routes/ (5 files)
+│   ├── routes/ (6 files)
 │   │   ├── preschools.js
 │   │   ├── comparison.js
 │   │   ├── googleMaps.js
 │   │   ├── reviews.js
-│   │   └── details.js
+│   │   ├── details.js
+│   │   └── admin.js ................... Admin API routes
 │   │
 │   └── middleware/
 │       ├── auth.js
@@ -137,16 +139,22 @@ findpreschool/
 │       ├── App.jsx .................... App with routing
 │       ├── index.css .................. Global styles
 │       │
-│       ├── pages/ (3 files)
+│       ├── pages/ (7 files)
 │       │   ├── HomePage.jsx
 │       │   ├── PreschoolListPage.jsx
-│       │   └── PreschoolDetailPageWrapper.jsx
+│       │   ├── PreschoolDetailPageWrapper.jsx
+│       │   ├── AdminLogin.jsx ......... Admin authentication
+│       │   ├── AdminDashboard.jsx ..... Admin dashboard
+│       │   ├── AdminPreschools.jsx .... Preschool management
+│       │   ├── AdminReviews.jsx ....... Review management
+│       │   └── AdminAdmins.jsx ........ Admin user management
 │       │
-│       ├── components/ (4 files)
+│       ├── components/ (5 files)
 │       │   ├── PreschoolCard.jsx
 │       │   ├── ComparisonPanel.jsx
 │       │   ├── FilterSidebar.jsx
-│       │   └── PreschoolDetail.jsx
+│       │   ├── PreschoolDetail.jsx
+│       │   └── AdminTable.jsx ......... Reusable admin table
 │       │
 │       ├── services/
 │       │   └── apiService.js

@@ -12,7 +12,7 @@ const AdmissionDetail = sequelize.define(
     preschool_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
+      // Removed unique constraint to reduce key count
     },
     monthly_fee: DataTypes.DECIMAL(10, 2),
     annual_fee: DataTypes.DECIMAL(10, 2),

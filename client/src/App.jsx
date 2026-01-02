@@ -1,17 +1,53 @@
 import React, { useContext, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { HomePage } from './pages/HomePage';
 import { PreschoolListPage } from './pages/PreschoolListPage';
 import { PreschoolDetailPageWrapper } from './pages/PreschoolDetailPageWrapper';
+import AdminLogin from './pages/Admin/AdminLogin';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminPreschools from './pages/Admin/AdminPreschools';
+import AdminReviews from './pages/Admin/AdminReviews';
+import AdminAdmins from './pages/Admin/AdminAdmins';
+import AdminPreschoolEdit from './pages/Admin/AdminPreschoolEdit';
+import AdminReviewEdit from './pages/Admin/AdminReviewEdit';
+import AdminAdminEdit from './pages/Admin/AdminAdminEdit';
 import { ComparisonProvider, ComparisonContext } from './context/ComparisonContext';
 import { FilterProvider } from './context/FilterContext';
 import { ComparisonPanel } from './components/ComparisonPanel';
 import './index.css';
 
+
 function AppContent() {
   const { selectedPreschools } = useContext(ComparisonContext);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Custom handler for Contact Us link
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById('contact');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    } else {
+      const el = document.getElementById('contact');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Custom handler for Home link
+  const handleHomeClick = (e) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // else let Link do its job
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -25,7 +61,7 @@ function AppContent() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex gap-6 items-center">
-              <Link to="/" className="text-gray-600 hover:text-primary-600 font-medium">
+              <Link to="/" className="text-gray-600 hover:text-primary-600 font-medium" onClick={handleHomeClick}>
                 Home
               </Link>
               <Link to="/preschools" className="text-gray-600 hover:text-primary-600 font-medium">
@@ -34,7 +70,10 @@ function AppContent() {
               <Link to="/preschools?city=Delhi" className="text-gray-600 hover:text-primary-600 font-medium">
                 Top Cities
               </Link>
-              <a href="#contact" className="text-gray-600 hover:text-primary-600 font-medium">Contact Us</a>
+              <a href="#contact" onClick={handleContactClick} className="text-gray-600 hover:text-primary-600 font-medium">Contact Us</a>
+              <Link to="/admin/login" className="text-blue-600 hover:text-blue-800 font-medium">
+                Admin
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -49,7 +88,7 @@ function AppContent() {
           {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="md:hidden mt-4 flex flex-col gap-4">
-              <Link to="/" className="text-gray-600 hover:text-primary-600 font-medium">
+              <Link to="/" className="text-gray-600 hover:text-primary-600 font-medium" onClick={handleHomeClick}>
                 Home
               </Link>
               <Link to="/preschools" className="text-gray-600 hover:text-primary-600 font-medium">
@@ -59,6 +98,9 @@ function AppContent() {
                 Top Cities
               </Link>
               <a href="#contact" className="text-gray-600 hover:text-primary-600 font-medium">Contact Us</a>
+              <Link to="/admin/login" className="text-blue-600 hover:text-blue-800 font-medium">
+                Admin
+              </Link>
             </div>
           )}
         </div>
@@ -78,6 +120,14 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/preschools" element={<PreschoolListPage />} />
           <Route path="/preschool/:id" element={<PreschoolDetailPageWrapper />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/preschools" element={<AdminPreschools />} />
+          <Route path="/admin/preschools/:id" element={<AdminPreschoolEdit />} />
+          <Route path="/admin/reviews" element={<AdminReviews />} />
+          <Route path="/admin/reviews/:id" element={<AdminReviewEdit />} />
+          <Route path="/admin/admins" element={<AdminAdmins />} />
+          <Route path="/admin/admins/:id" element={<AdminAdminEdit />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

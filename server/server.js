@@ -13,6 +13,7 @@ import googleMapsRouter from './routes/googleMaps.js';
 import reviewsRouter from './routes/reviews.js';
 import detailsRouter from './routes/details.js';
 import contactRouter from './routes/contact.js';
+import adminRouter from './routes/admin.js';
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ app.use('/api/google-maps', googleMapsRouter);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/details', detailsRouter);
 app.use('/api', contactRouter);
+app.use('/api/admin', adminRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -8,14 +8,14 @@ import {
   validateRequest,
   schemas,
 } from '../middleware/validation.js';
-import { verifyAdmin } from '../middleware/auth.js';
+import { authenticateAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Admission Details
 router.put(
   '/admission/:preschool_id',
-  verifyAdmin,
+  authenticateAdmin,
   validateRequest(schemas.updateAdmissionDetails),
   updateAdmissionDetails
 );
@@ -23,7 +23,7 @@ router.put(
 // Franchise Details
 router.put(
   '/franchise/:preschool_id',
-  verifyAdmin,
+  authenticateAdmin,
   validateRequest(schemas.updateFranchiseDetails),
   updateFranchiseDetails
 );

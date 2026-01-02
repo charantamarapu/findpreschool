@@ -24,7 +24,7 @@ const Preschool = sequelize.define(
     website: DataTypes.STRING(255),
     google_place_id: {
       type: DataTypes.STRING(255),
-      unique: true,
+      // Removed unique constraint to reduce key count
     },
     verified_status: {
       type: DataTypes.BOOLEAN,

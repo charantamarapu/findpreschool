@@ -18,7 +18,7 @@ Preschool.hasOne(FranchiseDetail, { foreignKey: 'preschool_id', as: 'franchise' 
 FranchiseDetail.belongsTo(Preschool, { foreignKey: 'preschool_id' });
 
 Preschool.hasMany(Review, { foreignKey: 'preschool_id', as: 'reviews' });
-Review.belongsTo(Preschool, { foreignKey: 'preschool_id' });
+Review.belongsTo(Preschool, { foreignKey: 'preschool_id', as: 'preschool' });
 
 Preschool.hasOne(PreschoolOwner, { foreignKey: 'preschool_id', as: 'owner' });
 PreschoolOwner.belongsTo(Preschool, { foreignKey: 'preschool_id' });

@@ -1,6 +1,12 @@
 -- Sample Data for FindPreschool.org Database
 USE findpreschool;
 
+-- Insert Default Admin User
+-- Password: admin123 (hashed)
+INSERT INTO admin_users (email, password_hash, name, role, active, created_at, updated_at) VALUES
+('admin@findpreschool.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'System Admin', 'admin', TRUE, NOW(), NOW()),
+('moderator@findpreschool.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Content Moderator', 'moderator', TRUE, NOW(), NOW());
+
 -- Insert Sample Preschools
 INSERT INTO preschools (name, address, city, state, pincode, latitude, longitude, phone, email, website, verified_status, created_at, updated_at) VALUES
 ('Sunshine Academy', 'Block A, New Delhi', 'Delhi', 'Delhi', '110001', 28.6139, 77.2090, '9876543210', 'info@sunshine.com', 'www.sunshine.com', TRUE, NOW(), NOW()),

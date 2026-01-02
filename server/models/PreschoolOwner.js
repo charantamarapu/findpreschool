@@ -12,7 +12,7 @@ const PreschoolOwner = sequelize.define(
     preschool_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
+      // Removed unique constraint to reduce key count
     },
     owner_name: DataTypes.STRING(255),
     owner_email: {

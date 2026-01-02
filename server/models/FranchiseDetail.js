@@ -12,7 +12,7 @@ const FranchiseDetail = sequelize.define(
     preschool_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
+      // Removed unique constraint to reduce key count
     },
     franchise_available: {
       type: DataTypes.BOOLEAN,

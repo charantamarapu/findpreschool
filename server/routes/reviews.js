@@ -10,7 +10,7 @@ import {
   validateRequest,
   schemas,
 } from '../middleware/validation.js';
-import { verifyAdmin } from '../middleware/auth.js';
+import { authenticateAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -20,8 +20,8 @@ router.post(
   validateRequest(schemas.submitReview),
   submitReview
 );
-router.put('/:review_id/verify', verifyAdmin, verifyReview);
-router.delete('/:review_id/reject', verifyAdmin, rejectReview);
-router.get('/admin/pending', verifyAdmin, getPendingReviews);
+router.put('/:review_id/verify', authenticateAdmin, verifyReview);
+router.delete('/:review_id/reject', authenticateAdmin, rejectReview);
+router.get('/admin/pending', authenticateAdmin, getPendingReviews);
 
 export default router;

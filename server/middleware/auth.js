@@ -22,7 +22,7 @@ export const verifyToken = (req, res, next) => {
   }
 };
 
-export const verifyAdmin = (req, res, next) => {
+export const authenticateAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
     if (req.user.role !== 'admin' && req.user.role !== 'moderator') {
       return res.status(403).json({

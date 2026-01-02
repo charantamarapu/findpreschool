@@ -42,14 +42,95 @@ export const reviewService = {
     apiClient.get('/reviews/admin/pending', { params }),
 };
 
-// Details endpoints
-export const detailsService = {
-  updateAdmissionDetails: (preschoolId, data) =>
-    apiClient.put(`/details/admission/${preschoolId}`, data),
-  updateFranchiseDetails: (preschoolId, data) =>
-    apiClient.put(`/details/franchise/${preschoolId}`, data),
-  getFranchiseOpportunities: (params) =>
-    apiClient.get('/details/franchise/opportunities', { params }),
+// Admin endpoints
+export const adminService = {
+  login: (credentials) => apiClient.post('/admin/login', credentials),
+  getDashboardStats: () => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.get('/admin/dashboard/stats', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  getPreschools: (params) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.get('/admin/preschools', {
+      params,
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  updatePreschool: (id, data) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.put(`/admin/preschools/${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  deletePreschool: (id) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.delete(`/admin/preschools/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  getReviews: (params) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.get('/admin/reviews', {
+      params,
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  updateReview: (id, data) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.put(`/admin/reviews/${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  deleteReview: (id) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.delete(`/admin/reviews/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  getAdmins: () => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.get('/admin/admins', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  createAdmin: (data) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.post('/admin/admins', data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  updateAdmin: (id, data) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.put(`/admin/admins/${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  deleteAdmin: (id) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.delete(`/admin/admins/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  bulkVerifyPreschools: (ids) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.post('/admin/bulk/verify-preschools', { ids }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  bulkVerifyReviews: (ids) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.post('/admin/bulk/verify-reviews', { ids }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  bulkDelete: (model, ids) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.post('/admin/bulk/delete', { model, ids }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  }
 };
 
 export default apiClient;

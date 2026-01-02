@@ -17,6 +17,7 @@ export const MapComponent = ({ preschools = [], center = [20.5937, 78.9629], zoo
       <MapContainer
         center={center}
         zoom={zoom}
+        scrollWheelZoom={false}
         style={{ height: '100%', width: '100%' }}
       >
         <TileLayer
