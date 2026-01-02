@@ -8,8 +8,10 @@ export const updateAdmissionDetails = async (req, res) => {
   try {
     const { preschool_id } = req.params;
     const {
-      monthly_fee,
-      annual_fee,
+      monthly_fee_min,
+      monthly_fee_max,
+      annual_fee_min,
+      annual_fee_max,
       registration_fee,
       hidden_charges_json,
       age_criteria,
@@ -28,8 +30,10 @@ export const updateAdmissionDetails = async (req, res) => {
     }
 
     await admission.update({
-      monthly_fee,
-      annual_fee,
+      monthly_fee_min,
+      monthly_fee_max,
+      annual_fee_min,
+      annual_fee_max,
       registration_fee,
       hidden_charges_json,
       age_criteria,

@@ -303,7 +303,7 @@ export const bulkDelete = async (req, res) => {
 // Admission Details Management
 export const createAdmissionDetail = async (req, res) => {
   try {
-    const { preschool_id, monthly_fee, annual_fee, verified_rating } = req.body;
+    const { preschool_id, monthly_fee_min, monthly_fee_max, annual_fee_min, annual_fee_max, verified_rating } = req.body;
     
     // Check if admission detail already exists
     let admission = await AdmissionDetail.findOne({ where: { preschool_id } });
@@ -311,8 +311,10 @@ export const createAdmissionDetail = async (req, res) => {
     if (admission) {
       // Update existing
       await admission.update({
-        monthly_fee: monthly_fee || admission.monthly_fee,
-        annual_fee: annual_fee || admission.annual_fee,
+        monthly_fee_min: monthly_fee_min !== undefined ? monthly_fee_min : admission.monthly_fee_min,
+        monthly_fee_max: monthly_fee_max !== undefined ? monthly_fee_max : admission.monthly_fee_max,
+        annual_fee_min: annual_fee_min !== undefined ? annual_fee_min : admission.annual_fee_min,
+        annual_fee_max: annual_fee_max !== undefined ? annual_fee_max : admission.annual_fee_max,
         verified_rating: verified_rating !== undefined ? verified_rating : admission.verified_rating,
       });
       res.json(admission);
@@ -320,8 +322,10 @@ export const createAdmissionDetail = async (req, res) => {
       // Create new
       admission = await AdmissionDetail.create({
         preschool_id,
-        monthly_fee,
-        annual_fee,
+        monthly_fee_min,
+        monthly_fee_max,
+        annual_fee_min,
+        annual_fee_max,
         verified_rating: verified_rating || 0,
       });
       res.status(201).json(admission);

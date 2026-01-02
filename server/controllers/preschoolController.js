@@ -25,8 +25,8 @@ export const getAllPreschools = async (req, res) => {
 
     // Build include for admission with optional filtering so the database does the heavy lifting
     const admissionWhere = {};
-    if (minFee) admissionWhere.monthly_fee = { ...(admissionWhere.monthly_fee || {}), [Op.gte]: parseFloat(minFee) };
-    if (maxFee) admissionWhere.monthly_fee = { ...(admissionWhere.monthly_fee || {}), [Op.lte]: parseFloat(maxFee) };
+    if (minFee) admissionWhere.monthly_fee_min = { [Op.lte]: parseFloat(minFee) };
+    if (maxFee) admissionWhere.monthly_fee_max = { [Op.gte]: parseFloat(maxFee) };
     if (minRating) admissionWhere.verified_rating = { [Op.gte]: parseFloat(minRating) };
 
     const include = [
@@ -34,8 +34,10 @@ export const getAllPreschools = async (req, res) => {
       {
         association: 'admission',
         attributes: [
-          'monthly_fee',
-          'annual_fee',
+          'monthly_fee_min',
+          'monthly_fee_max',
+          'annual_fee_min',
+          'annual_fee_max',
           'verified_rating',
           'total_reviews',
         ],

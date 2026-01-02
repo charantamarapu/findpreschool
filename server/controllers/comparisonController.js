@@ -27,8 +27,10 @@ export const compareAdmission = async (req, res) => {
         {
           association: 'admission',
           attributes: [
-            'monthly_fee',
-            'annual_fee',
+            'monthly_fee_min',
+            'monthly_fee_max',
+            'annual_fee_min',
+            'annual_fee_max',
             'registration_fee',
             'hidden_charges_json',
             'age_criteria',
@@ -49,28 +51,35 @@ export const compareAdmission = async (req, res) => {
     }
 
     // Calculate total cost of ownership
-    const comparisonData = preschools.map((p) => ({
-      id: p.id,
-      name: p.name,
-      city: p.city,
-      phone: p.phone,
-      email: p.email,
-      website: p.website,
-      admission: {
-        monthly_fee: p.admission?.monthly_fee || 0,
-        annual_fee: p.admission?.annual_fee || 0,
-        registration_fee: p.admission?.registration_fee || 0,
-        hidden_charges: p.admission?.hidden_charges_json || {},
-        age_criteria: p.admission?.age_criteria,
-        academic_year_start: p.admission?.academic_year_start,
-        verified_rating: p.admission?.verified_rating || 0,
-        total_reviews: p.admission?.total_reviews || 0,
-      },
-      totalAnnualCost:
-        (p.admission?.monthly_fee || 0) * 12 +
-        (p.admission?.annual_fee || 0) +
-        (p.admission?.registration_fee || 0),
-    }));
+    const comparisonData = preschools.map((p) => {
+      const monthlyFeeAvg = p.admission?.monthly_fee_min && p.admission?.monthly_fee_max
+        ? (p.admission.monthly_fee_min + p.admission.monthly_fee_max) / 2
+        : (p.admission?.monthly_fee_min || p.admission?.monthly_fee_max || 0);
+      const annualFeeAvg = p.admission?.annual_fee_min && p.admission?.annual_fee_max
+        ? (p.admission.annual_fee_min + p.admission.annual_fee_max) / 2
+        : (p.admission?.annual_fee_min || p.admission?.annual_fee_max || 0);
+      return {
+        id: p.id,
+        name: p.name,
+        city: p.city,
+        phone: p.phone,
+        email: p.email,
+        website: p.website,
+        admission: {
+          monthly_fee_min: p.admission?.monthly_fee_min || 0,
+          monthly_fee_max: p.admission?.monthly_fee_max || 0,
+          annual_fee_min: p.admission?.annual_fee_min || 0,
+          annual_fee_max: p.admission?.annual_fee_max || 0,
+          registration_fee: p.admission?.registration_fee || 0,
+          hidden_charges: p.admission?.hidden_charges_json || {},
+          age_criteria: p.admission?.age_criteria,
+          academic_year_start: p.admission?.academic_year_start,
+          verified_rating: p.admission?.verified_rating || 0,
+          total_reviews: p.admission?.total_reviews || 0,
+        },
+        totalAnnualCost: monthlyFeeAvg * 12 + annualFeeAvg + (p.admission?.registration_fee || 0),
+      };
+    });
 
     // Sort by best value (lowest total cost)
     comparisonData.sort((a, b) => a.totalAnnualCost - b.totalAnnualCost);
