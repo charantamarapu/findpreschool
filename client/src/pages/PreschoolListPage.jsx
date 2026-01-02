@@ -17,13 +17,18 @@ export const PreschoolListPage = () => {
 
   const city = searchParams.get('city') || filters.city;
 
+  // Reset offset when city or filters change
+  useEffect(() => {
+    setPagination((p) => ({ ...p, offset: 0 }));
+  }, [city, filters]);
+
   useEffect(() => {
     const fetchPreschools = async () => {
       setLoading(true);
       try {
         const params = {
-          limit: 20,
-          offset: 0,
+          limit: pagination.limit,
+          offset: pagination.offset,
         };
 
         if (city) params.city = city;
@@ -45,7 +50,7 @@ export const PreschoolListPage = () => {
     };
 
     fetchPreschools();
-  }, [city, filters]);
+  }, [city, filters, pagination.offset]);
 
   const handleViewDetails = (preschoolId) => {
     navigate(`/preschool/${preschoolId}`);
