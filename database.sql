@@ -41,8 +41,10 @@ CREATE TABLE preschool_images (
 CREATE TABLE admission_details (
   id INT PRIMARY KEY AUTO_INCREMENT,
   preschool_id INT NOT NULL UNIQUE,
-  monthly_fee DECIMAL(10, 2),
-  annual_fee DECIMAL(10, 2),
+  monthly_fee_min DECIMAL(10, 2),
+  monthly_fee_max DECIMAL(10, 2),
+  annual_fee_min DECIMAL(10, 2),
+  annual_fee_max DECIMAL(10, 2),
   registration_fee DECIMAL(10, 2),
   hidden_charges_json JSON,
   age_criteria VARCHAR(255),
@@ -52,7 +54,8 @@ CREATE TABLE admission_details (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (preschool_id) REFERENCES preschools(id) ON DELETE CASCADE,
-  INDEX idx_monthly_fee (monthly_fee),
+  INDEX idx_monthly_fee_min (monthly_fee_min),
+  INDEX idx_monthly_fee_max (monthly_fee_max),
   INDEX idx_verified_rating (verified_rating)
 );
 

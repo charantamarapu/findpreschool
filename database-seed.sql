@@ -1,12 +1,6 @@
 -- Sample Data for FindPreschool.org Database
 USE findpreschool;
 
--- Insert Default Admin User
--- Password: admin123 (hashed)
-INSERT INTO admin_users (email, password_hash, name, role, active, created_at, updated_at) VALUES
-('admin@findpreschool.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'System Admin', 'admin', TRUE, NOW(), NOW()),
-('moderator@findpreschool.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Content Moderator', 'moderator', TRUE, NOW(), NOW());
-
 -- Insert Sample Preschools
 INSERT INTO preschools (name, address, city, state, pincode, latitude, longitude, phone, email, website, verified_status, created_at, updated_at) VALUES
 ('Sunshine Academy', 'Block A, New Delhi', 'Delhi', 'Delhi', '110001', 28.6139, 77.2090, '9876543210', 'info@sunshine.com', 'www.sunshine.com', TRUE, NOW(), NOW()),
@@ -38,17 +32,17 @@ INSERT INTO preschool_images (preschool_id, image_url, is_primary, created_at) V
 (10, 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop', TRUE, NOW());
 
 -- Insert Sample Admission Details
-INSERT INTO admission_details (preschool_id, monthly_fee, annual_fee, registration_fee, age_criteria, academic_year_start, verified_rating, total_reviews, created_at, updated_at) VALUES
-(1, 15000, 180000, 5000, '2-5 years', 'April', 4.8, 45, NOW(), NOW()),
-(2, 16500, 198000, 7500, '2-5 years', 'June', 4.7, 38, NOW(), NOW()),
-(3, 18000, 216000, 10000, '2-6 years', 'April', 4.6, 52, NOW(), NOW()),
-(4, 14000, 168000, 4000, '2-4 years', 'May', 4.5, 28, NOW(), NOW()),
-(5, 13500, 162000, 5500, '2-5 years', 'April', 4.7, 35, NOW(), NOW()),
-(6, 12000, 144000, 3500, '2-5 years', 'June', 4.2, 22, NOW(), NOW()),
-(7, 17000, 204000, 8000, '2-5 years', 'June', 4.8, 41, NOW(), NOW()),
-(8, 16000, 192000, 6000, '2-5 years', 'April', 4.6, 38, NOW(), NOW()),
-(9, 11500, 138000, 3000, '1.5-5 years', 'July', 4.3, 19, NOW(), NOW()),
-(10, 15500, 186000, 5500, '2-5 years', 'April', 4.7, 33, NOW(), NOW());
+INSERT INTO admission_details (preschool_id, monthly_fee_min, monthly_fee_max, annual_fee_min, annual_fee_max, registration_fee, age_criteria, academic_year_start, verified_rating, total_reviews, created_at, updated_at) VALUES
+(1, 12000, 15000, 144000, 180000, 5000, '2-5 years', 'April', 4.8, 45, NOW(), NOW()),
+(2, 14000, 16500, 168000, 198000, 7500, '2-5 years', 'June', 4.7, 38, NOW(), NOW()),
+(3, 16000, 18000, 192000, 216000, 10000, '2-6 years', 'April', 4.6, 52, NOW(), NOW()),
+(4, 12000, 14000, 144000, 168000, 4000, '2-4 years', 'May', 4.5, 28, NOW(), NOW()),
+(5, 11500, 13500, 138000, 162000, 5500, '2-5 years', 'April', 4.7, 35, NOW(), NOW()),
+(6, 10000, 12000, 120000, 144000, 3500, '2-5 years', 'June', 4.2, 22, NOW(), NOW()),
+(7, 15000, 17000, 180000, 204000, 8000, '2-5 years', 'June', 4.8, 41, NOW(), NOW()),
+(8, 14500, 16000, 174000, 192000, 6000, '2-5 years', 'April', 4.6, 38, NOW(), NOW()),
+(9, 9500, 11500, 114000, 138000, 3000, '1.5-5 years', 'July', 4.3, 19, NOW(), NOW()),
+(10, 13000, 15500, 156000, 186000, 5500, '2-5 years', 'April', 4.7, 33, NOW(), NOW());
 
 -- Insert Sample Reviews
 INSERT INTO reviews (preschool_id, parent_name, parent_email, rating, facilities_rating, teachers_rating, curriculum_rating, safety_rating, review_text, verified, created_at, updated_at) VALUES
@@ -72,11 +66,6 @@ INSERT INTO franchise_details (preschool_id, franchise_available, initial_invest
 (5, TRUE, 4500000, 5, 'percentage', '{"duration": "8 years", "territory": "city", "support": "training, operations"}', NOW(), NOW()),
 (7, TRUE, 5500000, 5.5, 'percentage', '{"duration": "10 years", "territory": "district", "support": "full support"}', NOW(), NOW()),
 (10, TRUE, 4800000, 5, 'percentage', '{"duration": "10 years", "territory": "city", "support": "training, marketing, hr"}', NOW(), NOW());
-
--- Insert Sample Admin User
-INSERT INTO admin_users (email, password_hash, name, role, active, created_at, updated_at) VALUES
-('admin@findpreschool.com', '$2a$10$1234567890123456789012', 'Admin User', 'admin', TRUE, NOW(), NOW()),
-('moderator@findpreschool.com', '$2a$10$0987654321098765432109', 'Moderator User', 'moderator', TRUE, NOW(), NOW());
 
 -- Insert Sample Preschool Owner
 INSERT INTO preschool_owners (preschool_id, owner_name, owner_email, owner_phone, verified_owner, created_at, updated_at) VALUES
