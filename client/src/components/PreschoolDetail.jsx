@@ -78,6 +78,7 @@ export const PreschoolDetailPage = ({ preschool }) => {
     );
   }
 
+
   return (
     <div className="max-w-6xl mx-auto py-8 px-4">
       {/* Header */}
