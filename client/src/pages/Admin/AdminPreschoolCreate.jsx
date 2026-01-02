@@ -76,9 +76,9 @@ const AdminPreschoolCreate = () => {
           preschool_id: preschoolId,
           monthly_fee: admissionData.monthly_fee ? parseFloat(admissionData.monthly_fee) : null,
           annual_fee: admissionData.annual_fee ? parseFloat(admissionData.annual_fee) : null,
-          verified_rating: admissionData.verified_rating ? parseFloat(admissionData.verified_rating) : null,
+          verified_rating: admissionData.verified_rating ? parseFloat(admissionData.verified_rating) : 0,
         };
-        // You'll need to create an endpoint or handle this in the createPreschool
+        await adminService.createAdmissionDetail(admissionPayload);
       }
 
       // Create image if provided
@@ -88,12 +88,13 @@ const AdminPreschoolCreate = () => {
           image_url: imageData.image_url,
           is_primary: imageData.is_primary,
         };
-        // You'll need to create an endpoint or handle this in the createPreschool
+        await adminService.createPreschoolImage(imagePayload);
       }
 
-      toast.success('Preschool created successfully');
+      toast.success('Preschool created successfully with all details!');
       navigate('/admin/preschools');
     } catch (err) {
+      console.error('Error creating preschool:', err);
       toast.error(err.response?.data?.error || 'Creation failed');
     } finally {
       setSubmitting(false);

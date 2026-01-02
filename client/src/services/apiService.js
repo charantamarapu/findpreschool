@@ -136,6 +136,30 @@ export const adminService = {
     return apiClient.post('/admin/bulk/delete', { model, ids }, {
       headers: { Authorization: `Bearer ${token}` }
     });
+  },
+  createAdmissionDetail: (data) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.post('/admin/admission', data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  createPreschoolImage: (data) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.post('/admin/images', data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  updatePreschoolImage: (id, data) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.put(`/admin/images/${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
+  deletePreschoolImage: (id) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.delete(`/admin/images/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 };
 

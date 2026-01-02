@@ -15,7 +15,11 @@ import {
   deleteAdmin,
   bulkVerifyPreschools,
   bulkVerifyReviews,
-  bulkDelete
+  bulkDelete,
+  createAdmissionDetail,
+  createPreschoolImage,
+  updatePreschoolImage,
+  deletePreschoolImage
 } from '../controllers/adminController.js';
 import { authenticateAdmin } from '../middleware/auth.js';
 
@@ -51,5 +55,13 @@ router.delete('/admins/:id', deleteAdmin);
 router.post('/bulk/verify-preschools', bulkVerifyPreschools);
 router.post('/bulk/verify-reviews', bulkVerifyReviews);
 router.post('/bulk/delete', bulkDelete);
+
+// Admission details management
+router.post('/admission', createAdmissionDetail);
+
+// Images management
+router.post('/images', createPreschoolImage);
+router.put('/images/:id', updatePreschoolImage);
+router.delete('/images/:id', deletePreschoolImage);
 
 export default router;

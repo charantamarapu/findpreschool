@@ -299,3 +299,98 @@ export const bulkDelete = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Admission Details Management
+export const createAdmissionDetail = async (req, res) => {
+  try {
+    const { preschool_id, monthly_fee, annual_fee, verified_rating } = req.body;
+    
+    // Check if admission detail already exists
+    let admission = await AdmissionDetail.findOne({ where: { preschool_id } });
+    
+    if (admission) {
+      // Update existing
+      await admission.update({
+        monthly_fee: monthly_fee || admission.monthly_fee,
+        annual_fee: annual_fee || admission.annual_fee,
+        verified_rating: verified_rating !== undefined ? verified_rating : admission.verified_rating,
+      });
+      res.json(admission);
+    } else {
+      // Create new
+      admission = await AdmissionDetail.create({
+        preschool_id,
+        monthly_fee,
+        annual_fee,
+        verified_rating: verified_rating || 0,
+      });
+      res.status(201).json(admission);
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Image Management
+export const createPreschoolImage = async (req, res) => {
+  try {
+    const { preschool_id, image_url, is_primary } = req.body;
+    
+    if (is_primary) {
+      // Unset primary for other images
+      await PreschoolImage.update(
+        { is_primary: false },
+        { where: { preschool_id } }
+      );
+    }
+    
+    const image = await PreschoolImage.create({
+      preschool_id,
+      image_url,
+      is_primary: is_primary || false,
+    });
+    
+    res.status(201).json(image);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const updatePreschoolImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { is_primary } = req.body;
+    
+    const image = await PreschoolImage.findByPk(id);
+    if (!image) {
+      return res.status(404).json({ error: 'Image not found' });
+    }
+    
+    if (is_primary) {
+      // Unset primary for other images
+      await PreschoolImage.update(
+        { is_primary: false },
+        { where: { preschool_id: image.preschool_id } }
+      );
+    }
+    
+    await image.update({ is_primary });
+    res.json(image);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const deletePreschoolImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await PreschoolImage.destroy({ where: { id } });
+    if (deleted) {
+      res.json({ message: 'Image deleted successfully' });
+    } else {
+      res.status(404).json({ error: 'Image not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
