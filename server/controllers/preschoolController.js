@@ -44,6 +44,8 @@ export const getAllPreschools = async (req, res) => {
     const preschools = await Preschool.findAndCountAll({
       where,
       include,
+      distinct: true,
+      col: 'id',
       limit: parseInt(limit),
       offset: parseInt(offset),
       order: [['created_at', 'DESC']],
