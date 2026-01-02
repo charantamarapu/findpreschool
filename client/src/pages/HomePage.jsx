@@ -82,7 +82,7 @@ export const HomePage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-700 text-white py-16">
+      <section className="hero-accent text-white py-16">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4">
             Find the Perfect Preschool for Your Child
@@ -93,23 +93,23 @@ export const HomePage = () => {
           </p>
 
           {/* Search Bar */}
-          <div className="bg-white rounded-lg shadow-lg p-4 max-w-2xl mx-auto">
-            <div className="flex gap-2">
+          <div className="bg-white rounded-full shadow-xl p-3 max-w-2xl mx-auto">
+            <div className="flex gap-3 items-center px-3">
               <div className="flex-1 relative">
-                <MapPin size={20} className="absolute left-3 top-3 text-gray-400" />
+                <MapPin size={20} className="absolute left-4 top-3 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Enter city name..."
                   value={searchCity}
                   onChange={(e) => setSearchCity(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border-0 focus:outline-none"
+                  className="w-full pl-12 pr-4 py-3 border-0 focus:outline-none text-sm"
                 />
               </div>
               <Link
                 to={`/preschools${searchCity ? `?city=${searchCity}` : ''}`}
-                className="btn-primary"
+                className="btn-primary flex items-center gap-2"
               >
-                <Search size={20} />
+                <Search size={18} />
                 Search
               </Link>
             </div>

@@ -15,22 +15,22 @@ export const PreschoolCard = ({ preschool, onViewDetails }) => {
   const rating = parseFloat(preschool.admission?.verified_rating) || 0;
 
   return (
-    <div className="card p-4 rounded-lg overflow-hidden">
+    <div className="card p-4 overflow-hidden transform hover:-translate-y-1 transition-transform">
       {/* Image Section */}
-      <div className="relative mb-4 h-48 bg-gray-200 rounded-lg overflow-hidden">
+      <div className="relative mb-4 h-48 bg-gray-200 rounded-md overflow-hidden shadow-sm">
         {primaryImage ? (
           <img
             src={primaryImage}
             alt={preschool.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-300 text-gray-500">
+          <div className="w-full h-full flex items-center justify-center bg-gray-300 text-gray-500 text-sm">
             No Image
           </div>
         )}
         {preschool.verified_status && (
-          <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+          <div className="absolute top-3 right-3 bg-white text-green-600 px-2 py-1 rounded-full text-xs font-semibold shadow">
             ✓ Verified
           </div>
         )}
@@ -97,10 +97,10 @@ export const PreschoolCard = ({ preschool, onViewDetails }) => {
         )}
 
         {/* Action Buttons */}
-        <div className="flex gap-2">
+        <div className="flex gap-3 items-center">
           <button
             onClick={() => onViewDetails(preschool.id)}
-            className="flex-1 btn-primary text-sm py-2"
+            className="flex-1 btn-outline text-sm py-2"
           >
             View Details
           </button>
@@ -110,18 +110,10 @@ export const PreschoolCard = ({ preschool, onViewDetails }) => {
                 ? removeFromComparison(preschool.id)
                 : addToComparison(preschool)
             }
-            className={`px-3 py-2 rounded-lg font-medium transition-colors border-2 ${
-              isSelected
-                ? 'bg-secondary-500 border-secondary-500 text-white'
-                : 'border-gray-300 text-gray-600 hover:border-secondary-500'
-            }`}
+            className={`inline-flex items-center justify-center h-10 w-10 rounded-lg transition-colors border ${isSelected ? 'bg-secondary-500 border-secondary-500 text-white' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-secondary-50 hover:border-secondary-500'}`}
             title={isSelected ? 'Remove from comparison' : 'Add to comparison'}
           >
-            {isSelected ? (
-              <Minus size={20} />
-            ) : (
-              <Plus size={20} />
-            )}
+            {isSelected ? <Minus size={18} /> : <Plus size={18} />}
           </button>
         </div>
       </div>

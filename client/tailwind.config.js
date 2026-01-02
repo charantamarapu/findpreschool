@@ -5,6 +5,7 @@ export default {
     "./src/**/*.{js,jsx}",
   ],
   theme: {
+    container: { center: true, padding: '1rem' },
     extend: {
       colors: {
         primary: {
@@ -20,7 +21,20 @@ export default {
           600: '#ea580c',
           700: '#c2410c',
         },
+        accent: {
+          50: '#ecfeff',
+          500: '#06b6d4'
+        }
       },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto'],
+      },
+      boxShadow: {
+        card: '0 6px 18px rgba(15,23,42,0.08)',
+      },
+      borderRadius: {
+        xl: '1rem',
+      }
     },
   },
   plugins: [],

@@ -255,7 +255,7 @@ const AdminTable = ({
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {data.map((item) => (
-                    <tr key={item.id}>
+                    <tr key={item.id} className="hover:bg-gray-50">
                       <td className="relative w-12 px-6 sm:w-16 sm:px-8">
                         <input
                           type="checkbox"
@@ -291,7 +291,7 @@ const AdminTable = ({
                           {canEdit && (
                             <button
                               onClick={() => navigate(`${editPath}/${item.id}`)}
-                              className="text-blue-600 hover:text-blue-900"
+                              className="inline-flex items-center justify-center h-8 w-8 rounded-md bg-blue-50 text-blue-600 hover:bg-blue-100"
                             >
                               <Edit className="h-4 w-4" />
                             </button>
@@ -299,7 +299,7 @@ const AdminTable = ({
                           {canDelete && (
                             <button
                               onClick={() => handleDelete(item.id)}
-                              className="text-red-600 hover:text-red-900"
+                              className="inline-flex items-center justify-center h-8 w-8 rounded-md bg-red-50 text-red-600 hover:bg-red-100"
                             >
                               <Trash2 className="h-4 w-4" />
                             </button>
