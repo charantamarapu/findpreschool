@@ -58,6 +58,12 @@ export const adminService = {
       headers: { Authorization: `Bearer ${token}` }
     });
   },
+  createPreschool: (data) => {
+    const token = localStorage.getItem('adminToken');
+    return apiClient.post('/admin/preschools', data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  },
   updatePreschool: (id, data) => {
     const token = localStorage.getItem('adminToken');
     return apiClient.put(`/admin/preschools/${id}`, data, {

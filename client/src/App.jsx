@@ -8,6 +8,7 @@ import { PreschoolDetailPageWrapper } from './pages/PreschoolDetailPageWrapper';
 import AdminLogin from './pages/Admin/AdminLogin';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import AdminPreschools from './pages/Admin/AdminPreschools';
+import AdminPreschoolCreate from './pages/Admin/AdminPreschoolCreate';
 import AdminReviews from './pages/Admin/AdminReviews';
 import AdminAdmins from './pages/Admin/AdminAdmins';
 import AdminPreschoolEdit from './pages/Admin/AdminPreschoolEdit';
@@ -133,6 +134,7 @@ function AppContent() {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/preschools" element={<AdminPreschools />} />
+          <Route path="/admin/preschools/new" element={<AdminPreschoolCreate />} />
           <Route path="/admin/preschools/:id" element={<AdminPreschoolEdit />} />
           <Route path="/admin/reviews" element={<AdminReviews />} />
           <Route path="/admin/reviews/:id" element={<AdminReviewEdit />} />

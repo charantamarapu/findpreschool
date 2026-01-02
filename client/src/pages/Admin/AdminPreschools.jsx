@@ -101,7 +101,7 @@ const AdminPreschools = () => {
           title="Preschools"
           endpoint="preschools"
           columns={columns}
-          createPath="/admin/preschools/create"
+          createPath="/admin/preschools/new"
           editPath="/admin/preschools"
           canCreate={true}
           canEdit={true}
