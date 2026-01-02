@@ -71,7 +71,13 @@ git init
 git add .
 git commit -m "Initial commit: FindPreschool app"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/findpreschool.git
+git remote add origin https://github.com/charantamarapu/findpreschool.git
+git push -u origin main
+```
+
+**Note**: If you get "remote origin already exists", run:
+```bash
+git remote set-url origin https://github.com/charantamarapu/findpreschool.git
 git push -u origin main
 ```
 
@@ -272,7 +278,7 @@ apt install nodejs npm mysql-server curl -y
 ### 4. Clone Repository
 ```bash
 cd /var/www
-git clone https://github.com/YOUR_USERNAME/findpreschool.git
+git clone https://github.com/charantamarapu/findpreschool.git
 cd findpreschool
 ```
 
