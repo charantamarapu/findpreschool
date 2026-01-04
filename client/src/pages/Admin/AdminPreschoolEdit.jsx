@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { adminService } from '../../services/apiService';
 import toast from 'react-hot-toast';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Plus, Trash2, Star } from 'lucide-react';
 
 const AdminPreschoolEdit = () => {
   const { id } = useParams();
@@ -27,10 +27,10 @@ const AdminPreschoolEdit = () => {
     annual_fee_max: '',
     verified_rating: '',
   });
-  const [imageData, setImageData] = useState({
-    image_url: '',
-    is_primary: false,
-  });
+  // Multiple images support
+  const [images, setImages] = useState([]);
+  const [originalImages, setOriginalImages] = useState([]);
+  const [newImageUrl, setNewImageUrl] = useState('');
   const [preschool, setPreschool] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -56,7 +56,7 @@ const AdminPreschoolEdit = () => {
             website: foundPreschool.website || '',
             established_year: foundPreschool.established_year || '',
           });
-          
+
           // Load admission data
           if (foundPreschool.admission) {
             setAdmissionData({
@@ -67,14 +67,16 @@ const AdminPreschoolEdit = () => {
               verified_rating: foundPreschool.admission.verified_rating || '',
             });
           }
-          
-          // Load image data
-          const primaryImage = foundPreschool.images?.find(img => img.is_primary);
-          if (primaryImage) {
-            setImageData({
-              image_url: primaryImage.image_url || '',
-              is_primary: true,
-            });
+
+          // Load all images
+          if (foundPreschool.images && foundPreschool.images.length > 0) {
+            const loadedImages = foundPreschool.images.map(img => ({
+              id: img.id,
+              image_url: img.image_url,
+              is_primary: img.is_primary,
+            }));
+            setImages(loadedImages);
+            setOriginalImages(loadedImages);
           }
         } else {
           toast.error('Preschool not found');
@@ -104,12 +106,43 @@ const AdminPreschoolEdit = () => {
     }));
   };
 
-  const handleImageChange = e => {
-    const { name, value, type, checked } = e.target;
-    setImageData(d => ({
-      ...d,
-      [name]: type === 'checkbox' ? checked : value
+  // Add a new image to the list
+  const handleAddImage = () => {
+    if (!newImageUrl.trim()) {
+      toast.error('Please enter an image URL');
+      return;
+    }
+    // Check for duplicates
+    if (images.some(img => img.image_url === newImageUrl.trim())) {
+      toast.error('This image URL already exists');
+      return;
+    }
+    const newImage = {
+      image_url: newImageUrl.trim(),
+      is_primary: images.length === 0, // First image is primary by default
+      isNew: true, // Mark as new image
+    };
+    setImages([...images, newImage]);
+    setNewImageUrl('');
+  };
+
+  // Remove an image from the list
+  const handleRemoveImage = (index) => {
+    const updatedImages = images.filter((_, i) => i !== index);
+    // If removed image was primary and there are still images, make the first one primary
+    if (images[index].is_primary && updatedImages.length > 0) {
+      updatedImages[0].is_primary = true;
+    }
+    setImages(updatedImages);
+  };
+
+  // Set an image as primary
+  const handleSetPrimary = (index) => {
+    const updatedImages = images.map((img, i) => ({
+      ...img,
+      is_primary: i === index,
     }));
+    setImages(updatedImages);
   };
 
   const handleSubmit = async e => {
@@ -140,25 +173,35 @@ const AdminPreschoolEdit = () => {
         await adminService.createAdmissionDetail(admissionPayload);
       }
 
-      // Update image if changed
-      if (imageData.image_url && preschool?.images?.length > 0) {
-        const primaryImage = preschool.images.find(img => img.is_primary);
-        if (primaryImage && primaryImage.image_url !== imageData.image_url) {
-          await adminService.deletePreschoolImage(primaryImage.id);
+      // Handle image updates
+      // 1. Delete removed images
+      for (const originalImg of originalImages) {
+        const stillExists = images.some(img => img.id === originalImg.id);
+        if (!stillExists) {
+          await adminService.deletePreschoolImage(originalImg.id);
+        }
+      }
+
+      // 2. Add new images
+      for (const image of images) {
+        if (image.isNew) {
           const imagePayload = {
             preschool_id: Number(id),
-            image_url: imageData.image_url,
-            is_primary: true,
+            image_url: image.image_url,
+            is_primary: image.is_primary,
           };
           await adminService.createPreschoolImage(imagePayload);
         }
-      } else if (imageData.image_url) {
-        const imagePayload = {
-          preschool_id: Number(id),
-          image_url: imageData.image_url,
-          is_primary: true,
-        };
-        await adminService.createPreschoolImage(imagePayload);
+      }
+
+      // 3. Update primary status for existing images
+      for (const image of images) {
+        if (image.id) {
+          const originalImg = originalImages.find(img => img.id === image.id);
+          if (originalImg && originalImg.is_primary !== image.is_primary) {
+            await adminService.updatePreschoolImage(image.id, { is_primary: image.is_primary });
+          }
+        }
       }
 
       toast.success('Preschool updated successfully');
@@ -281,19 +324,78 @@ const AdminPreschoolEdit = () => {
             </div>
           </div>
 
-          {/* Image */}
+          {/* Images */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Primary Image</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Image URL</label>
-                <input name="image_url" type="url" value={imageData.image_url} onChange={handleImageChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="https://example.com/image.jpg" />
-              </div>
-              <div className="flex items-center">
-                <input name="is_primary" type="checkbox" checked={imageData.is_primary} onChange={handleImageChange} className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                <label className="ml-2 text-sm font-medium text-gray-700">Set as Primary Image</label>
-              </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Preschool Images</h3>
+            <p className="text-sm text-gray-500 mb-4">Add multiple images. Click the star icon to set an image as primary.</p>
+
+            {/* Add New Image */}
+            <div className="flex gap-2 mb-4">
+              <input
+                type="url"
+                value={newImageUrl}
+                onChange={(e) => setNewImageUrl(e.target.value)}
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter image URL (https://example.com/image.jpg)"
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddImage())}
+              />
+              <button
+                type="button"
+                onClick={handleAddImage}
+                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                <Plus className="h-4 w-4 mr-1" />
+                Add
+              </button>
             </div>
+
+            {/* Image List */}
+            {images.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {images.map((img, index) => (
+                  <div key={img.id || `new-${index}`} className={`relative border rounded-lg overflow-hidden ${img.is_primary ? 'ring-2 ring-blue-500' : 'border-gray-200'}`}>
+                    <img
+                      src={img.image_url}
+                      alt={`Preschool image ${index + 1}`}
+                      className="w-full h-40 object-cover"
+                      onError={(e) => { e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Found'; }}
+                    />
+                    <div className="absolute top-2 right-2 flex gap-1">
+                      <button
+                        type="button"
+                        onClick={() => handleSetPrimary(index)}
+                        className={`p-1.5 rounded-full ${img.is_primary ? 'bg-yellow-400 text-white' : 'bg-white text-gray-600 hover:bg-yellow-100'}`}
+                        title={img.is_primary ? 'Primary Image' : 'Set as Primary'}
+                      >
+                        <Star className={`h-4 w-4 ${img.is_primary ? 'fill-current' : ''}`} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
+                        title="Remove Image"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                    {img.is_primary && (
+                      <div className="absolute bottom-0 left-0 right-0 bg-blue-500 text-white text-xs text-center py-1">
+                        Primary Image
+                      </div>
+                    )}
+                    {img.isNew && (
+                      <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
+                        New
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8 border-2 border-dashed border-gray-300 rounded-lg">
+                <p className="text-gray-500">No images added yet. Add images using the input above.</p>
+              </div>
+            )}
           </div>
 
           <div className="flex gap-4">

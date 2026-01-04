@@ -47,18 +47,25 @@ export const MarkerClusterLayer = ({ preschools, createDivIcon, onSelect }) => {
     preschools.forEach((preschool) => {
       if (!preschool.latitude || !preschool.longitude) return;
       const marker = L.marker([preschool.latitude, preschool.longitude], {
-        icon: createDivIcon(preschool.verified_status ? '#10b981' : '#06b6d4', (preschool.name || '').split(' ').slice(0,2).map(w=>w[0]).join('')),
+        icon: createDivIcon(preschool.verified_status ? '#10b981' : '#06b6d4', (preschool.name || '').split(' ').slice(0, 2).map(w => w[0]).join('')),
       });
 
+      // Get primary image or first image
+      const primaryImage = preschool.images?.find(img => img.is_primary) || preschool.images?.[0];
+      const imageUrl = primaryImage?.image_url;
+
       const popupHtml = `
-        <div class="font-semibold text-sm">
-          <div class="mb-1">${preschool.name}</div>
-          <div class="text-xs text-gray-600 mb-1">${preschool.address || ''}</div>
-          ${preschool.phone ? `<a href="tel:${preschool.phone}" class="text-xs text-blue-600 hover:underline">${preschool.phone}</a>` : ''}
+        <div class="preschool-popup">
+          ${imageUrl ? `<img src="${imageUrl}" alt="${preschool.name}" class="popup-image" />` : ''}
+          <div class="popup-content">
+            <a href="/preschool/${preschool.id}" class="popup-title">${preschool.name}</a>
+            <div class="popup-address">${preschool.address || ''}</div>
+            ${preschool.phone ? `<a href="tel:${preschool.phone}" class="popup-phone">${preschool.phone}</a>` : ''}
+          </div>
         </div>
       `;
 
-      marker.bindPopup(popupHtml, { minWidth: 160 });
+      marker.bindPopup(popupHtml, { minWidth: 200, maxWidth: 280 });
 
       marker.on('click', () => onSelect(preschool));
 
@@ -119,7 +126,7 @@ export const MapComponent = ({ preschools = [], center = [20.5937, 78.9629], zoo
       </MapContainer>
 
       {showOverlay && selected && (
-        <div className="absolute bottom-4 right-4 w-80"> 
+        <div className="absolute bottom-4 right-4 w-80">
           <div className="card p-3">
             <div className="flex items-start gap-3">
               <div className="w-16 h-12 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">

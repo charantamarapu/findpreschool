@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, Search, Mail, Shield, ChevronRight, Heart, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { HomePage } from './pages/HomePage';
 import { PreschoolListPage } from './pages/PreschoolListPage';
 import { PreschoolDetailPageWrapper } from './pages/PreschoolDetailPageWrapper';
@@ -26,9 +26,13 @@ function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Check if current path is admin
+  const isAdminPage = location.pathname.startsWith('/admin');
+
   // Custom handler for Contact Us link
   const handleContactClick = (e) => {
     e.preventDefault();
+    setMobileMenuOpen(false);
     if (location.pathname !== '/') {
       navigate('/');
       setTimeout(() => {
@@ -43,84 +47,159 @@ function AppContent() {
 
   // Custom handler for Home link
   const handleHomeClick = (e) => {
+    setMobileMenuOpen(false);
     if (location.pathname === '/') {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    // else let Link do its job
+  };
+
+  // Check if link is active
+  const isActive = (path) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-3" onClick={handleHomeClick}>
-              <div className="site-logo bg-white p-1 rounded-md shadow-sm">
-                <svg viewBox="0 0 48 48" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                  <rect width="48" height="48" rx="10" fill="#06B6D4" />
-                  <path d="M15 30c3-6 9-9 16-9" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="19" cy="19" r="2" fill="#fff" />
-                </svg>
-              </div>
-              <div>
-                <div className="text-xl font-bold text-primary-600">FindPreschool</div>
-                <div className="text-xs text-gray-500 -mt-0.5">discover. compare. decide.</div>
-              </div>
-            </Link>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+      {/* Navigation - Only show on non-admin pages */}
+      {!isAdminPage && (
+        <nav className="nav-glass sticky top-0 z-50 shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 py-3">
+            <div className="flex justify-between items-center">
+              {/* Logo */}
+              <Link to="/" className="flex items-center gap-3 group" onClick={handleHomeClick}>
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg shadow-primary-500/30 group-hover:shadow-primary-500/50 transition-shadow">
+                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                      <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
+                    FindPreschool
+                  </div>
+                  <div className="text-xs text-gray-500 font-medium -mt-0.5 tracking-wide">
+                    discover · compare · decide
+                  </div>
+                </div>
+              </Link>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex gap-6 items-center nav-links">
-              <Link to="/" className="nav-link" onClick={handleHomeClick}>
-                Home
-              </Link>
-              <Link to="/preschools" className="text-gray-600 hover:text-primary-600 font-medium">
-                Browse
-              </Link>
-              <a href="#contact" onClick={handleContactClick} className="text-gray-600 hover:text-primary-600 font-medium">Contact Us</a>
-              <Link to="/admin/login" className="text-blue-600 hover:text-blue-800 font-medium">
-                Admin
-              </Link>
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex items-center gap-1">
+                <Link
+                  to="/"
+                  onClick={handleHomeClick}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 ${isActive('/') && location.pathname === '/'
+                      ? 'bg-primary-50 text-primary-600'
+                      : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
+                    }`}
+                >
+                  <Home size={18} />
+                  Home
+                </Link>
+                <Link
+                  to="/preschools"
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 ${isActive('/preschools')
+                      ? 'bg-primary-50 text-primary-600'
+                      : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
+                    }`}
+                >
+                  <Search size={18} />
+                  Browse
+                </Link>
+                <a
+                  href="#contact"
+                  onClick={handleContactClick}
+                  className="px-4 py-2 rounded-lg font-medium text-gray-600 hover:text-primary-600 hover:bg-gray-50 transition-all duration-200 flex items-center gap-2"
+                >
+                  <Mail size={18} />
+                  Contact
+                </a>
+                <div className="w-px h-6 bg-gray-200 mx-2" />
+                <Link
+                  to="/admin/login"
+                  className="px-4 py-2 rounded-lg font-medium text-gray-500 hover:text-primary-600 hover:bg-gray-50 transition-all duration-200 flex items-center gap-2"
+                >
+                  <Shield size={16} />
+                  Admin
+                </Link>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {/* Mobile Navigation */}
+            {mobileMenuOpen && (
+              <div className="md:hidden mt-4 pb-4 border-t border-gray-100 pt-4 animate-slide-down">
+                <div className="flex flex-col gap-2">
+                  <Link
+                    to="/"
+                    onClick={handleHomeClick}
+                    className={`px-4 py-3 rounded-xl font-medium transition-all flex items-center gap-3 ${isActive('/') && location.pathname === '/'
+                        ? 'bg-primary-50 text-primary-600'
+                        : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                  >
+                    <Home size={20} />
+                    Home
+                  </Link>
+                  <Link
+                    to="/preschools"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`px-4 py-3 rounded-xl font-medium transition-all flex items-center gap-3 ${isActive('/preschools')
+                        ? 'bg-primary-50 text-primary-600'
+                        : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                  >
+                    <Search size={20} />
+                    Browse Preschools
+                  </Link>
+                  <a
+                    href="#contact"
+                    onClick={handleContactClick}
+                    className="px-4 py-3 rounded-xl font-medium text-gray-600 hover:bg-gray-50 transition-all flex items-center gap-3"
+                  >
+                    <Mail size={20} />
+                    Contact Us
+                  </a>
+                  <div className="border-t border-gray-100 my-2" />
+                  <Link
+                    to="/admin/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="px-4 py-3 rounded-xl font-medium text-gray-500 hover:bg-gray-50 transition-all flex items-center gap-3"
+                  >
+                    <Shield size={20} />
+                    Admin Panel
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <div className="md:hidden mt-4 flex flex-col gap-4">
-              <Link to="/" className="text-gray-600 hover:text-primary-600 font-medium" onClick={handleHomeClick}>
-                Home
-              </Link>
-              <Link to="/preschools" className="text-gray-600 hover:text-primary-600 font-medium">
-                Browse
-              </Link>
-              <a href="#contact" onClick={handleContactClick} className="text-gray-600 hover:text-primary-600 font-medium">Contact Us</a>
-              <Link to="/admin/login" className="text-blue-600 hover:text-blue-800 font-medium">
-                Admin
-              </Link>
+          {/* Comparison Badge */}
+          {selectedPreschools.length > 0 && (
+            <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-semibold px-4 py-2.5 flex items-center justify-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center font-bold">
+                {selectedPreschools.length}
+              </span>
+              preschool{selectedPreschools.length > 1 ? 's' : ''} selected for comparison
             </div>
           )}
-        </div>
-
-        {/* Comparison Badge */}
-        {selectedPreschools.length > 0 && (
-          <div className="bg-secondary-500 text-white text-sm font-semibold px-4 py-2">
-            {selectedPreschools.length} preschool{selectedPreschools.length > 1 ? 's' : ''}{' '}
-            selected for comparison
-          </div>
-        )}
-      </nav>
+        </nav>
+      )}
 
       {/* Main Content */}
-      <main>
+      <main className={isAdminPage ? '' : 'page-transition'}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/preschools" element={<PreschoolListPage />} />
@@ -129,6 +208,7 @@ function AppContent() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/preschools" element={<AdminPreschools />} />
           <Route path="/admin/preschools/new" element={<AdminPreschoolCreate />} />
+          <Route path="/admin/preschools/create" element={<AdminPreschoolCreate />} />
           <Route path="/admin/preschools/:id" element={<AdminPreschoolEdit />} />
           <Route path="/admin/reviews" element={<AdminReviews />} />
           <Route path="/admin/reviews/:id" element={<AdminReviewEdit />} />
@@ -143,62 +223,137 @@ function AppContent() {
         <ComparisonPanel comparisonData={selectedPreschools} />
       )}
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white mt-16">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="font-bold text-lg mb-4">FindPreschool.org</h4>
-              <p className="text-gray-400 text-sm">
-                The most transparent preschool comparison platform in India.
+      {/* Footer - Only show on non-admin pages */}
+      {!isAdminPage && (
+        <footer className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 text-white mt-16 relative overflow-hidden">
+          {/* Decorative gradient line */}
+          <div className="h-1 bg-gradient-to-r from-primary-500 via-accent-500 to-secondary-500" />
+
+          <div className="max-w-7xl mx-auto px-4 py-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+              {/* Brand Column */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                      <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                  </div>
+                  <span className="text-xl font-bold">FindPreschool.org</span>
+                </div>
+                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                  India's most transparent preschool comparison platform. Helping parents make informed decisions with verified data.
+                </p>
+                <div className="flex gap-3">
+                  {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+                    <a
+                      key={i}
+                      href="#"
+                      className="w-10 h-10 rounded-lg bg-white/10 hover:bg-primary-600 flex items-center justify-center transition-colors duration-200"
+                    >
+                      <Icon size={18} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div>
+                <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
+                  Quick Links
+                </h4>
+                <ul className="space-y-3">
+                  {[
+                    { label: 'Home', href: '/' },
+                    { label: 'Browse Preschools', href: '/preschools' },
+                    { label: 'About Us', href: '#' },
+                    { label: 'Contact', href: '#contact' },
+                  ].map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                      >
+                        <ChevronRight size={14} className="text-primary-500 group-hover:translate-x-1 transition-transform" />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Popular Cities */}
+              <div>
+                <h4 className="font-bold text-lg mb-4">Popular Cities</h4>
+                <ul className="space-y-3">
+                  {['Delhi', 'Mumbai', 'Bangalore', 'Chennai', 'Hyderabad', 'Pune'].map((city) => (
+                    <li key={city}>
+                      <Link
+                        to={`/preschools?city=${city}`}
+                        className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                      >
+                        <ChevronRight size={14} className="text-primary-500 group-hover:translate-x-1 transition-transform" />
+                        Preschools in {city}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Legal */}
+              <div>
+                <h4 className="font-bold text-lg mb-4">Legal</h4>
+                <ul className="space-y-3">
+                  {[
+                    { label: 'Privacy Policy', href: '#' },
+                    { label: 'Terms & Conditions', href: '#' },
+                    { label: 'Disclaimer', href: '#' },
+                    { label: 'Cookie Policy', href: '#' },
+                  ].map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                      >
+                        <ChevronRight size={14} className="text-primary-500 group-hover:translate-x-1 transition-transform" />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Bottom Bar */}
+            <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-gray-500 text-sm text-center md:text-left">
+                © {new Date().getFullYear()} FindPreschool.org. All rights reserved.
+              </p>
+              <p className="text-gray-500 text-sm flex items-center gap-1">
+                Made with <Heart size={14} className="text-red-500" fill="currentColor" /> for parents in India
               </p>
             </div>
-            <div>
-              <h4 className="font-bold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="/" className="hover:text-white">Home</a></li>
-                <li><a href="/preschools" className="hover:text-white">Browse</a></li>
-                <li><a href="#" className="hover:text-white">About</a></li>
-                <li><a href="#" className="hover:text-white">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Cities</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="/preschools?city=Delhi" className="hover:text-white">Delhi</a></li>
-                <li><a href="/preschools?city=Mumbai" className="hover:text-white">Mumbai</a></li>
-                <li><a href="/preschools?city=Bangalore" className="hover:text-white">Bangalore</a></li>
-                <li><a href="/preschools?city=Chennai" className="hover:text-white">Chennai</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white">Terms & Conditions</a></li>
-                <li><a href="#" className="hover:text-white">Disclaimer</a></li>
-              </ul>
-            </div>
           </div>
-
-          <div className="border-t border-gray-800 pt-8">
-            <p className="text-gray-400 text-sm text-center">
-              © 2024 FindPreschool.org. All rights reserved. | Helping parents find the best preschools.
-            </p>
-          </div>
-        </div>
-      </footer>
+        </footer>
+      )}
     </div>
   );
 }
 
 function NotFound() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-[70vh]">
       <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-gray-600 mb-6">Page not found</p>
-        <Link to="/" className="btn-primary">
+        <div className="text-8xl font-bold bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent mb-4">
+          404
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Page Not Found</h2>
+        <p className="text-gray-600 mb-8 max-w-md">
+          Sorry, we couldn't find the page you're looking for. It might have been moved or deleted.
+        </p>
+        <Link to="/" className="btn-primary inline-flex items-center gap-2">
+          <Home size={18} />
           Back to Home
         </Link>
       </div>

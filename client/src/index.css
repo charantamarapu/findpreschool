@@ -1,63 +1,308 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* { @apply scroll-smooth; }
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+* {
+  @apply scroll-smooth;
+}
 
 body {
-  @apply bg-gray-50 text-gray-900 font-sans;
+  @apply bg-gradient-to-br from-slate-50 via-white to-blue-50/30 text-gray-900 font-sans;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
-.card { @apply bg-white rounded-xl shadow-card transition-shadow border border-gray-100 overflow-hidden; }
+/* ========================================
+   CARD STYLES
+   ======================================== */
 
-/* Buttons */
-.btn-primary { @apply bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-xl font-semibold transition-all shadow; }
-.btn-secondary { @apply bg-secondary-500 hover:bg-secondary-600 text-white px-4 py-2 rounded-lg font-medium transition-colors shadow-sm; }
-.btn-outline { @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-50 px-4 py-2 rounded-lg font-medium transition-colors; }
-
-/* Hero gradient helper */
-.hero-accent { background-image: linear-gradient(135deg, rgba(59,130,246,0.95), rgba(37,99,235,0.95)); }
-
-/* Badges */
-.badge { @apply inline-block bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-xs font-semibold; }
-
-/* Map popup */
-.preschool-popup { @apply bg-white rounded-lg shadow-md p-3 text-sm; }
-
-/* Small helpers */
-.fade-in { animation: fadeIn 0.35s ease both; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+.card {
+  @apply bg-white rounded-2xl transition-all duration-300 border border-gray-100/50 overflow-hidden;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
 }
 
-/* Header & Navigation */
-.nav-link { @apply text-gray-600 hover:text-primary-600 font-medium transition-colors; }
-.nav-links > a { @apply text-gray-600 hover:text-primary-600 font-medium; }
+.card:hover {
+  @apply -translate-y-1;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.15);
+}
 
-.site-logo svg { width: 36px; height: 36px; display: block; }
+.card-glass {
+  @apply bg-white/70 backdrop-blur-lg rounded-2xl border border-white/20;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
 
-/* Mobile menu */
-.mobile-menu { @apply md:hidden mt-4 flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md; }
+.card-gradient {
+  @apply bg-gradient-to-br from-white to-gray-50/50 rounded-2xl border border-gray-100/50;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+}
 
-/* Comparison badge (header) */
-.header-compare { @apply absolute right-4 mt-2 bg-secondary-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow; }
 
-/* Map markers & overlay */
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+
+.btn-primary {
+  @apply bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-0.5 active:translate-y-0;
+}
+
+.btn-secondary {
+  @apply bg-gradient-to-r from-secondary-500 to-secondary-600 hover:from-secondary-600 hover:to-secondary-700 text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-secondary-500/25 hover:shadow-xl hover:shadow-secondary-500/30 hover:-translate-y-0.5;
+}
+
+.btn-outline {
+  @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/20;
+}
+
+.btn-ghost {
+  @apply text-gray-600 hover:text-primary-600 hover:bg-primary-50 px-4 py-2 rounded-xl font-medium transition-all duration-200;
+}
+
+/* ========================================
+   HERO & GRADIENT STYLES
+   ======================================== */
+
+.hero-gradient {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 35%, #1e40af 70%, #312e81 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.hero-accent {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(29, 78, 216, 0.95), rgba(30, 64, 175, 0.95));
+}
+
+/* Animated gradient background */
+.gradient-animate {
+  background: linear-gradient(-45deg, #2563eb, #1d4ed8, #06b6d4, #0891b2);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ========================================
+   NAVIGATION STYLES
+   ======================================== */
+
+.nav-glass {
+  @apply bg-white/80 backdrop-blur-lg border-b border-gray-200/50;
+}
+
+.nav-link {
+  @apply text-gray-600 hover:text-primary-600 font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center;
+}
+
+.nav-link-active {
+  @apply text-primary-600 after:scale-x-100;
+}
+
+/* ========================================
+   INPUT STYLES
+   ======================================== */
+
+.input-modern {
+  @apply w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all duration-200 placeholder-gray-400;
+}
+
+.input-glass {
+  @apply w-full px-4 py-3 bg-white/50 backdrop-blur-sm border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all duration-200;
+}
+
+/* ========================================
+   BADGE STYLES
+   ======================================== */
+
+.badge {
+  @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold;
+}
+
+.badge-primary {
+  @apply bg-primary-100 text-primary-700;
+}
+
+.badge-success {
+  @apply bg-green-100 text-green-700;
+}
+
+.badge-warning {
+  @apply bg-amber-100 text-amber-700;
+}
+
+.badge-info {
+  @apply bg-cyan-100 text-cyan-700;
+}
+
+/* ========================================
+   ANIMATION CLASSES
+   ======================================== */
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+/* Staggered animation delays */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+}
+
+/* Glow effect on hover */
+.hover-glow:hover {
+  @apply shadow-glow;
+}
+
+/* ========================================
+   GLASSMORPHISM
+   ======================================== */
+
+.glass {
+  @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-glass;
+}
+
+.glass-dark {
+  @apply bg-gray-900/70 backdrop-blur-lg border border-white/10;
+}
+
+/* ========================================
+   MAP & POPUP STYLES
+   ======================================== */
+
+.preschool-popup {
+  padding: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.preschool-popup .popup-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+  display: block;
+}
+
+.preschool-popup .popup-content {
+  padding: 12px 14px;
+}
+
+.preschool-popup .popup-title {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1e40af;
+  text-decoration: none;
+  margin-bottom: 6px;
+  transition: color 0.2s ease;
+  line-height: 1.3;
+}
+
+.preschool-popup .popup-title:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.preschool-popup .popup-address {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.preschool-popup .popup-phone {
+  font-size: 12px;
+  color: #2563eb;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.preschool-popup .popup-phone:hover {
+  text-decoration: underline;
+}
+
+/* Leaflet popup overrides */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  min-width: 200px;
+}
+
+.leaflet-popup-tip {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 .custom-div-icon .marker-pin {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
   margin-left: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
+
 .custom-div-icon .marker-label {
   margin-top: -6px;
   font-weight: 700;
@@ -66,18 +311,175 @@ body {
   text-align: center;
 }
 
-.custom-marker { background: transparent; }
+/* ========================================
+   RATING STYLES
+   ======================================== */
 
-/* Map overlay card */
-.card { @apply bg-white rounded-xl shadow-card transition-shadow border border-gray-100 overflow-hidden; }
-
-/* Small responsive tweak */
-@media (max-width: 640px) {
-  .absolute.bottom-4.right-4.w-80 { width: calc(100% - 2rem); left: 1rem; right: 1rem; }
+.rating-stars {
+  @apply flex gap-0.5 items-center;
 }
 
-.card img { @apply w-full h-full object-cover; }
+.rating-stars .star {
+  @apply text-amber-400;
+}
 
-.rating-stars { @apply flex gap-1 items-center; }
+/* ========================================
+   STAT CARD STYLES
+   ======================================== */
 
-.rating-stars .star { @apply text-yellow-400 text-lg; }
+.stat-card {
+  @apply bg-white rounded-2xl p-6 shadow-card border border-gray-100/50 transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
+}
+
+.stat-card-gradient {
+  @apply bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl p-6 text-white shadow-lg shadow-primary-500/25;
+}
+
+/* ========================================
+   SKELETON LOADING
+   ======================================== */
+
+.skeleton {
+  @apply bg-gray-200 rounded animate-pulse;
+}
+
+.skeleton-text {
+  @apply h-4 bg-gray-200 rounded animate-pulse;
+}
+
+/* ========================================
+   SECTION STYLES
+   ======================================== */
+
+.section-header {
+  @apply text-center mb-12;
+}
+
+.section-title {
+  @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+}
+
+.section-subtitle {
+  @apply text-lg text-gray-600 max-w-2xl mx-auto;
+}
+
+/* ========================================
+   FEATURE ICON STYLES
+   ======================================== */
+
+.feature-icon {
+  @apply w-14 h-14 rounded-2xl flex items-center justify-center text-2xl bg-gradient-to-br from-primary-100 to-primary-50 shadow-sm;
+}
+
+.feature-icon-alt {
+  @apply w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/30;
+}
+
+/* ========================================
+   ADMIN STYLES
+   ======================================== */
+
+.admin-header {
+  @apply bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-40;
+}
+
+.admin-nav-link {
+  @apply px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-primary-600 hover:bg-primary-50;
+}
+
+.admin-nav-link-active {
+  @apply bg-primary-600 text-white hover:bg-primary-700 hover:text-white;
+}
+
+.admin-card {
+  @apply bg-white rounded-xl shadow-card border border-gray-100/50 overflow-hidden;
+}
+
+/* ========================================
+   RESPONSIVE UTILITIES
+   ======================================== */
+
+@media (max-width: 640px) {
+  .mobile-full {
+    @apply w-full;
+  }
+}
+
+/* Smooth page transitions */
+.page-transition {
+  animation: fadeSlideIn 0.4s ease-out;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   KEYFRAME ANIMATIONS
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Floating shapes for hero */
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 2s;
+}

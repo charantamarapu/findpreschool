@@ -5,7 +5,8 @@ import {
   FranchiseDetail,
   Review,
 } from '../models/index.js';
-import { Op } from 'sequelize';
+import { Op, literal, fn, col } from 'sequelize';
+import sequelize from '../config/database.js';
 
 export const getAllPreschools = async (req, res) => {
   try {
@@ -222,6 +223,104 @@ export const updatePreschool = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: 'Error updating preschool',
+    });
+  }
+};
+
+// Get nearby preschools using Haversine formula
+export const getNearbyPreschools = async (req, res) => {
+  try {
+    const {
+      latitude,
+      longitude,
+      radius = 10, // Default 10km radius
+      limit = 20,
+      offset = 0,
+    } = req.query;
+
+    if (!latitude || !longitude) {
+      return res.status(400).json({
+        success: false,
+        message: 'Latitude and longitude are required',
+      });
+    }
+
+    const lat = parseFloat(latitude);
+    const lng = parseFloat(longitude);
+    const radiusKm = parseFloat(radius);
+
+    // Haversine formula to calculate distance in km
+    // Uses MySQL's math functions
+    const distanceFormula = `
+      (6371 * acos(
+        cos(radians(${lat})) * cos(radians(latitude)) *
+        cos(radians(longitude) - radians(${lng})) +
+        sin(radians(${lat})) * sin(radians(latitude))
+      ))
+    `;
+
+    const preschools = await Preschool.findAll({
+      attributes: {
+        include: [
+          [literal(distanceFormula), 'distance']
+        ]
+      },
+      include: [
+        { association: 'images', attributes: ['image_url', 'is_primary'] },
+        {
+          association: 'admission',
+          attributes: [
+            'monthly_fee_min',
+            'monthly_fee_max',
+            'verified_rating',
+            'total_reviews',
+          ],
+        },
+      ],
+      where: {
+        latitude: { [Op.ne]: null },
+        longitude: { [Op.ne]: null },
+      },
+      having: literal(`distance <= ${radiusKm}`),
+      order: [[literal('distance'), 'ASC']],
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+      subQuery: false,
+    });
+
+    // Get total count for pagination
+    const countResult = await sequelize.query(`
+      SELECT COUNT(*) as total FROM preschools 
+      WHERE latitude IS NOT NULL AND longitude IS NOT NULL
+      AND (6371 * acos(
+        cos(radians(${lat})) * cos(radians(latitude)) *
+        cos(radians(longitude) - radians(${lng})) +
+        sin(radians(${lat})) * sin(radians(latitude))
+      )) <= ${radiusKm}
+    `, { type: sequelize.QueryTypes.SELECT });
+
+    const total = countResult[0]?.total || 0;
+
+    return res.status(200).json({
+      success: true,
+      data: preschools,
+      pagination: {
+        total: parseInt(total),
+        limit: parseInt(limit),
+        offset: parseInt(offset),
+      },
+      searchParams: {
+        latitude: lat,
+        longitude: lng,
+        radius: radiusKm,
+      },
+    });
+  } catch (error) {
+    console.error('Error fetching nearby preschools:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Error fetching nearby preschools',
+      error: error.message,
     });
   }
 };

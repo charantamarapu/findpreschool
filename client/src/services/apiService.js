@@ -11,6 +11,7 @@ const apiClient = axios.create({
 export const preschoolService = {
   getAllPreschools: (params) => apiClient.get('/preschools', { params }),
   getPreschoolById: (id) => apiClient.get(`/preschools/${id}`),
+  getNearbyPreschools: (params) => apiClient.get('/preschools/nearby', { params }),
   addPreschool: (data) => apiClient.post('/preschools', data),
   updatePreschool: (id, data) => apiClient.put(`/preschools/${id}`, data),
 };
