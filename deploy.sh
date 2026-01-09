@@ -10,6 +10,12 @@ echo "========================================================"
 echo "🚀 Starting Update Deployment"
 echo "========================================================"
 
+# Check if running as root
+if [ "$EUID" -ne 0 ]; then
+  echo "❌ Please run as root (sudo ./deploy.sh)"
+  exit 1
+fi
+
 # 1. Pull latest code
 echo "📥 Pulling latest changes from git..."
 git pull origin main

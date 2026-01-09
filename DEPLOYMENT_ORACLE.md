@@ -142,7 +142,7 @@ When you make changes to your code in the future:
     SSH into your server and run:
     ```bash
     cd findpreschool
-    ./deploy.sh
+    sudo ./deploy.sh
     ```
     
     This will automatically pull the code, rebuild the frontend, and restart the backend.
