@@ -9,7 +9,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 // Routes
 import preschoolsRouter from './routes/preschools.js';
 import comparisonRouter from './routes/comparison.js';
-import googleMapsRouter from './routes/googleMaps.js';
+
 import reviewsRouter from './routes/reviews.js';
 import detailsRouter from './routes/details.js';
 import contactRouter from './routes/contact.js';
@@ -40,7 +40,7 @@ app.use(limiter);
 // Routes
 app.use('/api/preschools', preschoolsRouter);
 app.use('/api/comparison', comparisonRouter);
-app.use('/api/google-maps', googleMapsRouter);
+
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/details', detailsRouter);
 app.use('/api', contactRouter);

@@ -65,7 +65,7 @@ export const SchoolContactForm = ({ preschoolId, preschoolName }) => {
           </div>
         </div>
       )}
-      
+
       {error && (
         <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex gap-2 text-red-800">
           <AlertCircle size={20} className="flex-shrink-0" />
@@ -81,7 +81,7 @@ export const SchoolContactForm = ({ preschoolId, preschoolName }) => {
           <input
             type="text"
             name="name"
-            placeholder="John Doe"
+            placeholder="Deva Datta"
             value={formData.name}
             onChange={handleChange}
             required

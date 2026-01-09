@@ -25,12 +25,7 @@ export const comparisonService = {
   getComparisonHistory: () => apiClient.get('/comparison/history'),
 };
 
-// Google Maps endpoints
-export const googleMapsService = {
-  fetchFromGoogleMaps: (data) => apiClient.post('/google-maps/fetch', data),
-  searchGooglePlaces: (params) =>
-    apiClient.get('/google-maps/search', { params }),
-};
+
 
 // Reviews endpoints
 export const reviewService = {

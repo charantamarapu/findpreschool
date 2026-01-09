@@ -112,7 +112,7 @@ export const HomePage = () => {
     },
     {
       title: 'Location Based',
-      description: 'Find preschools near your home. Check Google Maps integration for easy navigation.',
+      description: 'Find preschools near your home. Easy navigation to preschool locations.',
       icon: MapPin,
       color: 'from-cyan-500 to-teal-600',
     },

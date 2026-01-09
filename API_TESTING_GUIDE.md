@@ -106,7 +106,7 @@ Response:
     "reviews": [
       {
         "id": 1,
-        "parent_name": "John Doe",
+        "parent_name": "Deva Datta",
         "rating": 5,
         "facilities_rating": 5,
         "teachers_rating": 4.5,
@@ -330,7 +330,7 @@ Response:
   "data": [
     {
       "id": 1,
-      "parent_name": "John Doe",
+      "parent_name": "Deva Datta",
       "rating": 5,
       "facilities_rating": 5,
       "teachers_rating": 4.5,
