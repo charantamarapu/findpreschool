@@ -189,6 +189,12 @@ EOF
 # Enable Site
 rm -f /etc/nginx/sites-enabled/default
 ln -sf "$NGINX_CONFIG" /etc/nginx/sites-enabled/
+
+# FIX: Allow Nginx content access
+echo "🔓 Fixing permissions for Nginx..."
+chmod 755 /home/ubuntu
+chmod 755 /home/ubuntu/findpreschool
+
 nginx -t && systemctl restart nginx
 
 echo "✅ Nginx configured."
