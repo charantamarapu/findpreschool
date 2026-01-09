@@ -74,15 +74,6 @@ const AdminDashboard = () => {
       textColor: 'text-emerald-600'
     },
     {
-      title: 'Comparisons',
-      icon: BarChart3,
-      count: stats.comparisons,
-      path: '/admin/comparisons',
-      color: 'from-purple-500 to-violet-600',
-      bgLight: 'bg-purple-50',
-      textColor: 'text-purple-600'
-    },
-    {
       title: 'Admins',
       icon: Shield,
       count: stats.admins,
@@ -140,8 +131,8 @@ const AdminDashboard = () => {
                     key={item.path}
                     onClick={() => navigate(item.path)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${item.active
-                        ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
-                        : 'text-gray-600 hover:text-primary-600 hover:bg-gray-100'
+                      ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
+                      : 'text-gray-600 hover:text-primary-600 hover:bg-gray-100'
                       }`}
                   >
                     {item.label}
