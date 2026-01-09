@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Menu, X, Home, Search, Mail, Shield, ChevronRight, Heart, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Menu, X, Home, Search, Mail, Shield, ChevronRight, Heart, Facebook, Twitter, Instagram, Linkedin, Phone } from 'lucide-react';
 import { HomePage } from './pages/HomePage';
 import { PreschoolListPage } from './pages/PreschoolListPage';
 import { PreschoolDetailPageWrapper } from './pages/PreschoolDetailPageWrapper';
@@ -93,8 +93,8 @@ function AppContent() {
                   to="/"
                   onClick={handleHomeClick}
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 ${isActive('/') && location.pathname === '/'
-                      ? 'bg-primary-50 text-primary-600'
-                      : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
+                    ? 'bg-primary-50 text-primary-600'
+                    : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
                     }`}
                 >
                   <Home size={18} />
@@ -103,8 +103,8 @@ function AppContent() {
                 <Link
                   to="/preschools"
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 ${isActive('/preschools')
-                      ? 'bg-primary-50 text-primary-600'
-                      : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
+                    ? 'bg-primary-50 text-primary-600'
+                    : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
                     }`}
                 >
                   <Search size={18} />
@@ -146,8 +146,8 @@ function AppContent() {
                     to="/"
                     onClick={handleHomeClick}
                     className={`px-4 py-3 rounded-xl font-medium transition-all flex items-center gap-3 ${isActive('/') && location.pathname === '/'
-                        ? 'bg-primary-50 text-primary-600'
-                        : 'text-gray-600 hover:bg-gray-50'
+                      ? 'bg-primary-50 text-primary-600'
+                      : 'text-gray-600 hover:bg-gray-50'
                       }`}
                   >
                     <Home size={20} />
@@ -157,8 +157,8 @@ function AppContent() {
                     to="/preschools"
                     onClick={() => setMobileMenuOpen(false)}
                     className={`px-4 py-3 rounded-xl font-medium transition-all flex items-center gap-3 ${isActive('/preschools')
-                        ? 'bg-primary-50 text-primary-600'
-                        : 'text-gray-600 hover:bg-gray-50'
+                      ? 'bg-primary-50 text-primary-600'
+                      : 'text-gray-600 hover:bg-gray-50'
                       }`}
                   >
                     <Search size={20} />

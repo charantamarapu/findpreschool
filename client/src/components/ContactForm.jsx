@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import apiClient from '../services/apiService';
 import { Send, User, Mail, Phone, MessageSquare, CheckCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -23,12 +24,16 @@ export const ContactForm = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    toast.success('Message sent successfully!');
-    setSubmitted(true);
-    setSubmitting(false);
+    try {
+      await apiClient.post('/contact', formData);
+      toast.success('Message sent successfully!');
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast.error('Failed to send message. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -90,8 +95,8 @@ export const ContactForm = () => {
                   </div>
                   <div>
                     <p className="text-sm text-primary-200 mb-1">Email</p>
-                    <a href="mailto:hello@findpreschool.org" className="font-medium hover:text-primary-200 transition-colors">
-                      hello@findpreschool.org
+                    <a href="mailto:findyourpreschool@gmail.com" className="font-medium hover:text-primary-200 transition-colors">
+                      findyourpreschool@gmail.com
                     </a>
                   </div>
                 </div>
@@ -101,8 +106,8 @@ export const ContactForm = () => {
                   </div>
                   <div>
                     <p className="text-sm text-primary-200 mb-1">Phone</p>
-                    <a href="tel:+911234567890" className="font-medium hover:text-primary-200 transition-colors">
-                      +91 123 456 7890
+                    <a href="tel:+918919945038" className="font-medium hover:text-primary-200 transition-colors">
+                      +91 89199 45038
                     </a>
                   </div>
                 </div>

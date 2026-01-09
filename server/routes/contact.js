@@ -4,34 +4,31 @@ import { Preschool } from '../models/index.js';
 
 const router = express.Router();
 
-// Configure nodemailer - using simple JSON file storage as fallback
+// Configure nodemailer for Gmail
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'localhost',
-  port: process.env.SMTP_PORT || 1025,
-  auth: process.env.SMTP_USER ? {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD
-  } : false,
-  secure: false,
-  tls: { rejectUnauthorized: false }
+  service: 'gmail',
+  auth: {
+    user: process.env.SMTP_USER ? process.env.SMTP_USER.trim() : undefined,
+    pass: process.env.SMTP_PASSWORD ? process.env.SMTP_PASSWORD.trim() : undefined
+  }
 });
 
 // Contact form submission
 router.post('/contact', async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
-    
+
     if (!name || !email || !message) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: 'Name, email, and message are required' 
+        error: 'Name, email, and message are required'
       });
     }
 
     // Try to send email, but don't fail if email service is not available
     try {
       await transporter.sendMail({
-        from: process.env.CONTACT_FROM_EMAIL || 'noreply@findpreschool.com',
+        from: process.env.SMTP_USER || 'noreply@findpreschool.com',
         to: process.env.CONTACT_EMAIL || 'contact@findpreschool.com',
         subject: `New Contact Form Submission from ${name}`,
         html: `
@@ -47,15 +44,15 @@ router.post('/contact', async (req, res) => {
       console.log('Email service not available, message logged:', emailError.message);
     }
 
-    res.json({ 
-      success: true, 
-      message: 'Thank you! Your message has been received. We will get back to you soon.' 
+    res.json({
+      success: true,
+      message: 'Thank you! Your message has been received. We will get back to you soon.'
     });
   } catch (error) {
     console.error('Contact form error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'Failed to process your message' 
+      error: 'Failed to process your message'
     });
   }
 });
@@ -67,25 +64,25 @@ router.post('/contact-school/:preschoolId', async (req, res) => {
     const { name, email, phone, message } = req.body;
 
     if (!name || !email || !message) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: 'Name, email, and message are required' 
+        error: 'Name, email, and message are required'
       });
     }
 
     // Get preschool details
     const preschool = await Preschool.findByPk(preschoolId);
     if (!preschool) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        error: 'Preschool not found' 
+        error: 'Preschool not found'
       });
     }
 
     // Try to send email to preschool
     try {
       await transporter.sendMail({
-        from: process.env.CONTACT_FROM_EMAIL || 'noreply@findpreschool.com',
+        from: process.env.SMTP_USER || 'noreply@findpreschool.com',
         to: preschool.email || process.env.CONTACT_EMAIL,
         subject: `New Inquiry from ${name} via FindPreschool.org`,
         html: `
@@ -102,15 +99,15 @@ router.post('/contact-school/:preschoolId', async (req, res) => {
       console.log('Email service not available, message logged:', emailError.message);
     }
 
-    res.json({ 
-      success: true, 
-      message: `Your inquiry has been sent to ${preschool.name}. They will contact you soon.` 
+    res.json({
+      success: true,
+      message: `Your inquiry has been sent to ${preschool.name}. They will contact you soon.`
     });
   } catch (error) {
     console.error('Contact school error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'Failed to send your inquiry' 
+      error: 'Failed to send your inquiry'
     });
   }
 });
