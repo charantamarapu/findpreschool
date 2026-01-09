@@ -8,7 +8,7 @@ const resetAdmin = async () => {
         await sequelize.authenticate();
         console.log('Database connected.');
 
-        const email = 'admin@abc.com';
+        const email = 'admin@abc.org';
         const newPassword = 'admin123';
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
@@ -29,7 +29,7 @@ const resetAdmin = async () => {
                 name: 'System Admin',
                 role: 'admin',
                 active: true
-            });
+            }, { hooks: false });
             console.log('✅ Admin user created.');
             console.log(`Email: ${email}`);
             console.log(`Password: ${newPassword}`);

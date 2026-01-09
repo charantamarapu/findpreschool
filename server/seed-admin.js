@@ -11,16 +11,16 @@ async function fixAdminPassword() {
     const hashedPassword = await bcrypt.hash('admin123', 10);
     await AdminUser.update(
       { password_hash: hashedPassword },
-      { where: { email: 'admin@findpreschool.com' } }
+      { where: { email: 'admin@abc.org' } }
     );
 
     console.log('✅ Admin password updated successfully');
-    console.log('Email: admin@findpreschool.com');
+    console.log('Email: admin@abc.org');
     console.log('Password: admin123');
 
     // Verify the update
     const admin = await AdminUser.findOne({
-      where: { email: 'admin@findpreschool.com' }
+      where: { email: 'admin@abc.org' }
     });
 
     if (admin) {

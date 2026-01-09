@@ -16,7 +16,7 @@ The FindPreschool admin panel provides a complete web interface for managing all
 After running the database seed, you can login with:
 
 ```
-Email: admin@findpreschool.com
+Email: admin@abc.org
 Password: admin123
 ```
 
@@ -99,7 +99,7 @@ You can create additional admin users through the admin panel or directly in the
 
 ```sql
 INSERT INTO admin_users (email, password_hash, name, role, active) VALUES
-('newadmin@findpreschool.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'New Admin', 'admin', TRUE);
+('newadmin@abc.org', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'New Admin', 'admin', TRUE);
 ```
 
 Password hash is for 'admin123'. Use a password hashing tool to generate hashes for other passwords.

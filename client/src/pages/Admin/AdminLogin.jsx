@@ -85,7 +85,7 @@ const AdminLogin = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="admin@findpreschool.org"
+                  placeholder="admin@abc.org"
                   className="w-full pl-12 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all"
                 />
               </div>
