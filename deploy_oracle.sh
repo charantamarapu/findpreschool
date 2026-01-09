@@ -101,16 +101,44 @@ cd ..
 echo ""
 echo "📝 Configuring Environment Variables..."
 if [ ! -f server/.env ]; then
-    echo "Creating server/.env from .env.example..."
-    cp server/.env.example server/.env
-    # Generate a random JWT Secret
+    echo "Creating server/.env..."
+    
+    # Generate random JWT
     RANDOM_SECRET=$(openssl rand -base64 32)
-    sed -i "s/JWT_SECRET=.*/JWT_SECRET=\"$RANDOM_SECRET\"/" server/.env
-    # Update NODE_ENV
-    sed -i "s/NODE_ENV=development/NODE_ENV=production/" server/.env
+    
+    cat > server/.env <<EOF
+# Database Configuration
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_db_password
+DB_NAME=findpreschool
+DB_PORT=3306
+
+# Server Configuration
+PORT=5000
+NODE_ENV=production
+JWT_SECRET="$RANDOM_SECRET"
+
+# CORS
+CORS_ORIGIN=http://$SERVER_NAME
+# Note: Provide your domain or IP here
+
+# Contact
+CONTACT_EMAIL=findyourpreschool@gmail.com
+CONTACT_PHONE=8919945038
+
+# SMTP Configuration (Gmail)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=findyourpreschool@gmail.com
+SMTP_PASSWORD=your_app_password
+
+# Google Maps Places API
+GOOGLE_PLACES_API_BASE=https://maps.googleapis.com/maps/api
+EOF
     
     echo "⚠️  IMPORTANT: You must edit server/.env to set your Database and SMTP credentials!"
-    echo "    Run 'nano server/.env' after this script finishes."
+    echo "    Run: nano server/.env"
 else
     echo "✅ server/.env already exists."
 fi
