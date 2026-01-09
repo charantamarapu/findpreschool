@@ -124,3 +124,25 @@ Visit your **Domain** (e.g., `https://findpreschool.org`) or **Public IP** (`htt
 *   **Frontend**: Should load the homepage.
 *   **Contact Form**: Should send emails (if SMTP configured).
 *   **Data**: Should load from database (initially empty).
+
+---
+
+## 🔄 Updating Your App
+
+When you make changes to your code in the future:
+
+1.  **Push changes to GitHub**:
+    ```bash
+    git add .
+    git commit -m "New features"
+    git push origin main
+    ```
+
+2.  **Run Update Script on Server**:
+    SSH into your server and run:
+    ```bash
+    cd findpreschool
+    ./deploy.sh
+    ```
+    
+    This will automatically pull the code, rebuild the frontend, and restart the backend.
