@@ -8,7 +8,7 @@ const resetAdmin = async () => {
         await sequelize.authenticate();
         console.log('Database connected.');
 
-        const email = 'admin@findpreschool.com';
+        const email = 'admin@abc.com';
         const newPassword = 'admin123';
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
