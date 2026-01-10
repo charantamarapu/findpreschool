@@ -1,7 +1,7 @@
 {
-  "name": "findpreschool-frontend",
+  "name": "findyourpreschool-frontend",
   "version": "1.0.0",
-  "description": "Frontend for FindPreschool.org",
+  "description": "Frontend for FindYourPreSchool",
   "type": "module",
   "scripts": {
     "dev": "vite",

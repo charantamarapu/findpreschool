@@ -1,4 +1,4 @@
-# FindPreschool.org - Full Stack Preschool Comparison Platform
+# FindYourPreSchool - Full Stack PreSchool Comparison Platform
 
 A comprehensive full-stack application for comparing preschools with verified data, parent reviews, fee transparency, and franchise information. Built with Node.js/Express, React/Vite, and MySQL.
 
@@ -36,7 +36,7 @@ A comprehensive full-stack application for comparing preschools with verified da
 ## 📁 Project Structure
 
 ```
-findpreschool/
+findyourpreschool/
 ├── server/
 │   ├── config/
 │   │   └── database.js
@@ -47,14 +47,14 @@ findpreschool/
 │   │   ├── detailController.js
 │   │   └── reviewController.js
 │   ├── models/
-│   │   ├── Preschool.js
-│   │   ├── PreschoolImage.js
+│   │   ├── PreSchool.js
+│   │   ├── PreSchoolImage.js
 │   │   ├── AdmissionDetail.js
 │   │   ├── FranchiseDetail.js
 │   │   ├── ComparisonHistory.js
 │   │   ├── Review.js
 │   │   ├── AdminUser.js
-│   │   ├── PreschoolOwner.js
+│   │   ├── PreSchoolOwner.js
 │   │   └── index.js
 │   ├── routes/
 │   │   ├── preschools.js
@@ -73,14 +73,14 @@ findpreschool/
 │   ├── public/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── PreschoolCard.jsx
+│   │   │   ├── PreSchoolCard.jsx
 │   │   │   ├── ComparisonPanel.jsx
 │   │   │   ├── FilterSidebar.jsx
-│   │   │   └── PreschoolDetail.jsx
+│   │   │   └── PreSchoolDetail.jsx
 │   │   ├── pages/
 │   │   │   ├── HomePage.jsx
-│   │   │   ├── PreschoolListPage.jsx
-│   │   │   └── PreschoolDetailPageWrapper.jsx
+│   │   │   ├── PreSchoolListPage.jsx
+│   │   │   └── PreSchoolDetailPageWrapper.jsx
 │   │   ├── services/
 │   │   │   └── apiService.js
 │   │   ├── context/
@@ -145,7 +145,7 @@ findpreschool/
    DB_HOST=localhost
    DB_USER=root
    DB_PASSWORD=your_mysql_password
-   DB_NAME=findpreschool
+   DB_NAME=findyourpreschool
    DB_PORT=3306
    PORT=5000
    NODE_ENV=development
@@ -184,7 +184,7 @@ findpreschool/
 
 ## 📡 API Endpoints
 
-### Preschools
+### PreSchools
 - `GET /api/preschools` - Get all preschools with filters
 - `GET /api/preschools/:id` - Get specific preschool details
 - `POST /api/preschools` - Add new preschool (admin)
@@ -219,7 +219,7 @@ findpreschool/
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=password
-DB_NAME=findpreschool
+DB_NAME=findyourpreschool
 DB_PORT=3306
 
 # Server
@@ -253,7 +253,7 @@ CORS_ORIGIN=http://localhost:5173
 4. Update admission and franchise details
 5. Manage preschool information
 
-### For Preschool Owners
+### For PreSchool Owners
 1. Claim your preschool
 2. Verify ownership
 3. Update admission details
@@ -293,7 +293,7 @@ Features:
 ### Verification System
 - Verified badge for data
 - Verified parent reviews only
-- Preschool owner verification
+- PreSchool owner verification
 - Admin moderation system
 
 ### User Tracking
@@ -352,7 +352,7 @@ POST /api/preschools
 ### Database Connection Issues
 - Check MySQL is running
 - Verify credentials in .env
-- Ensure database exists: `CREATE DATABASE findpreschool;`
+- Ensure database exists: `CREATE DATABASE findyourpreschool;`
 
 ### Google Maps API Errors
 - Verify API key has Places API and Geocoding API enabled
@@ -400,8 +400,8 @@ Contributions are welcome! Please follow these steps:
 
 For issues, questions, or suggestions:
 - Create an issue on GitHub
-- Contact: support@findpreschool.org
-- Website: https://findpreschool.org
+- Contact: support@findyourpreschool
+- Website: https://findyourpreschool
 
 ## 🙏 Acknowledgments
 

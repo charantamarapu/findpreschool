@@ -1,4 +1,4 @@
-# FindPreschool.org - Complete Project Index
+# FindYourPreSchool - Complete Project Index
 
 ## 📚 Documentation Guide
 
@@ -73,7 +73,7 @@ npm run dev
 ## 📁 Project Structure
 
 ```
-findpreschool/
+findyourpreschool/
 │
 ├── 📖 Documentation Files (THIS YOU'RE READING)
 │   ├── README.md ........................ Full documentation
@@ -96,14 +96,14 @@ findpreschool/
 │   │   └── database.js ................ Sequelize connection
 │   │
 │   ├── models/ (9 files)
-│   │   ├── Preschool.js
-│   │   ├── PreschoolImage.js
+│   │   ├── PreSchool.js
+│   │   ├── PreSchoolImage.js
 │   │   ├── AdmissionDetail.js
 │   │   ├── FranchiseDetail.js
 │   │   ├── ComparisonHistory.js
 │   │   ├── Review.js
 │   │   ├── AdminUser.js
-│   │   ├── PreschoolOwner.js
+│   │   ├── PreSchoolOwner.js
 │   │   └── index.js (associations)
 │   │
 │   ├── controllers/ (6 files)
@@ -141,19 +141,19 @@ findpreschool/
 │       │
 │       ├── pages/ (7 files)
 │       │   ├── HomePage.jsx
-│       │   ├── PreschoolListPage.jsx
-│       │   ├── PreschoolDetailPageWrapper.jsx
+│       │   ├── PreSchoolListPage.jsx
+│       │   ├── PreSchoolDetailPageWrapper.jsx
 │       │   ├── AdminLogin.jsx ......... Admin authentication
 │       │   ├── AdminDashboard.jsx ..... Admin dashboard
-│       │   ├── AdminPreschools.jsx .... Preschool management
+│       │   ├── AdminPreSchools.jsx .... PreSchool management
 │       │   ├── AdminReviews.jsx ....... Review management
 │       │   └── AdminAdmins.jsx ........ Admin user management
 │       │
 │       ├── components/ (5 files)
-│       │   ├── PreschoolCard.jsx
+│       │   ├── PreSchoolCard.jsx
 │       │   ├── ComparisonPanel.jsx
 │       │   ├── FilterSidebar.jsx
-│       │   ├── PreschoolDetail.jsx
+│       │   ├── PreSchoolDetail.jsx
 │       │   └── AdminTable.jsx ......... Reusable admin table
 │       │
 │       ├── services/
@@ -194,12 +194,12 @@ findpreschool/
 |------|---------|-------|
 | App.jsx | Main app with routing | 150 |
 | pages/HomePage.jsx | Home page | 250 |
-| pages/PreschoolListPage.jsx | List with filters | 100 |
-| pages/PreschoolDetailPageWrapper.jsx | Detail page | 60 |
-| components/PreschoolCard.jsx | Card component | 120 |
+| pages/PreSchoolListPage.jsx | List with filters | 100 |
+| pages/PreSchoolDetailPageWrapper.jsx | Detail page | 60 |
+| components/PreSchoolCard.jsx | Card component | 120 |
 | components/ComparisonPanel.jsx | Comparison table | 130 |
 | components/FilterSidebar.jsx | Filters | 120 |
-| components/PreschoolDetail.jsx | Detail view | 300 |
+| components/PreSchoolDetail.jsx | Detail view | 300 |
 | services/apiService.js | API calls | 70 |
 | context/* | State management | 100 |
 
@@ -340,7 +340,7 @@ Once both servers are running:
 curl http://localhost:5000/api/health
 ```
 
-### Get Preschools
+### Get PreSchools
 ```bash
 curl "http://localhost:5000/api/preschools?limit=5"
 ```

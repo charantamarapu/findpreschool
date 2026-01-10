@@ -2,10 +2,10 @@ import express from 'express';
 import {
   login,
   getDashboardStats,
-  getPreschools,
-  createPreschool,
-  updatePreschool,
-  deletePreschool,
+  getPreSchools,
+  createPreSchool,
+  updatePreSchool,
+  deletePreSchool,
   getReviews,
   updateReview,
   deleteReview,
@@ -13,13 +13,13 @@ import {
   createAdmin,
   updateAdmin,
   deleteAdmin,
-  bulkVerifyPreschools,
+  bulkVerifyPreSchools,
   bulkVerifyReviews,
   bulkDelete,
   createAdmissionDetail,
-  createPreschoolImage,
-  updatePreschoolImage,
-  deletePreschoolImage
+  createPreSchoolImage,
+  updatePreSchoolImage,
+  deletePreSchoolImage
 } from '../controllers/adminController.js';
 import { authenticateAdmin } from '../middleware/auth.js';
 
@@ -34,11 +34,11 @@ router.use(authenticateAdmin);
 // Dashboard
 router.get('/dashboard/stats', getDashboardStats);
 
-// Preschools management
-router.get('/preschools', getPreschools);
-router.post('/preschools', createPreschool);
-router.put('/preschools/:id', updatePreschool);
-router.delete('/preschools/:id', deletePreschool);
+// PreSchools management
+router.get('/preschools', getPreSchools);
+router.post('/preschools', createPreSchool);
+router.put('/preschools/:id', updatePreSchool);
+router.delete('/preschools/:id', deletePreSchool);
 
 // Reviews management
 router.get('/reviews', getReviews);
@@ -52,7 +52,7 @@ router.put('/admins/:id', updateAdmin);
 router.delete('/admins/:id', deleteAdmin);
 
 // Bulk operations
-router.post('/bulk/verify-preschools', bulkVerifyPreschools);
+router.post('/bulk/verify-preschools', bulkVerifyPreSchools);
 router.post('/bulk/verify-reviews', bulkVerifyReviews);
 router.post('/bulk/delete', bulkDelete);
 
@@ -60,8 +60,8 @@ router.post('/bulk/delete', bulkDelete);
 router.post('/admission', createAdmissionDetail);
 
 // Images management
-router.post('/images', createPreschoolImage);
-router.put('/images/:id', updatePreschoolImage);
-router.delete('/images/:id', deletePreschoolImage);
+router.post('/images', createPreSchoolImage);
+router.put('/images/:id', updatePreSchoolImage);
+router.delete('/images/:id', deletePreSchoolImage);
 
 export default router;

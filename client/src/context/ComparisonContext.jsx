@@ -3,11 +3,11 @@ import React, { createContext, useState, useCallback } from 'react';
 export const ComparisonContext = createContext();
 
 export const ComparisonProvider = ({ children }) => {
-  const [selectedPreschools, setSelectedPreschools] = useState([]);
+  const [selectedPreSchools, setSelectedPreSchools] = useState([]);
   const [comparisonType, setComparisonType] = useState('admission');
 
   const addToComparison = useCallback((preschool) => {
-    setSelectedPreschools((prev) => {
+    setSelectedPreSchools((prev) => {
       // Limit to 4 preschools
       if (prev.length >= 4) {
         return prev;
@@ -21,17 +21,17 @@ export const ComparisonProvider = ({ children }) => {
   }, []);
 
   const removeFromComparison = useCallback((preschoolId) => {
-    setSelectedPreschools((prev) =>
+    setSelectedPreSchools((prev) =>
       prev.filter((p) => p.id !== preschoolId)
     );
   }, []);
 
   const clearComparison = useCallback(() => {
-    setSelectedPreschools([]);
+    setSelectedPreSchools([]);
   }, []);
 
   const value = {
-    selectedPreschools,
+    selectedPreSchools,
     comparisonType,
     setComparisonType,
     addToComparison,

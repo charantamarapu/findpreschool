@@ -1,9 +1,9 @@
 @echo off
-echo 🚀 FindPreschool - GitHub Push Helper
+echo 🚀 FindYourPreSchool - GitHub Push Helper
 echo.
 
 echo Checking if repository exists...
-powershell -Command "try { $response = Invoke-WebRequest -Uri 'https://api.github.com/repos/charantamarapu/findpreschool' -UseBasicParsing; if ($response.StatusCode -eq 200) { echo '✅ Repository exists!'; } } catch { echo '❌ Repository not found. Please create it first.'; exit 1; }"
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'https://api.github.com/repos/charantamarapu/findyourpreschool' -UseBasicParsing; if ($response.StatusCode -eq 200) { echo '✅ Repository exists!'; } } catch { echo '❌ Repository not found. Please create it first.'; exit 1; }"
 
 echo.
 echo Pushing to GitHub...

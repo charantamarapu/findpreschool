@@ -1,15 +1,15 @@
-# 🚀 FindPreschool Deployment Quick Guide
+# 🚀 FindYourPreSchool Deployment Quick Guide
 
 ## Your App is Ready to Deploy! ✅
 
-Your FindPreschool.org application is fully built and ready for production deployment. Here's what you need to know:
+Your FindYourPreSchool application is fully built and ready for production deployment. Here's what you need to know:
 
 ---
 
 ## 📊 What You're Deploying
 
 ```
-FindPreschool.org
+FindYourPreSchool
 ├── Frontend: React 18 + Vite (5,000+ lines)
 ├── Backend: Node.js + Express (2,500+ lines)
 ├── Database: MySQL with 8 tables
@@ -72,7 +72,7 @@ Before you start, gather these items:
 ```bash
 git init
 git add .
-git commit -m "Initial commit: FindPreschool app"
+git commit -m "Initial commit: FindYourPreSchool app"
 git push origin main
 ```
 
@@ -93,7 +93,7 @@ NODE_ENV=production
 DB_HOST=your-host
 DB_USER=your-user
 DB_PASSWORD=your-password
-DB_NAME=findpreschool
+DB_NAME=findyourpreschool
 JWT_SECRET=[generate with: openssl rand -base64 32]
 CORS_ORIGIN=https://your-domain.com
 ```

@@ -3,10 +3,10 @@ import { Minus, Plus, MapPin, Phone, Globe, Star, ExternalLink, Calendar, Naviga
 import { ComparisonContext } from '../context/ComparisonContext';
 import { formatCurrency } from '../utils/helpers';
 
-export const PreschoolCard = ({ preschool, onViewDetails, viewMode = 'grid' }) => {
-  const { addToComparison, removeFromComparison, selectedPreschools } =
+export const PreSchoolCard = ({ preschool, onViewDetails, viewMode = 'grid' }) => {
+  const { addToComparison, removeFromComparison, selectedPreSchools } =
     useContext(ComparisonContext);
-  const isSelected = selectedPreschools.some((p) => p.id === preschool.id);
+  const isSelected = selectedPreSchools.some((p) => p.id === preschool.id);
 
   const primaryImage =
     preschool.images?.find((img) => img.is_primary)?.image_url ||

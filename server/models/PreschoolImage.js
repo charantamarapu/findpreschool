@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
 
-const PreschoolImage = sequelize.define(
-  'PreschoolImage',
+const PreSchoolImage = sequelize.define(
+  'PreSchoolImage',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -30,4 +30,4 @@ const PreschoolImage = sequelize.define(
   }
 );
 
-export default PreschoolImage;
+export default PreSchoolImage;

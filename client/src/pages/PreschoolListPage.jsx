@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { preschoolService } from '../services/apiService';
-import { PreschoolCard } from '../components/PreschoolCard';
+import { PreSchoolCard } from '../components/PreSchoolCard';
 import { FilterSidebar } from '../components/FilterSidebar';
 import { MapComponent } from '../components/MapComponent';
 import { FilterContext } from '../context/FilterContext';
 import { Loader, MapPin, Grid3X3, List, ChevronLeft, ChevronRight, Navigation } from 'lucide-react';
 
-export const PreschoolListPage = () => {
+export const PreSchoolListPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { filters, nearbyMode, userLocation, searchRadius } = useContext(FilterContext);
-  const [preschools, setPreschools] = useState([]);
+  const [preschools, setPreSchools] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({ total: 0, limit: 20, offset: 0 });
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
@@ -24,7 +24,7 @@ export const PreschoolListPage = () => {
   }, [city, filters, nearbyMode, userLocation, searchRadius]);
 
   useEffect(() => {
-    const fetchPreschools = async () => {
+    const fetchPreSchools = async () => {
       setLoading(true);
       try {
         let response;
@@ -38,7 +38,7 @@ export const PreschoolListPage = () => {
             limit: pagination.limit,
             offset: pagination.offset,
           };
-          response = await preschoolService.getNearbyPreschools(params);
+          response = await preschoolService.getNearbyPreSchools(params);
         } else {
           // Use regular API
           const params = {
@@ -52,11 +52,11 @@ export const PreschoolListPage = () => {
           if (filters.minRating) params.minRating = filters.minRating;
           if (filters.minEstablishedYear) params.minEstablishedYear = filters.minEstablishedYear;
 
-          response = await preschoolService.getAllPreschools(params);
+          response = await preschoolService.getAllPreSchools(params);
         }
 
         if (response.data.success) {
-          setPreschools(response.data.data);
+          setPreSchools(response.data.data);
           setPagination(response.data.pagination);
         }
       } catch (error) {
@@ -66,7 +66,7 @@ export const PreschoolListPage = () => {
       }
     };
 
-    fetchPreschools();
+    fetchPreSchools();
   }, [city, filters, pagination.offset, nearbyMode, userLocation, searchRadius]);
 
   const handleViewDetails = (preschoolId) => {
@@ -103,7 +103,7 @@ export const PreschoolListPage = () => {
                   <span>Within {searchRadius} km of your location</span>
                 </div>
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  Nearby Preschools
+                  Nearby PreSchools
                 </h1>
               </>
             ) : (
@@ -113,7 +113,7 @@ export const PreschoolListPage = () => {
                   <span>{city || 'All India'}</span>
                 </div>
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  {city ? `Preschools in ${city}` : 'All Preschools'}
+                  {city ? `PreSchools in ${city}` : 'All PreSchools'}
                 </h1>
               </>
             )}
@@ -175,7 +175,7 @@ export const PreschoolListPage = () => {
           <FilterSidebar />
         </div>
 
-        {/* Preschool Grid */}
+        {/* PreSchool Grid */}
         <div className="lg:col-span-3">
           {preschools.length > 0 ? (
             <>
@@ -189,7 +189,7 @@ export const PreschoolListPage = () => {
                     className="fade-in"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    <PreschoolCard
+                    <PreSchoolCard
                       preschool={preschool}
                       onViewDetails={handleViewDetails}
                       viewMode={viewMode}

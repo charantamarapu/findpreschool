@@ -1,20 +1,20 @@
--- Sample Data for FindPreschool.org Database
-USE findpreschool;
+-- Sample Data for FindYourPreSchool Database
+USE findyourpreschool;
 
--- Insert Sample Preschools
+-- Insert Sample PreSchools
 INSERT INTO preschools (name, address, city, state, pincode, latitude, longitude, phone, email, website, verified_status, created_at, updated_at) VALUES
 ('Sunshine Academy', 'Block A, New Delhi', 'Delhi', 'Delhi', '110001', 28.6139, 77.2090, '9876543210', 'info@sunshine.com', 'www.sunshine.com', TRUE, NOW(), NOW()),
-('Little Stars Preschool', 'Whitefield, Bangalore', 'Bangalore', 'Karnataka', '560066', 12.9698, 77.7499, '9876543211', 'info@littlestars.com', 'www.littlestars.com', TRUE, NOW(), NOW()),
+('Little Stars PreSchool', 'Whitefield, Bangalore', 'Bangalore', 'Karnataka', '560066', 12.9698, 77.7499, '9876543211', 'info@littlestars.com', 'www.littlestars.com', TRUE, NOW(), NOW()),
 ('Rainbow Kids School', 'Bandra, Mumbai', 'Mumbai', 'Maharashtra', '400050', 19.0596, 72.8295, '9876543212', 'info@rainbowkids.com', 'www.rainbowkids.com', TRUE, NOW(), NOW()),
 ('Smart Kids Learning Center', 'Kalyani Nagar, Pune', 'Pune', 'Maharashtra', '411006', 18.5204, 73.8567, '9876543213', 'info@smartkids.com', 'www.smartkids.com', TRUE, NOW(), NOW()),
-('Golden Years Preschool', 'Sector 7, Chandigarh', 'Chandigarh', 'Chandigarh', '160001', 30.7333, 76.7794, '9876543214', 'info@goldenyears.com', 'www.goldenyears.com', TRUE, NOW(), NOW()),
+('Golden Years PreSchool', 'Sector 7, Chandigarh', 'Chandigarh', 'Chandigarh', '160001', 30.7333, 76.7794, '9876543214', 'info@goldenyears.com', 'www.goldenyears.com', TRUE, NOW(), NOW()),
 ('Playway Academy', 'Jubilee Hills, Hyderabad', 'Hyderabad', 'Telangana', '500033', 17.3850, 78.4867, '9876543215', 'info@playway.com', 'www.playway.com', FALSE, NOW(), NOW()),
 ('Creative Kids School', 'Indiranagar, Bangalore', 'Bangalore', 'Karnataka', '560038', 12.9716, 77.6412, '9876543216', 'info@creativekids.com', 'www.creativekids.com', TRUE, NOW(), NOW()),
-('Bright Minds Preschool', 'Malviya Nagar, Delhi', 'Delhi', 'Delhi', '110017', 28.5244, 77.1903, '9876543217', 'info@brightminds.com', 'www.brightminds.com', TRUE, NOW(), NOW()),
+('Bright Minds PreSchool', 'Malviya Nagar, Delhi', 'Delhi', 'Delhi', '110017', 28.5244, 77.1903, '9876543217', 'info@brightminds.com', 'www.brightminds.com', TRUE, NOW(), NOW()),
 ('Happy Child Daycare', 'T. Nagar, Chennai', 'Chennai', 'Tamil Nadu', '600017', 13.0279, 80.2427, '9876543218', 'info@happychild.com', 'www.happychild.com', FALSE, NOW(), NOW()),
 ('Wisdom Kids Academy', 'Gurgaon', 'Gurgaon', 'Haryana', '122001', 28.4595, 77.0266, '9876543219', 'info@wisdomkids.com', 'www.wisdomkids.com', TRUE, NOW(), NOW());
 
--- Insert Sample Preschool Images
+-- Insert Sample PreSchool Images
 INSERT INTO preschool_images (preschool_id, image_url, is_primary, created_at) VALUES
 (1, 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=300&fit=crop', TRUE, NOW()),
 (1, 'https://images.unsplash.com/photo-1503454537688-e6ba5f2b8fbc?w=400&h=300&fit=crop', FALSE, NOW()),
@@ -67,7 +67,7 @@ INSERT INTO franchise_details (preschool_id, franchise_available, initial_invest
 (7, TRUE, 5500000, 5.5, 'percentage', '{"duration": "10 years", "territory": "district", "support": "full support"}', NOW(), NOW()),
 (10, TRUE, 4800000, 5, 'percentage', '{"duration": "10 years", "territory": "city", "support": "training, marketing, hr"}', NOW(), NOW());
 
--- Insert Sample Preschool Owner
+-- Insert Sample PreSchool Owner
 INSERT INTO preschool_owners (preschool_id, owner_name, owner_email, owner_phone, verified_owner, created_at, updated_at) VALUES
 (1, 'Rajesh Sharma', 'owner@sunshine.com', '9999999999', TRUE, NOW(), NOW()),
 (2, 'Meera Kulkarni', 'owner@littlestars.com', '9999999998', TRUE, NOW(), NOW()),

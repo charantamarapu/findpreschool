@@ -1,11 +1,11 @@
 # Admin Panel Setup Guide
 
 ## Overview
-The FindPreschool admin panel provides a complete web interface for managing all database operations without using MySQL directly.
+The FindYourPreSchool admin panel provides a complete web interface for managing all database operations without using MySQL directly.
 
 ## Features
 - ✅ **Dashboard** - Overview statistics and quick actions
-- ✅ **Preschool Management** - CRUD operations, verification, bulk actions
+- ✅ **PreSchool Management** - CRUD operations, verification, bulk actions
 - ✅ **Review Management** - Moderate reviews, verification, deletion
 - ✅ **Admin User Management** - Manage admin accounts and permissions
 - ✅ **Bulk Operations** - Verify/delete multiple items at once
@@ -16,7 +16,7 @@ The FindPreschool admin panel provides a complete web interface for managing all
 After running the database seed, you can login with:
 
 ```
-Email: admin@abc.org
+Email: admin@abc.com
 Password: admin123
 ```
 
@@ -35,7 +35,7 @@ Password: admin123
 
 ## Database Operations Available
 
-### Preschools
+### PreSchools
 - View all preschools with pagination
 - Edit preschool details
 - Verify/unverify preschools
@@ -99,7 +99,7 @@ You can create additional admin users through the admin panel or directly in the
 
 ```sql
 INSERT INTO admin_users (email, password_hash, name, role, active) VALUES
-('newadmin@abc.org', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'New Admin', 'admin', TRUE);
+('newadmin@abc.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'New Admin', 'admin', TRUE);
 ```
 
 Password hash is for 'admin123'. Use a password hashing tool to generate hashes for other passwords.

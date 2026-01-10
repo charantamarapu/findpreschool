@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Preschool, PreschoolImage, AdmissionDetail, FranchiseDetail } from '../models/index.js';
+import { PreSchool, PreSchoolImage, AdmissionDetail, FranchiseDetail } from '../models/index.js';
 
 const GOOGLE_PLACES_API_BASE = process.env.GOOGLE_PLACES_API_BASE;
 const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
@@ -71,7 +71,7 @@ export const fetchFromGoogleMaps = async (req, res) => {
           // Process results
           for (const place of nearbyResponse.data.results) {
             try {
-              const existing = await Preschool.findOne({
+              const existing = await PreSchool.findOne({
                 where: { google_place_id: place.place_id },
               });
 
@@ -120,7 +120,7 @@ export const fetchFromGoogleMaps = async (req, res) => {
                   }
 
                   // Create preschool
-                  const preschool = await Preschool.create({
+                  const preschool = await PreSchool.create({
                     name: detail.name,
                     address: detail.formatted_address,
                     city,
@@ -140,7 +140,7 @@ export const fetchFromGoogleMaps = async (req, res) => {
                     for (let i = 0; i < Math.min(detail.photos.length, 3); i++) {
                       const photoUrl = `${imageUrl}?maxwidth=400&maxheight=400&photoreference=${detail.photos[i].photo_reference}&key=${GOOGLE_MAPS_API_KEY}`;
 
-                      await PreschoolImage.create({
+                      await PreSchoolImage.create({
                         preschool_id: preschool.id,
                         image_url: photoUrl,
                         is_primary: i === 0,
@@ -183,7 +183,7 @@ export const fetchFromGoogleMaps = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: 'Preschools fetched from Google Maps',
+      message: 'PreSchools fetched from Google Maps',
       data: {
         added: totalAdded,
         skipped: totalSkipped,

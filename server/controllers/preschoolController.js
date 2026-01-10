@@ -1,6 +1,6 @@
 import {
-  Preschool,
-  PreschoolImage,
+  PreSchool,
+  PreSchoolImage,
   AdmissionDetail,
   FranchiseDetail,
   Review,
@@ -8,7 +8,7 @@ import {
 import { Op, literal, fn, col } from 'sequelize';
 import sequelize from '../config/database.js';
 
-export const getAllPreschools = async (req, res) => {
+export const getAllPreSchools = async (req, res) => {
   try {
     const {
       city,
@@ -46,7 +46,7 @@ export const getAllPreschools = async (req, res) => {
       },
     ];
 
-    const preschools = await Preschool.findAndCountAll({
+    const preschools = await PreSchool.findAndCountAll({
       where,
       include,
       distinct: true,
@@ -75,11 +75,11 @@ export const getAllPreschools = async (req, res) => {
   }
 };
 
-export const getPreschoolById = async (req, res) => {
+export const getPreSchoolById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const preschool = await Preschool.findByPk(id, {
+    const preschool = await PreSchool.findByPk(id, {
       include: [
         { association: 'images', attributes: ['id', 'image_url', 'is_primary'] },
         { association: 'admission' },
@@ -107,7 +107,7 @@ export const getPreschoolById = async (req, res) => {
     if (!preschool) {
       return res.status(404).json({
         success: false,
-        message: 'Preschool not found',
+        message: 'PreSchool not found',
       });
     }
 
@@ -125,7 +125,7 @@ export const getPreschoolById = async (req, res) => {
   }
 };
 
-export const addPreschool = async (req, res) => {
+export const addPreSchool = async (req, res) => {
   try {
     const {
       name,
@@ -143,18 +143,18 @@ export const addPreschool = async (req, res) => {
 
     // Check if already exists
     if (google_place_id) {
-      const existing = await Preschool.findOne({
+      const existing = await PreSchool.findOne({
         where: { google_place_id },
       });
       if (existing) {
         return res.status(400).json({
           success: false,
-          message: 'Preschool already exists',
+          message: 'PreSchool already exists',
         });
       }
     }
 
-    const preschool = await Preschool.create({
+    const preschool = await PreSchool.create({
       name,
       address,
       city,
@@ -176,7 +176,7 @@ export const addPreschool = async (req, res) => {
     return res.status(201).json({
       success: true,
       data: preschool,
-      message: 'Preschool added successfully',
+      message: 'PreSchool added successfully',
     });
   } catch (error) {
     console.error('Error adding preschool:', error);
@@ -188,17 +188,17 @@ export const addPreschool = async (req, res) => {
   }
 };
 
-export const updatePreschool = async (req, res) => {
+export const updatePreSchool = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, address, city, state, pincode, phone, email, website } =
       req.validated;
 
-    const preschool = await Preschool.findByPk(id);
+    const preschool = await PreSchool.findByPk(id);
     if (!preschool) {
       return res.status(404).json({
         success: false,
-        message: 'Preschool not found',
+        message: 'PreSchool not found',
       });
     }
 
@@ -216,7 +216,7 @@ export const updatePreschool = async (req, res) => {
     return res.status(200).json({
       success: true,
       data: preschool,
-      message: 'Preschool updated successfully',
+      message: 'PreSchool updated successfully',
     });
   } catch (error) {
     console.error('Error updating preschool:', error);
@@ -228,7 +228,7 @@ export const updatePreschool = async (req, res) => {
 };
 
 // Get nearby preschools using Haversine formula
-export const getNearbyPreschools = async (req, res) => {
+export const getNearbyPreSchools = async (req, res) => {
   try {
     const {
       latitude,
@@ -259,7 +259,7 @@ export const getNearbyPreschools = async (req, res) => {
       ))
     `;
 
-    const preschools = await Preschool.findAll({
+    const preschools = await PreSchool.findAll({
       attributes: {
         include: [
           [literal(distanceFormula), 'distance']

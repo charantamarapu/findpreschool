@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# FindPreschool Deployment Script for Oracle Cloud (Ubuntu)
+# FindYourPreSchool Deployment Script for Oracle Cloud (Ubuntu)
 # This script automates the setup of Node.js, Nginx, MySQL, and the application itself.
 
 set -e # Exit on error
 
 echo "========================================================"
-echo "🚀 Starting Deployment for FindPreschool"
+echo "🚀 Starting Deployment for FindYourPreSchool"
 echo "========================================================"
 
 # Check if running as root
@@ -24,7 +24,7 @@ echo "📂 Working directory: $SCRIPT_DIR"
 # --- Configuration Prompts ---
 echo ""
 echo "--- Configuration ---"
-read -p "Enter your Domain Name (e.g., findpreschool.org) [Leave blank for IP-only]: " DOMAIN_NAME
+read -p "Enter your Domain Name (e.g., findyourpreschool) [Leave blank for IP-only]: " DOMAIN_NAME
 if [ -n "$DOMAIN_NAME" ]; then
     read -p "Enter your Email for SSL Certificate: " SSL_EMAIL
     SERVER_NAME="$DOMAIN_NAME"
@@ -111,7 +111,7 @@ if [ ! -f server/.env ]; then
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_db_password
-DB_NAME=findpreschool
+DB_NAME=findyourpreschool
 DB_PORT=3306
 
 # Server Configuration
@@ -150,7 +150,7 @@ echo "🌐 Configuring Nginx..."
 # Identify the Public IP (for reference)
 PUBLIC_IP=$(curl -s ifconfig.me) || PUBLIC_IP="YOUR_SERVER_IP"
 
-NGINX_CONFIG="/etc/nginx/sites-available/findpreschool"
+NGINX_CONFIG="/etc/nginx/sites-available/findyourpreschool"
 
 cat > "$NGINX_CONFIG" <<EOF
 server {
@@ -193,7 +193,7 @@ ln -sf "$NGINX_CONFIG" /etc/nginx/sites-enabled/
 # FIX: Allow Nginx content access
 echo "🔓 Fixing permissions for Nginx..."
 chmod 755 /home/ubuntu
-chmod 755 /home/ubuntu/findpreschool
+chmod 755 /home/ubuntu/findyourpreschool
 
 nginx -t && systemctl restart nginx
 
@@ -211,7 +211,7 @@ fi
 echo ""
 echo "🔄 Setting up PM2 Process Manager..."
 cd server
-pm2 start server.js --name "findpreschool-api"
+pm2 start server.js --name "findyourpreschool-api"
 pm2 save
 pm2 startup | tail -n 1 > /tmp/pm2_startup_script.sh
 # Check if the output is a script execution command or just info. 
@@ -226,9 +226,9 @@ echo ""
 echo "👉 NEXT STEPS:"
 echo "1. Configure Database:"
 echo "   - Run: sudo mysql"
-echo "   - SQL: CREATE DATABASE findpreschool;"
+echo "   - SQL: CREATE DATABASE findyourpreschool;"
 echo "   - SQL: CREATE USER 'admin'@'localhost' IDENTIFIED BY 'yourpassword';"
-echo "   - SQL: GRANT ALL PRIVILEGES ON findpreschool.* TO 'admin'@'localhost';"
+echo "   - SQL: GRANT ALL PRIVILEGES ON findyourpreschool.* TO 'admin'@'localhost';"
 echo "   - SQL: FLUSH PRIVILEGES;"
 echo "   - SQL: EXIT;"
 echo ""
@@ -237,7 +237,7 @@ echo "   - Edit server/.env: nano server/.env"
 echo "   - Set DB_USER, DB_PASSWORD, SMTP credentials."
 echo ""
 echo "3. Restart Backend:"
-echo "   - Run: pm2 restart findpreschool-api"
+echo "   - Run: pm2 restart findyourpreschool-api"
 echo ""
 echo "4. Oracle Cloud Firewall (IMPORTANT):"
 echo "   - Go to Oracle Cloud Console -> Networking -> VNC -> Security List"

@@ -27,7 +27,7 @@ export const validateRequest = (schema) => {
 
 // Validation schemas
 export const schemas = {
-  addPreschool: Joi.object({
+  addPreSchool: Joi.object({
     name: Joi.string().required(),
     address: Joi.string(),
     city: Joi.string(),

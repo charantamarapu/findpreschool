@@ -19,7 +19,7 @@ export const ImageCarousel = ({ images }) => {
     <div className="relative w-full h-96 bg-gray-200 rounded-lg overflow-hidden group">
       <img
         src={images[currentIndex].image_url}
-        alt={`Preschool ${currentIndex + 1}`}
+        alt={`PreSchool ${currentIndex + 1}`}
         className="w-full h-full object-cover"
       />
 
@@ -51,9 +51,8 @@ export const ImageCarousel = ({ images }) => {
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`h-2 rounded-full transition-all ${
-                  idx === currentIndex ? 'bg-white w-6' : 'bg-white/50 w-2'
-                }`}
+                className={`h-2 rounded-full transition-all ${idx === currentIndex ? 'bg-white w-6' : 'bg-white/50 w-2'
+                  }`}
               />
             ))}
           </div>
@@ -63,7 +62,7 @@ export const ImageCarousel = ({ images }) => {
   );
 };
 
-export const PreschoolDetailPage = ({ preschool }) => {
+export const PreSchoolDetailPage = ({ preschool }) => {
   const [activeTab, setActiveTab] = useState('overview');
   const [liked, setLiked] = useState(false);
 
@@ -95,11 +94,10 @@ export const PreschoolDetailPage = ({ preschool }) => {
           <div className="flex gap-2">
             <button
               onClick={() => setLiked(!liked)}
-              className={`p-3 rounded-full border-2 transition-colors ${
-                liked
+              className={`p-3 rounded-full border-2 transition-colors ${liked
                   ? 'bg-red-100 border-red-500 text-red-500'
                   : 'border-gray-300 text-gray-600 hover:border-red-500'
-              }`}
+                }`}
             >
               <Heart size={24} fill={liked ? 'currentColor' : 'none'} />
             </button>
@@ -152,11 +150,10 @@ export const PreschoolDetailPage = ({ preschool }) => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-3 font-semibold border-b-2 transition-colors capitalize ${
-                  activeTab === tab
+                className={`px-4 py-3 font-semibold border-b-2 transition-colors capitalize ${activeTab === tab
                     ? 'border-primary-600 text-primary-600'
                     : 'border-transparent text-gray-600 hover:text-gray-900'
-                }`}
+                  }`}
               >
                 {tab}
               </button>
@@ -253,7 +250,7 @@ export const PreschoolDetailPage = ({ preschool }) => {
                     <p className="text-2xl font-bold text-primary-600">
                       {preschool.admission.monthly_fee_min && preschool.admission.monthly_fee_max
                         ? `${formatCurrency(preschool.admission.monthly_fee_min)} - ${formatCurrency(preschool.admission.monthly_fee_max)}`
-                        : preschool.admission.monthly_fee_min 
+                        : preschool.admission.monthly_fee_min
                           ? `${formatCurrency(preschool.admission.monthly_fee_min)}`
                           : `${formatCurrency(preschool.admission.monthly_fee_max)}`
                       }
@@ -266,7 +263,7 @@ export const PreschoolDetailPage = ({ preschool }) => {
                     <p className="text-2xl font-bold text-green-600">
                       {preschool.admission.annual_fee_min && preschool.admission.annual_fee_max
                         ? `${formatCurrency(preschool.admission.annual_fee_min)} - ${formatCurrency(preschool.admission.annual_fee_max)}`
-                        : preschool.admission.annual_fee_min 
+                        : preschool.admission.annual_fee_min
                           ? `${formatCurrency(preschool.admission.annual_fee_min)}`
                           : `${formatCurrency(preschool.admission.annual_fee_max)}`
                       }

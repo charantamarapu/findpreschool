@@ -4,14 +4,14 @@ import { ComparisonContext } from '../context/ComparisonContext';
 import { formatCurrency, calculateAnnualCost } from '../utils/helpers';
 
 export const ComparisonPanel = ({ comparisonData }) => {
-  const { selectedPreschools, removeFromComparison, clearComparison } =
+  const { selectedPreSchools, removeFromComparison, clearComparison } =
     useContext(ComparisonContext);
 
-  if (selectedPreschools.length === 0) return null;
+  if (selectedPreSchools.length === 0) return null;
 
   const handleExportCSV = () => {
     const csvData = comparisonData.map((p) => ({
-      'Preschool Name': p.name,
+      'PreSchool Name': p.name,
       'Monthly Fee': p.admission?.monthly_fee_min && p.admission?.monthly_fee_max
         ? `${formatCurrency(p.admission.monthly_fee_min)} - ${formatCurrency(p.admission.monthly_fee_max)}`
         : p.admission?.monthly_fee_min || p.admission?.monthly_fee_max || 'N/A',
@@ -45,7 +45,7 @@ export const ComparisonPanel = ({ comparisonData }) => {
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">
-            Comparing {selectedPreschools.length} Preschools
+            Comparing {selectedPreSchools.length} PreSchools
           </h2>
           <div className="flex gap-2">
             <button
@@ -69,7 +69,7 @@ export const ComparisonPanel = ({ comparisonData }) => {
           <table className="w-full text-sm">
             <thead className="bg-gray-100 border-b-2">
               <tr>
-                <th className="text-left p-2 font-bold">Preschool</th>
+                <th className="text-left p-2 font-bold">PreSchool</th>
                 {comparisonData.map((p) => (
                   <th key={p.id} className="text-left p-2 min-w-max">
                     <div className="flex justify-between items-start">

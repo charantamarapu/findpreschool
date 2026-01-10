@@ -17,7 +17,7 @@ vi.mock('../components/MapComponent', () => ({
 }));
 
 import * as preschoolService from '../services/apiService';
-import { PreschoolListPage } from './PreschoolListPage';
+import { PreSchoolListPage } from './PreSchoolListPage';
 
 vi.mock('../services/apiService');
 
@@ -36,9 +36,9 @@ const makeResponse = (offset = 0, limit = 20) => ({
   },
 });
 
-describe('PreschoolListPage pagination', () => {
+describe('PreSchoolListPage pagination', () => {
   beforeEach(() => {
-    preschoolService.preschoolService.getAllPreschools = vi.fn((params) => {
+    preschoolService.preschoolService.getAllPreSchools = vi.fn((params) => {
       const offset = params?.offset || 0;
       return Promise.resolve(makeResponse(offset));
     });
@@ -49,7 +49,7 @@ describe('PreschoolListPage pagination', () => {
       <MemoryRouter>
         <FilterProvider>
           <ComparisonProvider>
-            <PreschoolListPage />
+            <PreSchoolListPage />
           </ComparisonProvider>
         </FilterProvider>
       </MemoryRouter>

@@ -41,7 +41,7 @@ const AdminTable = ({
       let response;
       switch (endpoint) {
         case 'preschools':
-          response = await adminService.getPreschools({ page, limit: 10 });
+          response = await adminService.getPreSchools({ page, limit: 10 });
           break;
         case 'reviews':
           response = await adminService.getReviews({ page, limit: 10 });
@@ -70,7 +70,7 @@ const AdminTable = ({
     try {
       switch (endpoint) {
         case 'preschools':
-          await adminService.deletePreschool(id);
+          await adminService.deletePreSchool(id);
           break;
         case 'reviews':
           await adminService.deleteReview(id);
@@ -108,7 +108,7 @@ const AdminTable = ({
     try {
       switch (endpoint) {
         case 'preschools':
-          await adminService.updatePreschool(id, { verified_status: !currentStatus });
+          await adminService.updatePreSchool(id, { verified_status: !currentStatus });
           break;
         case 'reviews':
           await adminService.updateReview(id, { verified: !currentStatus });
@@ -128,7 +128,7 @@ const AdminTable = ({
 
     try {
       if (endpoint === 'preschools') {
-        await adminService.bulkVerifyPreschools(selectedItems);
+        await adminService.bulkVerifyPreSchools(selectedItems);
       } else if (endpoint === 'reviews') {
         await adminService.bulkVerifyReviews(selectedItems);
       }
@@ -274,11 +274,10 @@ const AdminTable = ({
                           {canVerify && (
                             <button
                               onClick={() => handleVerify(item.id, endpoint === 'preschools' ? item.verified_status : item.verified)}
-                              className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                                (endpoint === 'preschools' ? item.verified_status : item.verified)
+                              className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${(endpoint === 'preschools' ? item.verified_status : item.verified)
                                   ? 'bg-green-100 text-green-800'
                                   : 'bg-yellow-100 text-yellow-800'
-                              }`}
+                                }`}
                             >
                               {(endpoint === 'preschools' ? item.verified_status : item.verified) ? (
                                 <CheckCircle className="h-4 w-4 mr-1" />

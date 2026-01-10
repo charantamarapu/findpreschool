@@ -1,10 +1,10 @@
 @echo off
-REM FindPreschool.org - Complete Startup Script for Windows
+REM FindYourPreSchool - Complete Startup Script for Windows
 REM Run this script from the project root directory in Command Prompt
 
 echo.
 echo ================================================
-echo FindPreschool.org - Complete Setup [Windows]
+echo FindYourPreSchool - Complete Setup [Windows]
 echo ================================================
 echo.
 
@@ -121,7 +121,7 @@ echo ================================================
 echo Setup Complete!
 echo ================================================
 echo.
-echo Your FindPreschool.org is ready to run!
+echo Your FindYourPreSchool is ready to run!
 echo.
 echo To start the application:
 echo.

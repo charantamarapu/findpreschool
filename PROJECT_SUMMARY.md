@@ -1,4 +1,4 @@
-# FindPreschool.org - Complete Project Summary
+# FindYourPreSchool - Complete Project Summary
 
 > This file has been archived to `archive_docs/PROJECT_SUMMARY.md`.
 > See archive_docs/PROJECT_SUMMARY.md for the original full content.
@@ -39,13 +39,13 @@ Your complete full-stack preschool comparison website is ready! All components h
 ### ✓ Frontend (React + Vite + Tailwind)
 - **Pages** (3 components):
   - HomePage - Hero, featured preschools, stats
-  - PreschoolListPage - List with advanced filtering
-  - PreschoolDetailPageWrapper - Full details view
+  - PreSchoolListPage - List with advanced filtering
+  - PreSchoolDetailPageWrapper - Full details view
 - **Components** (4 reusable):
-  - PreschoolCard - Grid card with image, fees, rating
+  - PreSchoolCard - Grid card with image, fees, rating
   - ComparisonPanel - Sticky bottom comparison table
   - FilterSidebar - Advanced filtering options
-  - PreschoolDetail - Full detail view with tabs
+  - PreSchoolDetail - Full detail view with tabs
 - **Services**:
   - API service layer with all endpoints
   - Google Maps integration
@@ -130,7 +130,7 @@ npm run dev
 
 ## 📡 API Endpoints (25 Available)
 
-### Preschools (4 endpoints)
+### PreSchools (4 endpoints)
 - GET /api/preschools
 - GET /api/preschools/:id
 - POST /api/preschools
@@ -186,7 +186,7 @@ npm run dev
 ## 📋 File Structure Reference
 
 ```
-findpreschool/
+findyourpreschool/
 ├── database.sql                    # Complete MySQL schema
 ├── README.md                       # Full documentation
 ├── QUICKSTART.md                   # 5-minute setup guide

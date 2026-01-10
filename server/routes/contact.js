@@ -1,6 +1,6 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
-import { Preschool } from '../models/index.js';
+import { PreSchool } from '../models/index.js';
 
 const router = express.Router();
 
@@ -28,8 +28,8 @@ router.post('/contact', async (req, res) => {
     // Try to send email, but don't fail if email service is not available
     try {
       await transporter.sendMail({
-        from: process.env.SMTP_USER || 'noreply@findpreschool.com',
-        to: process.env.CONTACT_EMAIL || 'contact@findpreschool.com',
+        from: process.env.SMTP_USER || 'noreply@findyourpreschool.com',
+        to: process.env.CONTACT_EMAIL || 'contact@findyourpreschool.com',
         subject: `New Contact Form Submission from ${name}`,
         html: `
           <h2>New Contact Form Submission</h2>
@@ -71,20 +71,20 @@ router.post('/contact-school/:preschoolId', async (req, res) => {
     }
 
     // Get preschool details
-    const preschool = await Preschool.findByPk(preschoolId);
+    const preschool = await PreSchool.findByPk(preschoolId);
     if (!preschool) {
       return res.status(404).json({
         success: false,
-        error: 'Preschool not found'
+        error: 'PreSchool not found'
       });
     }
 
     // Try to send email to preschool
     try {
       await transporter.sendMail({
-        from: process.env.SMTP_USER || 'noreply@findpreschool.com',
+        from: process.env.SMTP_USER || 'noreply@findyourpreschool.com',
         to: preschool.email || process.env.CONTACT_EMAIL,
-        subject: `New Inquiry from ${name} via FindPreschool.org`,
+        subject: `New Inquiry from ${name} via FindYourPreSchool`,
         html: `
           <h2>New Inquiry</h2>
           <p><strong>From:</strong> ${name}</p>
@@ -92,7 +92,7 @@ router.post('/contact-school/:preschoolId', async (req, res) => {
           <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
           <p><strong>Message:</strong></p>
           <p>${message.replace(/\n/g, '<br>')}</p>
-          <p><em>This inquiry was sent via FindPreschool.org</em></p>
+          <p><em>This inquiry was sent via FindYourPreSchool</em></p>
         `
       });
     } catch (emailError) {

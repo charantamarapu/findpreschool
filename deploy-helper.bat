@@ -1,5 +1,5 @@
 @echo off
-echo 🚀 FindPreschool Deployment Helper
+echo 🚀 FindYourPreSchool Deployment Helper
 echo.
 
 echo Step 1: Checking Git status...
@@ -12,7 +12,7 @@ echo.
 
 echo Step 3: Ready to push to GitHub
 echo Make sure you created the repository at:
-echo https://github.com/charantamarapu/findpreschool
+echo https://github.com/charantamarapu/findyourpreschool
 echo.
 
 echo When ready, run: git push -u origin main

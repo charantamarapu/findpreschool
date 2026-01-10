@@ -9,7 +9,7 @@ openssl rand -base64 32
 
 ### MySQL Connection String Format
 ```
-mysql://user:password@host:3306/findpreschool
+mysql://user:password@host:3306/findyourpreschool
 ```
 
 ## 2. Setup Railway.app
@@ -31,8 +31,8 @@ apt install nodejs npm mysql-server nginx certbot python3-certbot-nginx -y
 ### Clone & Setup
 ```bash
 cd /var/www
-git clone https://github.com/your-username/findpreschool.git
-cd findpreschool/server
+git clone https://github.com/your-username/findyourpreschool.git
+cd findyourpreschool/server
 npm install
 npm start
 ```
@@ -41,17 +41,17 @@ npm start
 
 ```bash
 # Build image
-docker build -t findpreschool:latest .
+docker build -t findyourpreschool:latest .
 
 # Run container
 docker run -d \
   -e DB_HOST=your-db-host \
   -e DB_USER=your-user \
   -e DB_PASSWORD=your-pass \
-  -e DB_NAME=findpreschool \
+  -e DB_NAME=findyourpreschool \
   -e JWT_SECRET=your-secret \
   -p 5000:5000 \
-  findpreschool:latest
+  findyourpreschool:latest
 ```
 
 ## 5. Environment Variables You'll Need

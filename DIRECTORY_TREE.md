@@ -97,7 +97,7 @@ root/
 
 ### Most Used Files
 - **preschoolController.js** - Main logic
-- **PreschoolListPage.jsx** - Main page
+- **PreSchoolListPage.jsx** - Main page
 - **apiService.js** - API communication
 - **models/index.js** - Data relationships
 

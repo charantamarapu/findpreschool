@@ -1,5 +1,5 @@
 import {
-  Preschool,
+  PreSchool,
   AdmissionDetail,
   FranchiseDetail,
   ComparisonHistory,
@@ -17,7 +17,7 @@ export const compareAdmission = async (req, res) => {
       });
     }
 
-    const preschools = await Preschool.findAll({
+    const preschools = await PreSchool.findAll({
       where: {
         id: {
           [Op.in]: preschool_ids,
@@ -46,7 +46,7 @@ export const compareAdmission = async (req, res) => {
     if (preschools.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Preschools not found',
+        message: 'PreSchools not found',
       });
     }
 
@@ -118,7 +118,7 @@ export const compareFranchise = async (req, res) => {
       });
     }
 
-    const preschools = await Preschool.findAll({
+    const preschools = await PreSchool.findAll({
       where: {
         id: {
           [Op.in]: preschool_ids,

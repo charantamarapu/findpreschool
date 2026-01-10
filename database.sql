@@ -1,10 +1,10 @@
--- FindPreschool.org Database Schema
+-- FindYourPreSchool Database Schema
 -- MySQL Database Script
 
-CREATE DATABASE IF NOT EXISTS findpreschool;
-USE findpreschool;
+CREATE DATABASE IF NOT EXISTS findyourpreschool;
+USE findyourpreschool;
 
--- Preschools Table
+-- PreSchools Table
 CREATE TABLE preschools (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE preschools (
   INDEX idx_google_place_id (google_place_id)
 );
 
--- Preschool Images Table
+-- PreSchool Images Table
 CREATE TABLE preschool_images (
   id INT PRIMARY KEY AUTO_INCREMENT,
   preschool_id INT NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE admin_users (
   INDEX idx_email (email)
 );
 
--- Preschool Owners Table (for claims/verification)
+-- PreSchool Owners Table (for claims/verification)
 CREATE TABLE preschool_owners (
   id INT PRIMARY KEY AUTO_INCREMENT,
   preschool_id INT NOT NULL UNIQUE,

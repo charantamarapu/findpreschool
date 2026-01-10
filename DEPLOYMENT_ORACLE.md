@@ -1,6 +1,6 @@
 # ☁️ Deploying to Oracle Cloud
 
-This guide provides specific instructions for deploying `FindPreschool` to an Oracle Cloud Infrastructure (OCI) Compute Instance running **Ubuntu**.
+This guide provides specific instructions for deploying `FindYourPreSchool` to an Oracle Cloud Infrastructure (OCI) Compute Instance running **Ubuntu**.
 
 ## ✅ Prerequisites
 
@@ -53,8 +53,8 @@ git push origin main
 
 2.  **Clone the Repository**:
     ```bash
-    git clone https://github.com/charantamarapu/findpreschool.git
-    cd findpreschool
+    git clone https://github.com/charantamarapu/findyourpreschool.git
+    cd findyourpreschool
     ```
 
 3.  **Run the Script**:
@@ -90,9 +90,9 @@ sudo mysql
 Paste these SQL commands (change 'password' to a strong password):
 
 ```sql
-CREATE DATABASE findpreschool;
+CREATE DATABASE findyourpreschool;
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'your_secure_password';
-GRANT ALL PRIVILEGES ON findpreschool.* TO 'admin'@'localhost';
+GRANT ALL PRIVILEGES ON findyourpreschool.* TO 'admin'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
@@ -112,14 +112,14 @@ sudo nano server/.env
 Apply the changes:
 
 ```bash
-pm2 restart findpreschool-api
+pm2 restart findyourpreschool-api
 ```
 
 ---
 
 ## 🎉 Verification
 
-Visit your **Domain** (e.g., `https://findpreschool.org`) or **Public IP** (`http://1.2.3.4`) in your browser.
+Visit your **Domain** (e.g., `https://findyourpreschool`) or **Public IP** (`http://1.2.3.4`) in your browser.
 
 *   **Frontend**: Should load the homepage.
 *   **Contact Form**: Should send emails (if SMTP configured).
@@ -141,7 +141,7 @@ When you make changes to your code in the future:
 2.  **Run Update Script on Server**:
     SSH into your server and run:
     ```bash
-    cd findpreschool
+    cd findyourpreschool
     sudo ./deploy.sh
     ```
     

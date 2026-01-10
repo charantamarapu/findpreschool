@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { preschoolService } from '../services/apiService';
-import { PreschoolDetailPage } from '../components/PreschoolDetail';
+import { PreSchoolDetailPage } from '../components/PreSchoolDetail';
 import { Loader } from 'lucide-react';
 
-export const PreschoolDetailPageWrapper = () => {
+export const PreSchoolDetailPageWrapper = () => {
   const { id } = useParams();
-  const [preschool, setPreschool] = useState(null);
+  const [preschool, setPreSchool] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPreschool = async () => {
+    const fetchPreSchool = async () => {
       try {
         setLoading(true);
-        const response = await preschoolService.getPreschoolById(id);
+        const response = await preschoolService.getPreSchoolById(id);
 
         if (response.data.success) {
-          setPreschool(response.data.data);
+          setPreSchool(response.data.data);
         }
       } catch (err) {
         console.error('Error fetching preschool:', err);
@@ -27,7 +27,7 @@ export const PreschoolDetailPageWrapper = () => {
       }
     };
 
-    fetchPreschool();
+    fetchPreSchool();
   }, [id]);
 
   if (loading) {
@@ -54,5 +54,5 @@ export const PreschoolDetailPageWrapper = () => {
     );
   }
 
-  return <PreschoolDetailPage preschool={preschool} />;
+  return <PreSchoolDetailPage preschool={preschool} />;
 };

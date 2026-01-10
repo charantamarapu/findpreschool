@@ -3,7 +3,7 @@ import AdminTable from '../../components/AdminTable';
 import { ArrowLeft, Shield } from 'lucide-react';
 import { formatCurrency } from '../../utils/helpers';
 
-const AdminPreschools = () => {
+const AdminPreSchools = () => {
   const navigate = useNavigate();
   const columns = [
     {
@@ -20,11 +20,10 @@ const AdminPreschools = () => {
       key: 'verified_status',
       label: 'Status',
       render: (item) => (
-        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-          item.verified_status
+        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${item.verified_status
             ? 'bg-green-100 text-green-800'
             : 'bg-yellow-100 text-yellow-800'
-        }`}>
+          }`}>
           {item.verified_status ? 'Verified' : 'Pending'}
         </span>
       )
@@ -83,7 +82,7 @@ const AdminPreschools = () => {
                 onClick={() => navigate('/admin/preschools')}
                 className="bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium"
               >
-                Preschools
+                PreSchools
               </button>
               <button
                 onClick={() => navigate('/admin/reviews')}
@@ -104,7 +103,7 @@ const AdminPreschools = () => {
 
       <div className="max-w-7xl mx-auto py-6">
         <AdminTable
-          title="Preschools"
+          title="PreSchools"
           endpoint="preschools"
           columns={columns}
           createPath="/admin/preschools/new"
@@ -119,4 +118,4 @@ const AdminPreschools = () => {
   );
 };
 
-export default AdminPreschools;
+export default AdminPreSchools;

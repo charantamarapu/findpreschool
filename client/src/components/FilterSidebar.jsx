@@ -109,8 +109,8 @@ export const FilterSidebar = () => {
                       key={option.value}
                       onClick={() => { setSearchRadius(option.value); setShowCustomRadius(false); }}
                       className={`py-2 rounded-lg text-xs font-medium transition-all ${searchRadius === option.value && !showCustomRadius
-                          ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/30'
-                          : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                        ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/30'
+                        : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                         }`}
                     >
                       {option.label}
@@ -151,8 +151,8 @@ export const FilterSidebar = () => {
                     <button
                       onClick={() => { setShowCustomRadius(true); setCustomRadiusValue(isCustomRadius ? String(searchRadius) : ''); }}
                       className={`w-full py-2 rounded-lg text-xs font-medium transition-all ${isCustomRadius
-                          ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/30'
-                          : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                        ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/30'
+                        : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                         }`}
                     >
                       {isCustomRadius ? `Custom: ${searchRadius} km` : 'Custom...'}
@@ -314,7 +314,7 @@ export const FilterSidebar = () => {
                   Age Group
                 </label>
                 <div className="space-y-2">
-                  {['Toddlers (0-2)', 'Preschool (2-3)', 'Pre-K (3-4)', 'Kindergarten (4-5)'].map(
+                  {['Toddlers (0-2)', 'PreSchool (2-3)', 'Pre-K (3-4)', 'Kindergarten (4-5)'].map(
                     (age) => (
                       <label
                         key={age}

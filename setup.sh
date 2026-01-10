@@ -1,9 +1,9 @@
 #!/bin/bash
-# FindPreschool.org - Complete Startup Script
+# FindYourPreSchool - Complete Startup Script
 # Run this script from the project root directory
 
 echo "================================================"
-echo "FindPreschool.org - Complete Setup & Startup"
+echo "FindYourPreSchool - Complete Setup & Startup"
 echo "================================================"
 echo ""
 
@@ -136,7 +136,7 @@ echo "================================================"
 echo "Setup Complete! ✅"
 echo "================================================"
 echo ""
-print_success "Your FindPreschool.org is ready to run!"
+print_success "Your FindYourPreSchool is ready to run!"
 echo ""
 echo "To start the application:"
 echo ""

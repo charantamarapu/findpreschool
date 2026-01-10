@@ -1,4 +1,4 @@
-# Quick Start Guide - FindPreschool.org
+# Quick Start Guide - FindYourPreSchool
 
 ## 5-Minute Setup
 
@@ -73,7 +73,7 @@ curl "http://localhost:5000/api/preschools?city=Delhi&limit=10"
 
 ## 📝 First Steps
 
-1. **Add Preschools**: Use Google Maps integration
+1. **Add PreSchools**: Use Google Maps integration
    ```bash
    POST /api/google-maps/fetch
    {
@@ -82,7 +82,7 @@ curl "http://localhost:5000/api/preschools?city=Delhi&limit=10"
    }
    ```
 
-2. **View Preschools**: Visit `http://localhost:5173`
+2. **View PreSchools**: Visit `http://localhost:5173`
 
 3. **Submit Reviews**: Click on preschool → Reviews tab
 

@@ -25,11 +25,11 @@ echo "🔄 Updating Backend..."
 cd server
 npm install --production
 # Restart the specific PM2 process
-if pm2 describe findpreschool-api > /dev/null; then
-    pm2 restart findpreschool-api
+if pm2 describe findyourpreschool-api > /dev/null; then
+    pm2 restart findyourpreschool-api
 else
-    echo "⚠️ PM2 process 'findpreschool-api' not found. Starting it..."
-    pm2 start server.js --name "findpreschool-api"
+    echo "⚠️ PM2 process 'findyourpreschool-api' not found. Starting it..."
+    pm2 start server.js --name "findyourpreschool-api"
 fi
 cd ..
 

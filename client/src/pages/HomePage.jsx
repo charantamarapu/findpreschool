@@ -8,20 +8,20 @@ import { preschoolService } from '../services/apiService';
 export const HomePage = () => {
 
   const [searchCity, setSearchCity] = useState('');
-  const [allPreschools, setAllPreschools] = useState([]);
+  const [allPreSchools, setAllPreSchools] = useState([]);
 
   useEffect(() => {
-    const fetchPreschools = async () => {
+    const fetchPreSchools = async () => {
       try {
-        const response = await preschoolService.getAllPreschools({ limit: 50 });
+        const response = await preschoolService.getAllPreSchools({ limit: 50 });
         if (response.data.success) {
-          setAllPreschools(response.data.data);
+          setAllPreSchools(response.data.data);
         }
       } catch (error) {
         console.error('Error fetching preschools:', error);
       }
     };
-    fetchPreschools();
+    fetchPreSchools();
   }, []);
 
   // Scroll to contact section if #contact in URL, and on hash change
@@ -37,7 +37,7 @@ export const HomePage = () => {
     return () => window.removeEventListener('hashchange', scrollToContact);
   }, []);
 
-  const featuredPreschools = [
+  const featuredPreSchools = [
     {
       id: 1,
       name: 'Sunshine Academy',
@@ -56,7 +56,7 @@ export const HomePage = () => {
     },
     {
       id: 3,
-      name: 'Little Stars Preschool',
+      name: 'Little Stars PreSchool',
       city: 'Bangalore',
       rating: 4.7,
       monthlyFee: '₹16,500',
@@ -73,7 +73,7 @@ export const HomePage = () => {
   ];
 
   const stats = [
-    { label: 'Preschools Listed', value: '2,500+', icon: Building2, color: 'from-blue-500 to-blue-600' },
+    { label: 'PreSchools Listed', value: '2,500+', icon: Building2, color: 'from-blue-500 to-blue-600' },
     { label: 'Parent Reviews', value: '15,000+', icon: Star, color: 'from-amber-500 to-orange-500' },
     { label: 'Cities Covered', value: '50+', icon: MapPin, color: 'from-emerald-500 to-green-600' },
     { label: 'Verified Data', value: '100%', icon: Shield, color: 'from-purple-500 to-violet-600' },
@@ -138,7 +138,7 @@ export const HomePage = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             Find the Perfect
             <span className="block bg-gradient-to-r from-amber-200 to-yellow-100 bg-clip-text text-transparent">
-              Preschool for Your Child
+              PreSchool for Your Child
             </span>
           </h1>
 
@@ -212,12 +212,12 @@ export const HomePage = () => {
       </section>
 
       {/* Map Section */}
-      {allPreschools.length > 0 && (
+      {allPreSchools.length > 0 && (
         <section className="py-16 bg-gradient-to-b from-white to-gray-50">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-10">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Preschools Near You
+                PreSchools Near You
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
                 Explore preschools across India. Click on markers to view details.
@@ -225,7 +225,7 @@ export const HomePage = () => {
             </div>
             <div className="bg-white rounded-2xl shadow-card overflow-hidden border border-gray-100" style={{ height: '500px' }}>
               <MapComponent
-                preschools={allPreschools}
+                preschools={allPreSchools}
                 center={[20.5937, 78.9629]}
                 zoom={5}
               />
@@ -234,7 +234,7 @@ export const HomePage = () => {
         </section>
       )}
 
-      {/* Featured Preschools */}
+      {/* Featured PreSchools */}
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -243,7 +243,7 @@ export const HomePage = () => {
               <span className="text-sm font-semibold">Top Rated</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Featured Preschools
+              Featured PreSchools
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               Highly-rated preschools verified by our team and loved by parents
@@ -251,7 +251,7 @@ export const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredPreschools.map((preschool, index) => (
+            {featuredPreSchools.map((preschool, index) => (
               <Link
                 key={preschool.id}
                 to={`/preschool/${preschool.id}`}
@@ -294,7 +294,7 @@ export const HomePage = () => {
               to="/preschools"
               className="btn-primary inline-flex items-center gap-2 text-lg px-8 py-4"
             >
-              View All Preschools
+              View All PreSchools
               <ArrowRight size={20} />
             </Link>
           </div>
@@ -306,7 +306,7 @@ export const HomePage = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose FindPreschool.org?
+              Why Choose FindYourPreSchool?
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               We're committed to helping parents find the best preschool for their children
@@ -345,10 +345,10 @@ export const HomePage = () => {
             <span className="text-sm font-medium">Join 50,000+ happy parents</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Ready to Find the Perfect Preschool?
+            Ready to Find the Perfect PreSchool?
           </h2>
           <p className="text-blue-100 mb-10 text-lg md:text-xl max-w-2xl mx-auto">
-            Join thousands of parents who use FindPreschool.org to make informed decisions about their child's education.
+            Join thousands of parents who use FindYourPreSchool to make informed decisions about their child's education.
           </p>
           <Link
             to="/preschools"

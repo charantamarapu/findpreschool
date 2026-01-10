@@ -1,4 +1,4 @@
-# FindPreschool.org - Complete File Manifest
+# FindYourPreSchool - Complete File Manifest
 
 ## 📋 Project Overview
 Complete full-stack preschool comparison website with React frontend, Node.js backend, and MySQL database.
@@ -61,7 +61,7 @@ See [archive_docs/FILE_MANIFEST.md](archive_docs/FILE_MANIFEST.md) for the full 
 ### Health (1)
 - GET /api/health
 
-### Preschools (4)
+### PreSchools (4)
 - GET /api/preschools
 - GET /api/preschools/:id
 - POST /api/preschools
@@ -110,7 +110,7 @@ See [archive_docs/FILE_MANIFEST.md](archive_docs/FILE_MANIFEST.md) for the full 
 ### Review System
 - reviewController.js - Full review management
 - Review model - Database structure
-- PreschoolDetail.jsx - Review display component
+- PreSchoolDetail.jsx - Review display component
 - Verification workflow for admin
 
 ### Responsive Design

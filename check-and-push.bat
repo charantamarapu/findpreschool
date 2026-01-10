@@ -1,9 +1,9 @@
 @echo off
-echo 🚀 FindPreschool - GitHub Repository Check & Push
+echo 🚀 FindYourPreSchool - GitHub Repository Check & Push
 echo.
 
 echo Checking if GitHub repository exists...
-powershell -Command "try { $response = Invoke-WebRequest -Uri 'https://api.github.com/repos/charantamarapu/findpreschool' -UseBasicParsing -ErrorAction Stop; echo '✅ Repository found! Pushing code...'; } catch { echo '❌ Repository not found. Please create it on GitHub first.'; echo 'Go to: https://github.com/new'; echo 'Name: findpreschool'; echo 'Make it Public, uncheck all options'; exit 1; }"
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'https://api.github.com/repos/charantamarapu/findyourpreschool' -UseBasicParsing -ErrorAction Stop; echo '✅ Repository found! Pushing code...'; } catch { echo '❌ Repository not found. Please create it on GitHub first.'; echo 'Go to: https://github.com/new'; echo 'Name: findyourpreschool'; echo 'Make it Public, uncheck all options'; exit 1; }"
 
 echo.
 git push -u origin main

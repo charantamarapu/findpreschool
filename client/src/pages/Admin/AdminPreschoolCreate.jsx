@@ -4,7 +4,7 @@ import { adminService } from '../../services/apiService';
 import toast from 'react-hot-toast';
 import { ArrowLeft, Plus, Trash2, Star } from 'lucide-react';
 
-const AdminPreschoolCreate = () => {
+const AdminPreSchoolCreate = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
@@ -98,7 +98,7 @@ const AdminPreschoolCreate = () => {
       };
 
       // Create preschool
-      const preschoolRes = await adminService.createPreschool(preschoolPayload);
+      const preschoolRes = await adminService.createPreSchool(preschoolPayload);
       const preschoolId = preschoolRes.data.id;
 
       // Create admission details if provided
@@ -121,10 +121,10 @@ const AdminPreschoolCreate = () => {
           image_url: image.image_url,
           is_primary: image.is_primary,
         };
-        await adminService.createPreschoolImage(imagePayload);
+        await adminService.createPreSchoolImage(imagePayload);
       }
 
-      toast.success('Preschool created successfully with all details!');
+      toast.success('PreSchool created successfully with all details!');
       navigate('/admin/preschools');
     } catch (err) {
       console.error('Error creating preschool:', err);
@@ -140,9 +140,9 @@ const AdminPreschoolCreate = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <button onClick={() => navigate('/admin/preschools')} className="flex items-center text-gray-500 hover:text-primary-600 transition-colors mb-4">
             <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Preschools
+            Back to PreSchools
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">Add New Preschool</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Add New PreSchool</h1>
           <p className="text-sm text-gray-500 mt-1">Fill in the details below to create a new listing</p>
         </div>
       </header>
@@ -245,7 +245,7 @@ const AdminPreschoolCreate = () => {
 
           {/* Images */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Preschool Images</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">PreSchool Images</h3>
             <p className="text-sm text-gray-500 mb-4">Add multiple images. The first image will be set as primary by default. Click the star icon to set a different image as primary.</p>
 
             {/* Add New Image */}
@@ -275,7 +275,7 @@ const AdminPreschoolCreate = () => {
                   <div key={index} className={`relative border rounded-lg overflow-hidden ${img.is_primary ? 'ring-2 ring-blue-500' : 'border-gray-200'}`}>
                     <img
                       src={img.image_url}
-                      alt={`Preschool image ${index + 1}`}
+                      alt={`PreSchool image ${index + 1}`}
                       className="w-full h-40 object-cover"
                       onError={(e) => { e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Found'; }}
                     />
@@ -314,7 +314,7 @@ const AdminPreschoolCreate = () => {
 
           <div className="flex gap-4">
             <button type="submit" disabled={submitting} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400">
-              {submitting ? 'Creating...' : 'Create Preschool'}
+              {submitting ? 'Creating...' : 'Create PreSchool'}
             </button>
             <button type="button" onClick={() => navigate('/admin/preschools')} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
               Cancel
@@ -326,4 +326,4 @@ const AdminPreschoolCreate = () => {
   );
 };
 
-export default AdminPreschoolCreate;
+export default AdminPreSchoolCreate;

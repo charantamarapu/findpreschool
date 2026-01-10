@@ -1,4 +1,4 @@
-# API Testing Guide - FindPreschool.org
+# API Testing Guide - FindYourPreSchool
 
 Use these examples to test the API endpoints with tools like Postman, Insomnia, or curl.
 
@@ -22,9 +22,9 @@ Response:
 
 ---
 
-## 🏫 Preschools Endpoints
+## 🏫 PreSchools Endpoints
 
-### 1. Get All Preschools
+### 1. Get All PreSchools
 ```
 GET /preschools?limit=20&offset=0&city=Delhi&minFee=5000&maxFee=25000&minRating=3
 ```
@@ -70,7 +70,7 @@ Response:
 }
 ```
 
-### 2. Get Single Preschool Details
+### 2. Get Single PreSchool Details
 ```
 GET /preschools/1
 ```
@@ -120,7 +120,7 @@ Response:
 }
 ```
 
-### 3. Add New Preschool (Admin)
+### 3. Add New PreSchool (Admin)
 ```
 POST /preschools
 Content-Type: application/json
@@ -148,11 +148,11 @@ Response: 201 Created
     "name": "Rainbow Kids School",
     ...
   },
-  "message": "Preschool added successfully"
+  "message": "PreSchool added successfully"
 }
 ```
 
-### 4. Update Preschool (Admin)
+### 4. Update PreSchool (Admin)
 ```
 PUT /preschools/1
 Content-Type: application/json
@@ -168,7 +168,7 @@ Content-Type: application/json
 
 ## 🗺️ Google Maps Endpoints
 
-### 1. Fetch Preschools from Google Maps
+### 1. Fetch PreSchools from Google Maps
 ```
 POST /google-maps/fetch
 Content-Type: application/json
@@ -183,7 +183,7 @@ Response:
 ```json
 {
   "success": true,
-  "message": "Preschools fetched from Google Maps",
+  "message": "PreSchools fetched from Google Maps",
   "data": {
     "added": 12,
     "skipped": 5,
@@ -204,7 +204,7 @@ Response:
   "data": [
     {
       "place_id": "ChIJr...",
-      "name": "Preschool Name",
+      "name": "PreSchool Name",
       "formatted_address": "123 Street",
       "geometry": {
         "location": {
@@ -413,7 +413,7 @@ Response:
       "id": 46,
       "parent_name": "Jane Smith",
       "rating": 4.5,
-      "Preschool": {
+      "PreSchool": {
         "id": 1,
         "name": "Sunshine Academy"
       }
@@ -507,7 +507,7 @@ Response:
       "franchise_available": true,
       "initial_investment": 500000,
       "royalty_percentage": 5,
-      "Preschool": {
+      "PreSchool": {
         "id": 1,
         "name": "Sunshine Academy",
         "city": "Delhi"
@@ -531,17 +531,17 @@ Response:
 curl http://localhost:5000/api/health
 ```
 
-### Get All Preschools
+### Get All PreSchools
 ```bash
 curl "http://localhost:5000/api/preschools?city=Delhi&limit=5"
 ```
 
-### Add Preschool
+### Add PreSchool
 ```bash
 curl -X POST http://localhost:5000/api/preschools \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Test Preschool",
+    "name": "Test PreSchool",
     "city": "Delhi",
     "address": "Test Address"
   }'
@@ -600,7 +600,7 @@ curl -X POST http://localhost:5000/api/comparison/admission \
 ```json
 {
   "success": false,
-  "message": "Preschool not found"
+  "message": "PreSchool not found"
 }
 ```
 

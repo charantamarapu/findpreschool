@@ -1,10 +1,10 @@
 import express from 'express';
 import {
-  getAllPreschools,
-  getPreschoolById,
-  addPreschool,
-  updatePreschool,
-  getNearbyPreschools,
+  getAllPreSchools,
+  getPreSchoolById,
+  addPreSchool,
+  updatePreSchool,
+  getNearbyPreSchools,
 } from '../controllers/preschoolController.js';
 import {
   validateRequest,
@@ -13,10 +13,10 @@ import {
 
 const router = express.Router();
 
-router.get('/', getAllPreschools);
-router.get('/nearby', getNearbyPreschools); // Must be before /:id
-router.get('/:id', getPreschoolById);
-router.post('/', validateRequest(schemas.addPreschool), addPreschool);
-router.put('/:id', validateRequest(schemas.addPreschool), updatePreschool);
+router.get('/', getAllPreSchools);
+router.get('/nearby', getNearbyPreSchools); // Must be before /:id
+router.get('/:id', getPreSchoolById);
+router.post('/', validateRequest(schemas.addPreSchool), addPreSchool);
+router.put('/:id', validateRequest(schemas.addPreSchool), updatePreSchool);
 
 export default router;

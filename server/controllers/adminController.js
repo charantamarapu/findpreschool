@@ -1,11 +1,11 @@
 import AdminUser from '../models/AdminUser.js';
-import Preschool from '../models/Preschool.js';
-import PreschoolImage from '../models/PreschoolImage.js';
+import PreSchool from '../models/PreSchool.js';
+import PreSchoolImage from '../models/PreSchoolImage.js';
 import AdmissionDetail from '../models/AdmissionDetail.js';
 import FranchiseDetail from '../models/FranchiseDetail.js';
 import ComparisonHistory from '../models/ComparisonHistory.js';
 import Review from '../models/Review.js';
-import PreschoolOwner from '../models/PreschoolOwner.js';
+import PreSchoolOwner from '../models/PreSchoolOwner.js';
 import jwt from 'jsonwebtoken';
 
 // Admin Authentication
@@ -46,7 +46,7 @@ export const login = async (req, res) => {
 export const getDashboardStats = async (req, res) => {
   try {
     const [preschoolCount, reviewCount, comparisonCount, adminCount] = await Promise.all([
-      Preschool.count(),
+      PreSchool.count(),
       Review.count(),
       ComparisonHistory.count(),
       AdminUser.count()
@@ -65,8 +65,8 @@ export const getDashboardStats = async (req, res) => {
   }
 };
 
-// Preschools CRUD
-export const getPreschools = async (req, res) => {
+// PreSchools CRUD
+export const getPreSchools = async (req, res) => {
   try {
     const { page = 1, limit = 10, city, verified } = req.query;
     const offset = (page - 1) * limit;
@@ -75,14 +75,14 @@ export const getPreschools = async (req, res) => {
     if (city) where.city = city;
     if (verified !== undefined) where.verified = verified === 'true';
 
-    const preschools = await Preschool.findAndCountAll({
+    const preschools = await PreSchool.findAndCountAll({
       where,
       limit: parseInt(limit),
       offset,
       include: [
         { model: AdmissionDetail, as: 'admission' },
         { model: FranchiseDetail, as: 'franchise' },
-        { model: PreschoolImage, as: 'images' }
+        { model: PreSchoolImage, as: 'images' }
       ],
       order: [['created_at', 'DESC']]
     });
@@ -98,38 +98,38 @@ export const getPreschools = async (req, res) => {
   }
 };
 
-export const createPreschool = async (req, res) => {
+export const createPreSchool = async (req, res) => {
   try {
-    const preschool = await Preschool.create(req.body);
+    const preschool = await PreSchool.create(req.body);
     res.status(201).json(preschool);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export const updatePreschool = async (req, res) => {
+export const updatePreSchool = async (req, res) => {
   try {
     const { id } = req.params;
-    const [updated] = await Preschool.update(req.body, { where: { id } });
+    const [updated] = await PreSchool.update(req.body, { where: { id } });
     if (updated) {
-      const preschool = await Preschool.findByPk(id);
+      const preschool = await PreSchool.findByPk(id);
       res.json(preschool);
     } else {
-      res.status(404).json({ error: 'Preschool not found' });
+      res.status(404).json({ error: 'PreSchool not found' });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export const deletePreschool = async (req, res) => {
+export const deletePreSchool = async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = await Preschool.destroy({ where: { id } });
+    const deleted = await PreSchool.destroy({ where: { id } });
     if (deleted) {
-      res.json({ message: 'Preschool deleted successfully' });
+      res.json({ message: 'PreSchool deleted successfully' });
     } else {
-      res.status(404).json({ error: 'Preschool not found' });
+      res.status(404).json({ error: 'PreSchool not found' });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -150,7 +150,7 @@ export const getReviews = async (req, res) => {
       where,
       limit: parseInt(limit),
       offset,
-      include: [{ model: Preschool, as: 'preschool' }],
+      include: [{ model: PreSchool, as: 'preschool' }],
       order: [['created_at', 'DESC']]
     });
 
@@ -249,10 +249,10 @@ export const deleteAdmin = async (req, res) => {
 };
 
 // Bulk Operations
-export const bulkVerifyPreschools = async (req, res) => {
+export const bulkVerifyPreSchools = async (req, res) => {
   try {
     const { ids } = req.body;
-    const [updated] = await Preschool.update(
+    const [updated] = await PreSchool.update(
       { verified: true },
       { where: { id: ids } }
     );
@@ -282,7 +282,7 @@ export const bulkDelete = async (req, res) => {
 
     switch (model) {
       case 'preschools':
-        deletedCount = await Preschool.destroy({ where: { id: ids } });
+        deletedCount = await PreSchool.destroy({ where: { id: ids } });
         break;
       case 'reviews':
         deletedCount = await Review.destroy({ where: { id: ids } });
@@ -304,10 +304,10 @@ export const bulkDelete = async (req, res) => {
 export const createAdmissionDetail = async (req, res) => {
   try {
     const { preschool_id, monthly_fee_min, monthly_fee_max, annual_fee_min, annual_fee_max, verified_rating } = req.body;
-    
+
     // Check if admission detail already exists
     let admission = await AdmissionDetail.findOne({ where: { preschool_id } });
-    
+
     if (admission) {
       // Update existing
       await admission.update({
@@ -336,48 +336,48 @@ export const createAdmissionDetail = async (req, res) => {
 };
 
 // Image Management
-export const createPreschoolImage = async (req, res) => {
+export const createPreSchoolImage = async (req, res) => {
   try {
     const { preschool_id, image_url, is_primary } = req.body;
-    
+
     if (is_primary) {
       // Unset primary for other images
-      await PreschoolImage.update(
+      await PreSchoolImage.update(
         { is_primary: false },
         { where: { preschool_id } }
       );
     }
-    
-    const image = await PreschoolImage.create({
+
+    const image = await PreSchoolImage.create({
       preschool_id,
       image_url,
       is_primary: is_primary || false,
     });
-    
+
     res.status(201).json(image);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export const updatePreschoolImage = async (req, res) => {
+export const updatePreSchoolImage = async (req, res) => {
   try {
     const { id } = req.params;
     const { is_primary } = req.body;
-    
-    const image = await PreschoolImage.findByPk(id);
+
+    const image = await PreSchoolImage.findByPk(id);
     if (!image) {
       return res.status(404).json({ error: 'Image not found' });
     }
-    
+
     if (is_primary) {
       // Unset primary for other images
-      await PreschoolImage.update(
+      await PreSchoolImage.update(
         { is_primary: false },
         { where: { preschool_id: image.preschool_id } }
       );
     }
-    
+
     await image.update({ is_primary });
     res.json(image);
   } catch (error) {
@@ -385,10 +385,10 @@ export const updatePreschoolImage = async (req, res) => {
   }
 };
 
-export const deletePreschoolImage = async (req, res) => {
+export const deletePreSchoolImage = async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = await PreschoolImage.destroy({ where: { id } });
+    const deleted = await PreSchoolImage.destroy({ where: { id } });
     if (deleted) {
       res.json({ message: 'Image deleted successfully' });
     } else {

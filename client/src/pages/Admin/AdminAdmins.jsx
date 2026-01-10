@@ -18,13 +18,12 @@ const AdminAdmins = () => {
       key: 'role',
       label: 'Role',
       render: (item) => (
-        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-          item.role === 'admin'
+        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${item.role === 'admin'
             ? 'bg-red-100 text-red-800'
             : item.role === 'moderator'
-            ? 'bg-blue-100 text-blue-800'
-            : 'bg-gray-100 text-gray-800'
-        }`}>
+              ? 'bg-blue-100 text-blue-800'
+              : 'bg-gray-100 text-gray-800'
+          }`}>
           {item.role}
         </span>
       )
@@ -33,11 +32,10 @@ const AdminAdmins = () => {
       key: 'active',
       label: 'Status',
       render: (item) => (
-        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-          item.active
+        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${item.active
             ? 'bg-green-100 text-green-800'
             : 'bg-red-100 text-red-800'
-        }`}>
+          }`}>
           {item.active ? 'Active' : 'Inactive'}
         </span>
       )
@@ -79,7 +77,7 @@ const AdminAdmins = () => {
                 onClick={() => navigate('/admin/preschools')}
                 className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
               >
-                Preschools
+                PreSchools
               </button>
               <button
                 onClick={() => navigate('/admin/reviews')}

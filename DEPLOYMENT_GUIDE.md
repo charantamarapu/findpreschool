@@ -1,4 +1,4 @@
-# 🚀 FindPreschool.org Deployment Guide
+# 🚀 FindYourPreSchool Deployment Guide
 
 Complete guide to deploy your full-stack preschool comparison platform to production.
 
@@ -69,15 +69,15 @@ Push your code to GitHub:
 ```bash
 git init
 git add .
-git commit -m "Initial commit: FindPreschool app"
+git commit -m "Initial commit: FindYourPreSchool app"
 git branch -M main
-git remote add origin https://github.com/charantamarapu/findpreschool.git
+git remote add origin https://github.com/charantamarapu/findyourpreschool.git
 git push -u origin main
 ```
 
 **Note**: If you get "remote origin already exists", run:
 ```bash
-git remote set-url origin https://github.com/charantamarapu/findpreschool.git
+git remote set-url origin https://github.com/charantamarapu/findyourpreschool.git
 git push -u origin main
 ```
 
@@ -87,8 +87,8 @@ git push -u origin main
    - Go to [render.com](https://render.com)
    - Click "New" → "MySQL"
    - Fill in details:
-     - Name: `findpreschool-db`
-     - Database: `findpreschool`
+     - Name: `findyourpreschool-db`
+     - Database: `findyourpreschool`
      - Keep default port: 3306
    - Create and note your connection string
 
@@ -105,7 +105,7 @@ git push -u origin main
    - Select the `server` directory (if available)
 
 2. **Configure**:
-   - **Name**: `findpreschool-api`
+   - **Name**: `findyourpreschool-api`
    - **Environment**: `Node`
    - **Build Command**: `npm install`
    - **Start Command**: `node server.js`
@@ -117,7 +117,7 @@ git push -u origin main
    DB_HOST=your_render_mysql_host
    DB_USER=your_render_user
    DB_PASSWORD=your_render_password
-   DB_NAME=findpreschool
+   DB_NAME=findyourpreschool
    DB_PORT=3306
    PORT=10000
    CORS_ORIGIN=https://your-frontend-url.com
@@ -127,7 +127,7 @@ git push -u origin main
 
 4. **Deploy**: Click "Deploy"
 
-5. **Note your backend URL**: `https://findpreschool-api.onrender.com`
+5. **Note your backend URL**: `https://findyourpreschool-api.onrender.com`
 
 ### Step 4: Deploy Frontend
 
@@ -136,7 +136,7 @@ git push -u origin main
    - Connect your GitHub repository
 
 2. **Configure**:
-   - **Name**: `findpreschool`
+   - **Name**: `findyourpreschool`
    - **Build Command**: `cd client && npm install && npm run build`
    - **Publish Directory**: `client/dist`
 
@@ -146,7 +146,7 @@ git push -u origin main
 
 4. **Deploy**: Click "Deploy"
 
-5. **Note your frontend URL**: `https://findpreschool.onrender.com`
+5. **Note your frontend URL**: `https://findyourpreschool.onrender.com`
 
 ### Step 5: Update Frontend API Configuration
 
@@ -155,7 +155,7 @@ Edit [client/src/services/apiService.js](client/src/services/apiService.js):
 ```javascript
 // Change from localhost to production API
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://findpreschool-api.onrender.com' 
+  ? 'https://findyourpreschool-api.onrender.com' 
   : 'http://localhost:5000';
 ```
 
@@ -278,8 +278,8 @@ apt install nodejs npm mysql-server curl -y
 ### 4. Clone Repository
 ```bash
 cd /var/www
-git clone https://github.com/charantamarapu/findpreschool.git
-cd findpreschool
+git clone https://github.com/charantamarapu/findyourpreschool.git
+cd findyourpreschool
 ```
 
 ### 5. Setup Backend
@@ -304,7 +304,7 @@ npm run build
 apt install nginx -y
 ```
 
-Create `/etc/nginx/sites-available/findpreschool`:
+Create `/etc/nginx/sites-available/findyourpreschool`:
 ```nginx
 server {
     listen 80;
@@ -312,7 +312,7 @@ server {
 
     # Frontend
     location / {
-        root /var/www/findpreschool/client/dist;
+        root /var/www/findyourpreschool/client/dist;
         try_files $uri $uri/ /index.html;
     }
 
@@ -330,7 +330,7 @@ server {
 
 Enable site:
 ```bash
-ln -s /etc/nginx/sites-available/findpreschool /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/findyourpreschool /etc/nginx/sites-enabled/
 nginx -t
 systemctl restart nginx
 ```
@@ -366,7 +366,7 @@ NODE_ENV=production
 DB_HOST=your-db-host
 DB_USER=your-user
 DB_PASSWORD=your-password
-DB_NAME=findpreschool
+DB_NAME=findyourpreschool
 DB_PORT=3306
 PORT=5000
 JWT_SECRET=your-very-secure-random-string-min-32-chars
@@ -385,7 +385,7 @@ VITE_API_URL=https://your-api-domain.com
 
 1. **Frontend**: Visit `https://yourdomain.com` - should load app
 2. **API Health**: Visit `https://api.yourdomain.com/api/health` - should return OK
-3. **Preschools API**: Visit `https://api.yourdomain.com/api/preschools?city=bangalore` - should return data
+3. **PreSchools API**: Visit `https://api.yourdomain.com/api/preschools?city=bangalore` - should return data
 4. **Database**: Check if data loads in frontend
 
 ---

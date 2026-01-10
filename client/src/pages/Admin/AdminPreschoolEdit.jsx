@@ -4,7 +4,7 @@ import { adminService } from '../../services/apiService';
 import toast from 'react-hot-toast';
 import { ArrowLeft, Plus, Trash2, Star } from 'lucide-react';
 
-const AdminPreschoolEdit = () => {
+const AdminPreSchoolEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -31,46 +31,46 @@ const AdminPreschoolEdit = () => {
   const [images, setImages] = useState([]);
   const [originalImages, setOriginalImages] = useState([]);
   const [newImageUrl, setNewImageUrl] = useState('');
-  const [preschool, setPreschool] = useState(null);
+  const [preschool, setPreSchool] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    const fetchPreschool = async () => {
+    const fetchPreSchool = async () => {
       try {
-        const res = await adminService.getPreschools({ limit: 100 });
+        const res = await adminService.getPreSchools({ limit: 100 });
         const preschools = res.data.preschools || [];
-        const foundPreschool = preschools.find(p => p.id === Number(id));
-        if (foundPreschool) {
-          setPreschool(foundPreschool);
+        const foundPreSchool = preschools.find(p => p.id === Number(id));
+        if (foundPreSchool) {
+          setPreSchool(foundPreSchool);
           setForm({
-            name: foundPreschool.name || '',
-            address: foundPreschool.address || '',
-            city: foundPreschool.city || '',
-            state: foundPreschool.state || '',
-            pincode: foundPreschool.pincode || '',
-            latitude: foundPreschool.latitude || '',
-            longitude: foundPreschool.longitude || '',
-            phone: foundPreschool.phone || '',
-            email: foundPreschool.email || '',
-            website: foundPreschool.website || '',
-            established_year: foundPreschool.established_year || '',
+            name: foundPreSchool.name || '',
+            address: foundPreSchool.address || '',
+            city: foundPreSchool.city || '',
+            state: foundPreSchool.state || '',
+            pincode: foundPreSchool.pincode || '',
+            latitude: foundPreSchool.latitude || '',
+            longitude: foundPreSchool.longitude || '',
+            phone: foundPreSchool.phone || '',
+            email: foundPreSchool.email || '',
+            website: foundPreSchool.website || '',
+            established_year: foundPreSchool.established_year || '',
           });
 
           // Load admission data
-          if (foundPreschool.admission) {
+          if (foundPreSchool.admission) {
             setAdmissionData({
-              monthly_fee_min: foundPreschool.admission.monthly_fee_min || '',
-              monthly_fee_max: foundPreschool.admission.monthly_fee_max || '',
-              annual_fee_min: foundPreschool.admission.annual_fee_min || '',
-              annual_fee_max: foundPreschool.admission.annual_fee_max || '',
-              verified_rating: foundPreschool.admission.verified_rating || '',
+              monthly_fee_min: foundPreSchool.admission.monthly_fee_min || '',
+              monthly_fee_max: foundPreSchool.admission.monthly_fee_max || '',
+              annual_fee_min: foundPreSchool.admission.annual_fee_min || '',
+              annual_fee_max: foundPreSchool.admission.annual_fee_max || '',
+              verified_rating: foundPreSchool.admission.verified_rating || '',
             });
           }
 
           // Load all images
-          if (foundPreschool.images && foundPreschool.images.length > 0) {
-            const loadedImages = foundPreschool.images.map(img => ({
+          if (foundPreSchool.images && foundPreSchool.images.length > 0) {
+            const loadedImages = foundPreSchool.images.map(img => ({
               id: img.id,
               image_url: img.image_url,
               is_primary: img.is_primary,
@@ -79,7 +79,7 @@ const AdminPreschoolEdit = () => {
             setOriginalImages(loadedImages);
           }
         } else {
-          toast.error('Preschool not found');
+          toast.error('PreSchool not found');
         }
       } catch (err) {
         toast.error('Failed to fetch preschool');
@@ -87,7 +87,7 @@ const AdminPreschoolEdit = () => {
         setLoading(false);
       }
     };
-    fetchPreschool();
+    fetchPreSchool();
   }, [id]);
 
   const handleChange = e => {
@@ -158,7 +158,7 @@ const AdminPreschoolEdit = () => {
       };
 
       // Update preschool
-      await adminService.updatePreschool(id, preschoolPayload);
+      await adminService.updatePreSchool(id, preschoolPayload);
 
       // Update admission details
       if (admissionData.monthly_fee_min || admissionData.monthly_fee_max || admissionData.annual_fee_min || admissionData.annual_fee_max || admissionData.verified_rating) {
@@ -178,7 +178,7 @@ const AdminPreschoolEdit = () => {
       for (const originalImg of originalImages) {
         const stillExists = images.some(img => img.id === originalImg.id);
         if (!stillExists) {
-          await adminService.deletePreschoolImage(originalImg.id);
+          await adminService.deletePreSchoolImage(originalImg.id);
         }
       }
 
@@ -190,7 +190,7 @@ const AdminPreschoolEdit = () => {
             image_url: image.image_url,
             is_primary: image.is_primary,
           };
-          await adminService.createPreschoolImage(imagePayload);
+          await adminService.createPreSchoolImage(imagePayload);
         }
       }
 
@@ -199,12 +199,12 @@ const AdminPreschoolEdit = () => {
         if (image.id) {
           const originalImg = originalImages.find(img => img.id === image.id);
           if (originalImg && originalImg.is_primary !== image.is_primary) {
-            await adminService.updatePreschoolImage(image.id, { is_primary: image.is_primary });
+            await adminService.updatePreSchoolImage(image.id, { is_primary: image.is_primary });
           }
         }
       }
 
-      toast.success('Preschool updated successfully');
+      toast.success('PreSchool updated successfully');
       navigate('/admin/preschools');
     } catch (err) {
       console.error('Error updating preschool:', err);
@@ -222,9 +222,9 @@ const AdminPreschoolEdit = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <button onClick={() => navigate('/admin/preschools')} className="flex items-center text-gray-600 hover:text-gray-900 mb-4">
             <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Preschools
+            Back to PreSchools
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">Edit Preschool</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Edit PreSchool</h1>
         </div>
       </header>
       <div className="max-w-4xl mx-auto py-6">
@@ -326,7 +326,7 @@ const AdminPreschoolEdit = () => {
 
           {/* Images */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Preschool Images</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">PreSchool Images</h3>
             <p className="text-sm text-gray-500 mb-4">Add multiple images. Click the star icon to set an image as primary.</p>
 
             {/* Add New Image */}
@@ -356,7 +356,7 @@ const AdminPreschoolEdit = () => {
                   <div key={img.id || `new-${index}`} className={`relative border rounded-lg overflow-hidden ${img.is_primary ? 'ring-2 ring-blue-500' : 'border-gray-200'}`}>
                     <img
                       src={img.image_url}
-                      alt={`Preschool image ${index + 1}`}
+                      alt={`PreSchool image ${index + 1}`}
                       className="w-full h-40 object-cover"
                       onError={(e) => { e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Found'; }}
                     />
@@ -400,7 +400,7 @@ const AdminPreschoolEdit = () => {
 
           <div className="flex gap-4">
             <button type="submit" disabled={submitting} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400">
-              {submitting ? 'Updating...' : 'Update Preschool'}
+              {submitting ? 'Updating...' : 'Update PreSchool'}
             </button>
             <button type="button" onClick={() => navigate('/admin/preschools')} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
               Cancel
@@ -412,4 +412,4 @@ const AdminPreschoolEdit = () => {
   );
 };
 
-export default AdminPreschoolEdit;
+export default AdminPreSchoolEdit;

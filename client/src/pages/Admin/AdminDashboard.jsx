@@ -56,7 +56,7 @@ const AdminDashboard = () => {
 
   const menuItems = [
     {
-      title: 'Preschools',
+      title: 'PreSchools',
       icon: School,
       count: stats.preschools,
       path: '/admin/preschools',
@@ -86,7 +86,7 @@ const AdminDashboard = () => {
 
   const navItems = [
     { label: 'Dashboard', path: '/admin/dashboard', active: true },
-    { label: 'Preschools', path: '/admin/preschools' },
+    { label: 'PreSchools', path: '/admin/preschools' },
     { label: 'Reviews', path: '/admin/reviews' },
     { label: 'Admins', path: '/admin/admins' }
   ];
@@ -118,7 +118,7 @@ const AdminDashboard = () => {
                 </div>
                 <div>
                   <h1 className="text-lg font-bold text-gray-900">Admin Panel</h1>
-                  <p className="text-xs text-gray-500">FindPreschool.org</p>
+                  <p className="text-xs text-gray-500">FindYourPreSchool</p>
                 </div>
               </div>
             </div>
@@ -214,7 +214,7 @@ const AdminDashboard = () => {
                   <Plus size={20} className="text-white" />
                 </div>
                 <div className="text-left">
-                  <p className="font-semibold text-gray-900">Add Preschool</p>
+                  <p className="font-semibold text-gray-900">Add PreSchool</p>
                   <p className="text-sm text-gray-500">Create new listing</p>
                 </div>
               </button>

@@ -64,7 +64,7 @@ const AdminLogin = () => {
           Admin Panel
         </h2>
         <p className="mt-2 text-center text-primary-200">
-          Sign in to manage FindPreschool.org
+          Sign in to manage FindYourPreSchool
         </p>
       </div>
 
@@ -85,7 +85,7 @@ const AdminLogin = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="admin@abc.org"
+                  placeholder="admin@abc.com"
                   className="w-full pl-12 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all"
                 />
               </div>
@@ -139,7 +139,7 @@ const AdminLogin = () => {
 
         {/* Additional info */}
         <p className="mt-6 text-center text-sm text-white/40">
-          © {new Date().getFullYear()} FindPreschool.org
+          © {new Date().getFullYear()} FindYourPreSchool
         </p>
       </div>
     </div>

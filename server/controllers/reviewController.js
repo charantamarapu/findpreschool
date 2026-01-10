@@ -1,4 +1,4 @@
-import { Review, Preschool, AdmissionDetail } from '../models/index.js';
+import { Review, PreSchool, AdmissionDetail } from '../models/index.js';
 
 export const getReviews = async (req, res) => {
   try {
@@ -62,11 +62,11 @@ export const submitReview = async (req, res) => {
     } = req.validated;
 
     // Verify preschool exists
-    const preschool = await Preschool.findByPk(preschool_id);
+    const preschool = await PreSchool.findByPk(preschool_id);
     if (!preschool) {
       return res.status(404).json({
         success: false,
-        message: 'Preschool not found',
+        message: 'PreSchool not found',
       });
     }
 
@@ -179,7 +179,7 @@ export const getPendingReviews = async (req, res) => {
       where: { verified: false },
       include: [
         {
-          association: 'Preschool',
+          association: 'PreSchool',
           attributes: ['id', 'name', 'city'],
         },
       ],

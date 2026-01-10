@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
 
-const PreschoolOwner = sequelize.define(
-  'PreschoolOwner',
+const PreSchoolOwner = sequelize.define(
+  'PreSchoolOwner',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -33,4 +33,4 @@ const PreschoolOwner = sequelize.define(
   }
 );
 
-export default PreschoolOwner;
+export default PreSchoolOwner;

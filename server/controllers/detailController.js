@@ -1,7 +1,7 @@
 import {
   AdmissionDetail,
   FranchiseDetail,
-  Preschool,
+  PreSchool,
 } from '../models/index.js';
 
 export const updateAdmissionDetails = async (req, res) => {
@@ -119,7 +119,7 @@ export const getFranchiseOpportunities = async (req, res) => {
       where,
       include: [
         {
-          association: 'Preschool',
+          association: 'PreSchool',
           attributes: ['id', 'name', 'city', 'phone', 'email'],
           where: city ? { city } : undefined,
         },
