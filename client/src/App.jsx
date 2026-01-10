@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Menu, X, Home, Search, Mail, Shield, ChevronRight, Heart, Facebook, Twitter, Instagram, Linkedin, Phone } from 'lucide-react';
 import { HomePage } from './pages/HomePage';
@@ -367,6 +368,7 @@ export default function App() {
       <ComparisonProvider>
         <FilterProvider>
           <AppContent />
+          <Toaster position="top-right" />
         </FilterProvider>
       </ComparisonProvider>
     </Router>
