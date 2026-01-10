@@ -1,119 +1,59 @@
-# ☁️ Deploying to Oracle Cloud
+# Deployment Guide for Oracle Cloud (Ubuntu)
 
-This guide provides specific instructions for deploying `FindYourPreSchool` to an Oracle Cloud Infrastructure (OCI) Compute Instance running **Ubuntu**.
-
-## ✅ Prerequisites
-
-1.  **Oracle Cloud Account**.
-2.  **Ubuntu 20.04 or 22.04** Instance created.
-3.  **SSH Key** configured for access.
-4.  **Public IP Address** of your instance.
+This guide walks you through deploying the **FindYourPreSchool** MERN stack application to an Oracle Cloud Infrastructure (OCI) Compute Instance running Ubuntu.
 
 ---
 
-## 🛑 Critical Step 1: Configure Oracle Firewall (Security List)
+## 🚀 Quick Deployment (Script)
 
-**You must perform this step in the Oracle Cloud Console.** Even if the server firewall is open, Oracle's network firewall will block traffic if you don't do this.
+We have created an automated script to handle most of the setup.
 
-1.  Log in to **Oracle Cloud Console**.
-2.  Go to **Compute** -> **Instances** and click on your instance.
-3.  Click on the **Virtual Cloud Network (VCN)** link (under "Instance Information" -> "Primary VNIC").
-4.  Click on **Security Lists** in the left menu.
-5.  Click on the **Default Security List**.
-6.  Click **Add Ingress Rules**.
-7.  Add the following rule:
-    *   **Source CIDR**: `0.0.0.0/0`
-    *   **IP Protocol**: `TCP`
-    *   **Destination Port Range**: `80,443`
-    *   **Description**: `Allow HTTP/HTTPS`
-8.  Click **Add Ingress Rules**.
-
----
-
-## 🚀 Step 2: Push Code to GitHub
-
-Make sure your latest code (including the new `deploy_oracle.sh` script) is on GitHub.
-
-```bash
-# On your local machine
-git add .
-git commit -m "Add deployment scripts"
-git push origin main
-```
-
----
-
-## 💻 Step 3: Run Deployment Script
-
-1.  **SSH into your server**:
+1.  **Transfer the project to your server:**
+    (Run this from your local machine anywhere, requires `scp` or use FileZilla)
     ```bash
-    ssh ubuntu@YOUR_PUBLIC_IP
-    # Note: Use -i key.pem if you have a key file
+    # Zip your project first (exclude node_modules)
+    # Then upload:
+    scp -r /path/to/findyourpreschool ubuntu@<YOUR_SERVER_IP>:~/
     ```
 
-2.  **Clone the Repository**:
+2.  **SSH into your server:**
     ```bash
-    git clone https://github.com/charantamarapu/findyourpreschool.git
+    ssh ubuntu@<YOUR_SERVER_IP>
+    ```
+
+3.  **Run the deployment script:**
+    ```bash
     cd findyourpreschool
-    ```
-
-3.  **Run the Script**:
-    ```bash
-    sudo chmod +x deploy_oracle.sh
+    chmod +x deploy_oracle.sh
     sudo ./deploy_oracle.sh
     ```
 
-4.  **Follow Prompts**:
-    *   Enter your Domain Name (or leave blank for IP-only).
-    *   Enter Email for SSL (if domain provided).
+    Follow the prompts to enter your **Domain Name** (default: `findyourpreschool.publicvm.com`) and **Email**.
 
-The script will automatically:
-*   Update the system.
-*   Install Node.js, Nginx, MySQL, PM2, Certbot.
-*   Configure the Firewall (UFW) inside the server.
-*   Build the application.
-*   Set up Nginx reverse proxy.
+4.  **Configure Database (Manual Step):**
+    The script installs MySQL but you need to create the database/user for security.
+    ```bash
+    sudo mysql
+    ```
+    ```sql
+    CREATE DATABASE findyourpreschool;
+    CREATE USER 'admin'@'localhost' IDENTIFIED BY 'SecurePassword123';
+    GRANT ALL PRIVILEGES ON findyourpreschool.* TO 'admin'@'localhost';
+    FLUSH PRIVILEGES;
+    EXIT;
+    ```
 
----
+5.  **Update Environment Variables:**
+    ```bash
+    nano server/.env
+    ```
+    - Update `DB_PASSWORD` to what you set above.
+    - Add your `SMTP_PASSWORD` for email.
 
-## ⚙️ Step 4: Final Configuration
-
-After the script finishes, you need to set up the database and secrets manually.
-
-### 1. Configure Database
-Run these commands on the server:
-
-```bash
-sudo mysql
-```
-
-Paste these SQL commands (change 'password' to a strong password):
-
-```sql
-CREATE DATABASE findyourpreschool;
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'your_secure_password';
-GRANT ALL PRIVILEGES ON findyourpreschool.* TO 'admin'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
-```
-
-### 2. Update Environment Variables
-Edit the `.env` file on the server:
-
-```bash
-sudo nano server/.env
-```
-
-*   Update `DB_PASSWORD` to match what you just set.
-*   Update `SMTP_USER` and `SMTP_PASSWORD` with your Gmail credentials.
-*   Save and exit (`Ctrl+O`, `Enter`, `Ctrl+X`).
-
-### 3. Restart Backend
-Apply the changes:
-
-```bash
-pm2 restart findyourpreschool-api
-```
+6.  **Restart the Backend:**
+    ```bash
+    pm2 restart findyourpreschool-api
+    ```
 
 ---
 
@@ -132,7 +72,7 @@ If you didn't configure the domain during the initial deployment, or want to upd
     - Set up HTTP to HTTPS redirection.
 
 2.  **Verify:**
-    - Visit `https://findyourpreschool.publicvm.com` in your browser.ur browser.
+    - Visit `https://findyourpreschool.publicvm.com` in your browser.
 
 *   **Frontend**: Should load the homepage.
 *   **Contact Form**: Should send emails (if SMTP configured).
@@ -142,30 +82,14 @@ If you didn't configure the domain during the initial deployment, or want to upd
 
 ## 🎉 Verification
 
-Visit your **Domain** (e.g., `https://findyourpreschool`) or **Public IP** (`http://1.2.3.4`) in your browser.
+Visit your **Domain** (e.g., `https://findyourpreschool.publicvm.com`) or **Public IP** in your browser.
 
-*   **Frontend**: Should load the homepage.
-*   **Contact Form**: Should send emails (if SMTP configured).
-*   **Data**: Should load from database (initially empty).
+If you see the site, Congratulations! 🎊
 
 ---
 
-## 🔄 Updating Your App
+## 🆘 Troubleshooting
 
-When you make changes to your code in the future:
-
-1.  **Push changes to GitHub**:
-    ```bash
-    git add .
-    git commit -m "New features"
-    git push origin main
-    ```
-
-2.  **Run Update Script on Server**:
-    SSH into your server and run:
-    ```bash
-    cd findyourpreschool
-    sudo ./deploy.sh
-    ```
-    
-    This will automatically pull the code, rebuild the frontend, and restart the backend.
+-   **502 Bad Gateway**: Backend is not running. Check logs: `pm2 logs`.
+-   **Database Error**: Check credentials in `server/.env`.
+-   **Static Files 404**: Check Nginx config: `cat /etc/nginx/sites-enabled/findyourpreschool`.

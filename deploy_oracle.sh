@@ -204,7 +204,7 @@ echo "✅ Nginx configured."
 if [ -n "$DOMAIN_NAME" ] && [ -n "$SSL_EMAIL" ]; then
     echo ""
     echo "🔒 Setting up SSL with Let's Encrypt..."
-    certbot --nginx -d "$DOMAIN_NAME" --non-interactive --agree-tos -m "$SSL_EMAIL"
+    certbot --nginx -d "$DOMAIN_NAME" --non-interactive --agree-tos -m "$SSL_EMAIL" --redirect
     echo "✅ SSL certificate installed."
 fi
 
