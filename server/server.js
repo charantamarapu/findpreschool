@@ -7,7 +7,7 @@ import sequelize from './config/database.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 // Routes
-import preschoolsRouter from './routes/preschools.js';
+import preschoolRoutes from './routes/preSchools.js';
 import comparisonRouter from './routes/comparison.js';
 
 import reviewsRouter from './routes/reviews.js';

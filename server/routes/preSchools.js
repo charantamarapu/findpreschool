@@ -5,7 +5,7 @@ import {
   addPreSchool,
   updatePreSchool,
   getNearbyPreSchools,
-} from '../controllers/preschoolController.js';
+} from '../controllers/preSchoolController.js';
 import {
   validateRequest,
   schemas,
