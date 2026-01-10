@@ -38,7 +38,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Routes
-app.use('/api/preschools', preschoolsRouter);
+app.use('/api/preschools', preschoolRoutes);
 app.use('/api/comparison', comparisonRouter);
 
 app.use('/api/reviews', reviewsRouter);
