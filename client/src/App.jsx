@@ -3,15 +3,15 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Menu, X, Home, Search, Mail, Shield, ChevronRight, Heart, Facebook, Twitter, Instagram, Linkedin, Phone } from 'lucide-react';
 import { HomePage } from './pages/HomePage';
-import { PreschoolListPage } from './pages/PreschoolListPage';
-import { PreschoolDetailPageWrapper } from './pages/PreschoolDetailPageWrapper';
+import { PreSchoolListPage } from './pages/PreSchoolListPage';
+import { PreSchoolDetailPageWrapper } from './pages/PreSchoolDetailPageWrapper';
 import AdminLogin from './pages/Admin/AdminLogin';
 import AdminDashboard from './pages/Admin/AdminDashboard';
-import AdminPreschools from './pages/Admin/AdminPreschools';
-import AdminPreschoolCreate from './pages/Admin/AdminPreschoolCreate';
+import AdminPreSchools from './pages/Admin/AdminPreSchools';
+import AdminPreSchoolCreate from './pages/Admin/AdminPreSchoolCreate';
 import AdminReviews from './pages/Admin/AdminReviews';
 import AdminAdmins from './pages/Admin/AdminAdmins';
-import AdminPreschoolEdit from './pages/Admin/AdminPreschoolEdit';
+import AdminPreSchoolEdit from './pages/Admin/AdminPreSchoolEdit';
 import AdminReviewEdit from './pages/Admin/AdminReviewEdit';
 import AdminAdminEdit from './pages/Admin/AdminAdminEdit';
 import { ComparisonProvider, ComparisonContext } from './context/ComparisonContext';
@@ -21,7 +21,7 @@ import './index.css';
 
 
 function AppContent() {
-  const { selectedPreschools } = useContext(ComparisonContext);
+  const { selectedPreSchools } = useContext(ComparisonContext);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -187,12 +187,12 @@ function AppContent() {
           </div>
 
           {/* Comparison Badge */}
-          {selectedPreschools.length > 0 && (
+          {selectedPreSchools.length > 0 && (
             <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-semibold px-4 py-2.5 flex items-center justify-center gap-2">
               <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center font-bold">
-                {selectedPreschools.length}
+                {selectedPreSchools.length}
               </span>
-              preschool{selectedPreschools.length > 1 ? 's' : ''} selected for comparison
+              preschool{selectedPreSchools.length > 1 ? 's' : ''} selected for comparison
             </div>
           )}
         </nav>
@@ -202,14 +202,14 @@ function AppContent() {
       <main className={isAdminPage ? '' : 'page-transition'}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/preschools" element={<PreschoolListPage />} />
-          <Route path="/preschool/:id" element={<PreschoolDetailPageWrapper />} />
+          <Route path="/preschools" element={<PreSchoolListPage />} />
+          <Route path="/preschool/:id" element={<PreSchoolDetailPageWrapper />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/preschools" element={<AdminPreschools />} />
-          <Route path="/admin/preschools/new" element={<AdminPreschoolCreate />} />
-          <Route path="/admin/preschools/create" element={<AdminPreschoolCreate />} />
-          <Route path="/admin/preschools/:id" element={<AdminPreschoolEdit />} />
+          <Route path="/admin/preschools" element={<AdminPreSchools />} />
+          <Route path="/admin/preschools/new" element={<AdminPreSchoolCreate />} />
+          <Route path="/admin/preschools/create" element={<AdminPreSchoolCreate />} />
+          <Route path="/admin/preschools/:id" element={<AdminPreSchoolEdit />} />
           <Route path="/admin/reviews" element={<AdminReviews />} />
           <Route path="/admin/reviews/:id" element={<AdminReviewEdit />} />
           <Route path="/admin/admins" element={<AdminAdmins />} />
@@ -219,8 +219,8 @@ function AppContent() {
       </main>
 
       {/* Comparison Panel */}
-      {selectedPreschools.length > 0 && (
-        <ComparisonPanel comparisonData={selectedPreschools} />
+      {selectedPreSchools.length > 0 && (
+        <ComparisonPanel comparisonData={selectedPreSchools} />
       )}
 
       {/* Footer - Only show on non-admin pages */}
