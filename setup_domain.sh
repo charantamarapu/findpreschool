@@ -29,6 +29,13 @@ server {
     listen 80;
     server_name $DOMAIN_NAME $PUBLIC_IP;
 
+    # Allow Let's Encrypt Certbot
+    location ~ ^/.well-known/acme-challenge/ {
+        allow all;
+        default_type "text/plain";
+        root $SCRIPT_DIR/client/dist;
+    }
+
     # Frontend (Static Files)
     location / {
         root $SCRIPT_DIR/client/dist;

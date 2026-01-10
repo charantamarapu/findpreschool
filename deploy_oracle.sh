@@ -171,6 +171,13 @@ server {
         }
     }
 
+    # Allow Let's Encrypt Certbot
+    location ~ ^/.well-known/acme-challenge/ {
+        allow all;
+        default_type "text/plain";
+        root $SCRIPT_DIR/client/dist;
+    }
+
     # Backend API (Reverse Proxy)
     location /api {
         proxy_pass http://localhost:5000;
