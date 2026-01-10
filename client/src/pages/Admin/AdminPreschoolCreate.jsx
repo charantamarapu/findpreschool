@@ -136,7 +136,7 @@ const AdminPreschoolCreate = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-      <header className="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-40">
+      <header className="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 z-40">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <button onClick={() => navigate('/admin/preschools')} className="flex items-center text-gray-500 hover:text-primary-600 transition-colors mb-4">
             <ArrowLeft className="h-5 w-5 mr-2" />

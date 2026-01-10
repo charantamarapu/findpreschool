@@ -380,7 +380,7 @@ body {
    ======================================== */
 
 .admin-header {
-  @apply bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-40;
+  @apply bg-white/80 backdrop-blur-lg border-b border-gray-200/50 z-40;
 }
 
 .admin-nav-link {
