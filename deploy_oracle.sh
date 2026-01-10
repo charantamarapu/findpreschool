@@ -24,7 +24,8 @@ echo "📂 Working directory: $SCRIPT_DIR"
 # --- Configuration Prompts ---
 echo ""
 echo "--- Configuration ---"
-read -p "Enter your Domain Name (e.g., findyourpreschool) [Leave blank for IP-only]: " DOMAIN_NAME
+read -p "Enter your Domain Name (default: findyourpreschool.publicvm.com): " DOMAIN_NAME
+DOMAIN_NAME=${DOMAIN_NAME:-findyourpreschool.publicvm.com}
 if [ -n "$DOMAIN_NAME" ]; then
     read -p "Enter your Email for SSL Certificate: " SSL_EMAIL
     SERVER_NAME="$DOMAIN_NAME"

@@ -117,6 +117,29 @@ pm2 restart findyourpreschool-api
 
 ---
 
+## 4. Configure Domain & SSL (Important)
+
+If you didn't configure the domain during the initial deployment, or want to update it to `findyourpreschool.publicvm.com` with SSL:
+
+1.  **Run the setup script:**
+    ```bash
+    sudo ./setup_domain.sh
+    ```
+    This script will:
+    - Update Nginx to serve `findyourpreschool.publicvm.com`.
+    - Install Certbot (if missing).
+    - Request and install an SSL certificate.
+    - Set up HTTP to HTTPS redirection.
+
+2.  **Verify:**
+    - Visit `https://findyourpreschool.publicvm.com` in your browser.ur browser.
+
+*   **Frontend**: Should load the homepage.
+*   **Contact Form**: Should send emails (if SMTP configured).
+*   **Data**: Should load from database (initially empty).
+
+---
+
 ## 🎉 Verification
 
 Visit your **Domain** (e.g., `https://findyourpreschool`) or **Public IP** (`http://1.2.3.4`) in your browser.
